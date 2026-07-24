@@ -1,0 +1,2994 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AeroVolt Product Collection - Discover our curated vault of cricket bats, football boots, badminton rackets, and gym training gears.">
+    <title>Product Collections Vault - AeroVolt Sports</title>
+    
+    <!-- Google Fonts: Outfit (headings), Plus Jakarta Sans (UI elements), Poppins (Collection Page contents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ----------------------------------------------------
+           1. DESIGN SYSTEM & CSS VARIABLES (Matches navbar.html)
+        ---------------------------------------------------- */
+        :root[data-theme="light"] {
+            --bg-page: hsl(220, 20%, 97%);
+            --bg-navbar: hsla(220, 20%, 97%, 0.85);
+            --bg-card: hsl(0, 0%, 100%);
+            --bg-hover: hsl(245, 100%, 97%);
+            --bg-dropdown: hsla(0, 0%, 100%, 0.92);
+            
+            --text-primary: hsl(245, 50%, 15%);
+            --text-secondary: hsl(245, 20%, 35%);
+            --text-muted: hsl(240, 10%, 55%);
+            
+            --primary: hsl(245, 75%, 52%);
+            --primary-hover: hsl(245, 75%, 45%);
+            --primary-glow: rgba(79, 70, 229, 0.15);
+            
+            --accent: hsl(14, 100%, 53%); /* Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.2);
+            
+            --border: hsla(245, 20%, 80%, 0.35);
+            --border-hover: hsla(245, 20%, 70%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(79, 70, 229, 0.04);
+            --shadow-md: 0 10px 30px rgba(79, 70, 229, 0.06);
+            --shadow-lg: 0 20px 40px rgba(79, 70, 229, 0.08);
+            
+            --glass-blur: 16px;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-page: hsl(240, 35%, 6%);
+            --bg-navbar: hsla(240, 35%, 6%, 0.85);
+            --bg-card: hsl(240, 25%, 11%);
+            --bg-hover: hsl(245, 30%, 18%);
+            --bg-dropdown: hsla(240, 25%, 11%, 0.92);
+            
+            --text-primary: hsl(210, 40%, 98%);
+            --text-secondary: hsl(240, 15%, 80%);
+            --text-muted: hsl(240, 10%, 65%);
+            
+            --primary: hsl(245, 90%, 65%);
+            --primary-hover: hsl(245, 90%, 72%);
+            --primary-glow: rgba(129, 140, 248, 0.25);
+            
+            --accent: hsl(14, 100%, 55%); /* Neon Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.25);
+            
+            --border: hsla(245, 20%, 25%, 0.4);
+            --border-hover: hsla(245, 20%, 35%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
+            
+            --glass-blur: 16px;
+        }
+
+        /* Base Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ----------------------------------------------------
+           2. HEADER & NAVIGATION BAR
+        ---------------------------------------------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            inset-inline-start: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--bg-navbar);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            flex-shrink: 0;
+            justify-self: start;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-section:hover .logo-badge {
+            transform: translateY(-2px) rotate(-3deg) scale(1.05);
+            filter: drop-shadow(0 4px 12px var(--primary-glow));
+        }
+
+        .logo-section:hover .logo-title span.highlight {
+            filter: brightness(1.1);
+        }
+
+        #main-navigation {
+            justify-self: center;
+        }
+
+        .logo-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+            animation: bounce-slow 4s infinite ease-in-out;
+        }
+
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .logo-title span.highlight {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Center Navigation Menu */
+        .nav-menu {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.15rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.55rem;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        .nav-link:hover::after,
+        .nav-item.active .nav-link::after {
+            width: 70%;
+            left: 15%;
+        }
+
+        .nav-link:hover, .nav-item.active .nav-link {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+        }
+
+        .nav-link svg.arrow-icon {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.2s ease;
+            stroke-width: 3px;
+        }
+
+        .nav-item:hover .nav-link svg.arrow-icon {
+            transform: translateY(1px);
+        }
+
+        /* Dropdown Menus */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            inset-inline-start: 0;
+            margin-top: 0.5rem;
+            background-color: var(--bg-dropdown);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px) scale(0.98);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 100;
+            overflow: hidden;
+            padding: 0.4rem;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .dropdown-item:hover {
+            transform: translateX(-4px);
+        }
+
+        /* Right Actions Layout */
+        .actions-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            justify-self: end;
+        }
+
+        /* Utility Toggle Buttons */
+        .action-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .action-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateY(-1px);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Dark Mode Button Icon Switcher */
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        /* RTL Toggle Button */
+        .rtl-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .rtl-toggle:hover svg {
+            animation: swap-arrow-slide 0.6s ease-in-out infinite alternate;
+        }
+
+        [dir="rtl"] .rtl-toggle:hover svg {
+            animation: swap-arrow-slide-rtl 0.6s ease-in-out infinite alternate;
+        }
+
+        /* Login Button */
+        .login-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), hsl(245, 75%, 40%));
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.35rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--primary-glow);
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            box-shadow: 0 6px 18px var(--primary-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.08);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke-width: 2.5;
+        }
+
+        /* Mobile Hamburger & Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22px;
+            height: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1100;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2.5px;
+            background-color: var(--text-primary);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Drawer Dark Overlay Backdrop */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer-actions-item-wrapper,
+        .drawer-header-item {
+            display: none;
+        }
+
+        /* ----------------------------------------------------
+           3. MAIN CONTAINER / DEMO BODY
+        ---------------------------------------------------- */
+        .demo-body {
+            margin-top: 80px; /* offset navbar height */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+            padding: 5rem 2rem;
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+
+
+        /* ----------------------------------------------------
+           4. RESPONSIVE MEDIA QUERIES (COLLAPSE AT 1320PX)
+        ---------------------------------------------------- */
+        @media (max-width: 1320px) {
+            .header {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: var(--bg-card);
+                z-index: 1060;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1.5rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active {
+                display: none !important;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                inset-inline-end: -320px;
+                width: 320px;
+                height: 100vh;
+                background-color: var(--bg-card);
+                border-inline-start: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0;
+                gap: 0;
+                z-index: 1050;
+                transition: inset-inline-end 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                visibility: hidden;
+                display: flex;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                inset-inline-end: 0;
+                visibility: visible;
+            }
+
+            .drawer-header-item {
+                display: block;
+                width: 100%;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 1rem;
+            }
+
+            .drawer-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.25rem 1.5rem;
+                background-color: var(--bg-card);
+            }
+
+            .drawer-close-btn {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                transition: all 0.2s ease;
+                padding: 0;
+            }
+
+            .drawer-close-btn:hover {
+                color: var(--primary);
+                transform: scale(1.1);
+            }
+
+            .drawer-close-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .nav-item {
+                width: 100%;
+                padding: 0 1.5rem;
+            }
+
+            .nav-link {
+                justify-content: space-between;
+                width: 100%;
+                padding: 0.85rem 0;
+                font-size: 0.95rem;
+                border-bottom: 1px solid hsla(215, 20%, 80%, 0.1);
+            }
+
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background-color: var(--bg-hover);
+                padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+                margin-top: 0.25rem;
+            }
+
+            .nav-link::after,
+            .dropdown-menu::before {
+                display: none !important;
+            }
+
+            .nav-item.mobile-open .dropdown-menu {
+                display: block;
+            }
+
+            .nav-item.mobile-open .nav-link svg.arrow-icon {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-item {
+                padding: 0.6rem 1rem;
+            }
+
+            .actions-section {
+                gap: 0.5rem;
+            }
+
+            .actions-section .theme-toggle,
+            .actions-section .rtl-toggle,
+            .actions-section .login-btn {
+                display: none;
+            }
+
+            .drawer-actions-item-wrapper {
+                display: block;
+                margin-top: auto;
+                padding: 1.5rem;
+            }
+
+            .drawer-divider {
+                height: 1px;
+                background-color: var(--border);
+                margin-bottom: 1.5rem;
+                opacity: 0.5;
+            }
+
+            .drawer-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row .action-btn {
+                flex: 1 !important;
+                height: 44px !important;
+                border-radius: 10px !important;
+                border: 1px solid var(--border) !important;
+                background-color: var(--bg-card) !important;
+                color: var(--text-secondary) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: auto !important;
+            }
+
+            .drawer-toggles-row .action-btn:hover {
+                border-color: var(--primary);
+                background-color: var(--bg-hover);
+                color: var(--primary);
+            }
+
+            .drawer-login-btn {
+                width: 100% !important;
+                height: 46px !important;
+                justify-content: center !important;
+                background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%)) !important;
+                box-shadow: 0 4px 15px var(--accent-glow) !important;
+                border-radius: 10px !important;
+                font-size: 0.95rem !important;
+                font-weight: 700 !important;
+                color: #ffffff !important;
+                border: none !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.5rem !important;
+                transition: all 0.3s ease;
+            }
+
+            .drawer-login-btn:hover {
+                box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4) !important;
+                transform: translateY(-1px);
+                filter: brightness(1.05);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .logo-tagline {
+                display: none;
+            }
+
+            .logo-title {
+                font-size: 1.15rem;
+            }
+        }
+
+        /* ----------------------------------------------------
+           5. SYSTEM KEYFRAMES & UTILITIES
+        ---------------------------------------------------- */
+        @keyframes bounce-slow {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-4px) rotate(5deg);
+            }
+        }
+
+        /* ----------------------------------------------------
+           6. FOOTER STYLING & RESPONSIVENESS
+        ---------------------------------------------------- */
+        .footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 5rem 2rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: auto;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.2fr 1.2fr 1.2fr 1.2fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+        }
+
+        .brand-col .brand-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%));
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            inset-inline-start: 0;
+            width: 36px;
+            height: 2px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .footer-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .contact-info-item {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            text-align: start;
+        }
+
+        .contact-info-item svg.contact-icon-svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .footer-bottom-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-link {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--primary);
+        }
+
+                /* Responsive Footer Media Queries */
+        @media (max-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 3;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 1.5rem;
+            }
+            .brand-col .footer-desc {
+                max-width: 600px;
+                margin: 0.75rem auto 1.5rem auto;
+            }
+            .brand-col .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 4rem 1.25rem 2rem 1.25rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 1;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 0;
+            }
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col ul {
+                padding: 0;
+            }
+            .footer-col ul li {
+                justify-content: center;
+            }
+            .footer-bottom-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+/* 1. Vault Isometric Hero Showcase */
+        .vault-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .vault-hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .vault-hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 850;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            text-align: start;
+        }
+
+        .vault-hero-title span.glow-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vault-hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            text-align: start;
+        }
+
+        .vault-hero-visual {
+            position: relative;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .isometric-card-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            perspective: 1000px;
+        }
+
+        .iso-card {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .iso-card img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
+        .iso-card-1 {
+            transform: rotateX(15deg) rotateY(-20deg) rotateZ(5deg) translateZ(0px);
+            z-index: 1;
+            opacity: 0.4;
+            top: 5%;
+            left: 5%;
+        }
+
+        .iso-card-2 {
+            transform: rotateX(15deg) rotateY(-20deg) rotateZ(5deg) translateZ(40px);
+            z-index: 2;
+            opacity: 0.7;
+            top: 15%;
+            left: 15%;
+        }
+
+        .iso-card-3 {
+            transform: rotateX(15deg) rotateY(-20deg) rotateZ(5deg) translateZ(80px);
+            z-index: 3;
+            top: 25%;
+            left: 25%;
+            border-color: var(--primary);
+        }
+
+        /* 2. Horizontal Snap Category Showcase */
+        .snap-carousel-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .snap-carousel-container {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 1.5rem 0.5rem;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+
+        .snap-carousel-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar Webkit */
+        }
+
+        .snap-card {
+            flex: 0 0 350px;
+            scroll-snap-align: start;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            text-align: start;
+            transition: all 0.3s ease;
+        }
+
+        .snap-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .snap-card-image {
+            height: 200px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .snap-card-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
+        .snap-card-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .snap-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .snap-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .carousel-nav-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .carousel-nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: var(--bg-hover);
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* 3. Comparison Matrix (Club vs Pro vs Elite) */
+        .matrix-wrapper {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: start;
+        }
+
+        .matrix-th,
+        .matrix-td {
+            padding: 1.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .matrix-th {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            color: var(--text-primary);
+            background-color: var(--bg-hover);
+        }
+
+        .matrix-tr:last-child .matrix-td {
+            border-bottom: none;
+        }
+
+        .tier-highlight {
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .accent-highlight {
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        /* 4. Circular Spec Performance Indicators */
+        .circle-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .circle-spec-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .circle-progress-box {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .circle-svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .circle-bg {
+            stroke: var(--bg-hover);
+            stroke-width: 8;
+            fill: none;
+        }
+
+        .circle-fill {
+            stroke: url(#circleGrad);
+            stroke-width: 8;
+            stroke-linecap: round;
+            fill: none;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .circle-val {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 850;
+            color: var(--text-primary);
+        }
+
+        .circle-spec-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 750;
+            color: var(--text-primary);
+        }
+
+        /* 5. Raw Material Cross-Sections */
+        .material-panel-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .material-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .material-visual-box {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            aspect-ratio: 4/3;
+        }
+
+        .material-visual-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .material-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+        }
+
+        .material-details h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .material-details p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cross-sections-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .cross-section-node {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cross-section-num {
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            font-weight: 800;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .cross-section-text-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .cross-section-text-title {
+            font-size: 0.92rem;
+            font-weight: 750;
+            color: var(--text-primary);
+        }
+
+        .cross-section-text-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* 6. Interactive Visual Gear Configurator */
+        .finder-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .finder-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+        }
+
+        .finder-info-visual {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            aspect-ratio: 4/3;
+        }
+
+        .finder-info-visual img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
+        .finder-wizard {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+        }
+
+        .wizard-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .wizard-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .wizard-group label {
+            font-size: 0.8rem;
+            font-weight: 750;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .wizard-group select {
+            background-color: var(--bg-page);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .wizard-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .wizard-result-box {
+            background-color: var(--bg-hover);
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-header span {
+            font-size: 0.85rem;
+            font-weight: 750;
+            color: var(--text-primary);
+        }
+
+        .result-item-badge {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .result-body-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* 7. Accessories Grid */
+        .accessories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .accessory-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+            transition: all 0.3s ease;
+        }
+
+        .accessory-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .accessory-specs {
+            margin-top: 0.5rem;
+            background-color: var(--bg-hover);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 0.25rem;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .item-sport-tag {
+            font-size: 0.8rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Support elements styling */
+        .locator-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .blog-badge,
+        .collection-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+            width: fit-content;
+            max-width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .blog-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+            text-align: start;
+        }
+
+        .blog-section-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            max-width: 650px;
+            text-align: start;
+        }
+
+        /* ----------------------------------------------------
+           8. RESPONSIVE FOR COLLECTION REVAMPED SECTIONS
+        ---------------------------------------------------- */
+        @media (max-width: 1024px) {
+            .collection-body {
+                gap: 4rem;
+            }
+
+            .vault-hero-grid,
+            .material-layout,
+            .finder-card {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+
+            .circle-spec-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2rem !important;
+            }
+
+            .accessories-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1.5rem !important;
+            }
+
+            .matrix-wrapper {
+                display: block !important;
+                overflow-x: auto !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .circle-spec-grid,
+            .accessories-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .material-panel-card,
+            .finder-card,
+            .circle-spec-card {
+                padding: 2rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-title {
+                font-size: 1rem !important;
+            }
+
+            .logo-badge svg {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .logo-section {
+                gap: 0.5rem !important;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1rem !important;
+            }
+
+            .collection-badge,
+            .blog-badge {
+                font-size: 0.72rem !important;
+                padding: 0.35rem 0.75rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .vault-hero-title {
+                font-size: 1.65rem !important;
+            }
+
+            .vault-hero-desc {
+                font-size: 0.88rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .material-panel-card,
+            .finder-card,
+            .circle-spec-card {
+                padding: 1.25rem !important;
+            }
+
+            .snap-card {
+                flex: 0 0 260px !important;
+            }
+
+            .isometric-card-stack {
+                transform: scale(0.85) !important;
+                margin: 0 auto !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .vault-hero-title {
+                font-size: 1.45rem !important;
+            }
+
+            .isometric-card-stack {
+                transform: scale(0.75) !important;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .vault-hero-title {
+                font-size: 1.30rem !important;
+            }
+
+            .isometric-card-stack {
+                transform: scale(0.65) !important;
+            }
+        }
+    
+        /* ====================================================
+           GLOBAL RESPONSIVENESS OVERRIDES
+        ==================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box !important;
+        }
+        
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            width: 100% !important;
+        }
+
+        img, video, iframe {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid, .telemetry-grid, .materials-grid, .calendar-grid, .radar-grid, .booking-grid, 
+            .about-hero-grid, .collage-container, .why-diagonal-grid, .orbit-container, .location-section-grid,
+            .custom-hero-grid, .custom-step-grid, .custom-benefits-grid, .bulk-hero-grid, .steps-grid, 
+            .benefits-grid, .blog-hero-grid, .blog-featured-grid, .blog-archive-grid, .contact-hero-grid, 
+            .contact-form-grid, .brands-hero-grid, .brands-showcase-grid,
+            .accessories-grid, .athletes-flex-row, .audit-layout, .calendar-phase-specs, .catalog-grid, 
+            .circle-spec-grid, .configurator-card, .flex-grid-wrapper, .grid-container, .material-layout, 
+            .quiz-card, .quiz-row, .testimonial-card, .vault-hero-grid, .wizard-row {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 4rem 1.5rem !important;
+            }
+
+            .demo-body {
+                padding: 0 !important;
+            }
+
+            /* Responsive Footer overrides (Laptop & Tablet viewports) */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 768px Breakpoint (Tablets) */
+        @media (max-width: 768px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 3rem 1.25rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.85rem !important;
+                line-height: 1.25 !important;
+            }
+            
+            h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Navbar adjustments */
+            .desktop-nav {
+                display: none !important;
+            }
+            
+            .mobile-hamburger {
+                display: flex !important;
+            }
+
+            .logo-title {
+                font-size: 1.15rem !important;
+            }
+
+            /* Responsive Footer overrides */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 480px Breakpoint (Mobile Portrait) */
+        @media (max-width: 480px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2.5rem 1rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.6rem !important;
+            }
+            
+            .btn-primary, .btn-secondary, .btn-accent, button.btn-primary, button.btn-secondary {
+                width: 100% !important;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .logo-tagline {
+                display: none !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.85) !important;
+                margin: -1.5rem auto !important;
+            }
+            .telemetry-tabs {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 0.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            .tab-trigger {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.75rem !important;
+                flex: 1 1 calc(33.333% - 0.5rem) !important;
+                min-width: 75px !important;
+                text-align: center !important;
+            }
+            .telemetry-readouts {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)) !important;
+                gap: 0.75rem !important;
+            }
+        }
+
+        /* 320px Breakpoint (Small Mobile Screen) */
+        @media (max-width: 320px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2rem 0.75rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 1.75rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.45rem !important;
+            }
+
+            .logo-title {
+                font-size: 1rem !important;
+            }
+            
+            /* Force absolute overflow prevention */
+            * {
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.75) !important;
+                margin: -2.5rem auto !important;
+            }
+            .telemetry-dashboard {
+                padding: 0.85rem !important;
+            }
+            .tab-trigger {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.5rem !important;
+            }
+        }
+    
+        /* --- Injecting Missing Layout Styles --- */
+        .locator-container {
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .blog-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-section-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .blog-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            width: fit-content;
+            margin-bottom: 0.75rem;
+        }
+
+        .glow-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .rtl-icon, .logo-icon-svg {
+            display: inline-block;
+        }
+        
+        /* Hamburger custom SVG toggle button styling */
+        .hamburger {
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            z-index: 1100 !important;
+        }
+        .hamburger svg {
+            width: 20px !important;
+            height: 20px !important;
+            color: var(--text-secondary) !important;
+            transition: transform 0.3s ease !important;
+        }
+        .hamburger:hover svg {
+            color: var(--primary) !important;
+            transform: scale(1.05) !important;
+        }
+</style>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+
+    <svg style="position: absolute; width: 0; height: 0;" width="0" height="0">
+        <defs>
+            <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--primary)"></stop>
+                <stop offset="100%" stop-color="var(--accent)"></stop>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Drawer Dark Overlay Backdrop -->
+    <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+
+    <!-- ----------------------------------------------------
+       HEADER & NAVIGATION BAR CONTAINER (Matches navbar.html)
+    ----------------------------------------------------- -->
+    <header class="header">
+        <div class="nav-container">
+            
+            <!-- Left: Logo & Tagline -->
+            <a href="index.html" class="logo-section" aria-label="AeroVolt Sports Lab Home">
+                <div class="logo-badge" aria-hidden="true">
+                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                            </linearGradient>
+                        </defs>
+                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGrad)"></path>
+                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                    </svg>
+                </div>
+                <div class="logo-text-wrapper">
+                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                </div>
+            </a>
+
+            <!-- Center: Navigation Menu Links -->
+            <nav id="main-navigation">
+                                                                <ul class="nav-menu" id="nav-menu-list">
+                    <!-- Drawer Header (visible only on mobile/tablet viewports inside the drawer) -->
+                    <li class="drawer-header-item">
+                        <div class="drawer-header">
+                            <a href="index.html" class="logo-section">
+                                <div class="logo-badge" aria-hidden="true">
+                                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                                        <defs>
+                                            <linearGradient id="logoGradDrawer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <!-- Outer Shield Outline -->
+                                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradDrawer)" stroke-width="2" stroke-linejoin="round" fill="rgba(124, 58, 237, 0.04)"></path>
+                                        <!-- Left Wing Feathers -->
+                                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Right Wing Feathers -->
+                                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+                                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradDrawer)"></path>
+                                        <!-- Energy Glow Dot -->
+                                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                                    </svg>
+                                </div>
+                                <div class="logo-text-wrapper">
+                                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                                </div>
+                            </a>
+                            <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Menu">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+
+                    <!-- 1. Home Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" aria-expanded="false" aria-haspopup="true">
+                            Home
+                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">Home 1</a>
+                            <a href="home 2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </li>
+
+                    <!-- 2. About Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <!-- 3. Collection Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.html">Collection</a>
+                    </li>
+
+                    <!-- 4. Arrivals Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="arrivals.html">Arrivals</a>
+                    </li>
+
+                    <!-- 5. Brands Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="brands.html">Brands</a>
+                    </li>
+
+                    <!-- 6. Custom Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="customization.html">Custom</a>
+                    </li>
+
+                    <!-- 7. Bulk Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.html">Bulk</a>
+                    </li>
+
+                    <!-- 8. Blog Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+
+                    <!-- 9. Contact Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    
+                    <!-- Drawer Actions (visible only on mobile/tablet viewport drawer) -->
+                    <li class="drawer-actions-item-wrapper">
+                        <div class="drawer-divider"></div>
+                        <div class="drawer-actions">
+                            <div class="drawer-toggles-row">
+                                <!-- Dark Mode Toggle Button -->
+                                <button class="action-btn theme-toggle" aria-label="Toggle Dark Mode">
+                                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M12 2v2"></path>
+                                        <path d="M12 20v2"></path>
+                                        <path d="M4.93 4.93l1.41 1.41"></path>
+                                        <path d="M17.66 17.66l1.41 1.41"></path>
+                                        <path d="M2 12h2"></path>
+                                        <path d="M20 12h2"></path>
+                                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                                    </svg>
+                                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                    </svg>
+                                    
+                                </button>
+                                
+                                <!-- RTL Toggle Button -->
+                                <button class="action-btn rtl-toggle" aria-label="Toggle Direction">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="rtl-icon">
+                                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                                    </svg>
+                                    
+                                </button>
+                            </div>
+                            
+                            <!-- Login Button in Mobile Drawer -->
+                            <button class="login-btn drawer-login-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span>Login</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="actions-section">
+                <button class="action-btn theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6.364 6.364 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </button>
+
+                <button class="action-btn rtl-toggle" id="rtl-toggle-btn" aria-label="Toggle Layout Direction LTR to RTL">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                    </svg>
+                </button>
+
+                <button class="login-btn" id="login-btn" aria-label="Login"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Login</span>
+                </button>
+
+                <button class="hamburger" id="mobile-hamburger" aria-label="Toggle Navigation Menu" aria-controls="main-navigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ----------------------------------------------------
+       MAIN CONTENT BODY (VISUALLY UNIQUE VAULT)
+    ----------------------------------------------------- -->
+    <main class="demo-body">
+        <div class="collection-body">
+            
+            <!-- SECTION 1: Vault Isometric Hero Showcase -->
+            <section class="vault-hero-grid" id="hero-section">
+                <div class="vault-hero-text">
+                    <div class="collection-badge">
+                        <span>Curated Equipment Vault</span>
+                    </div>
+                    <h2 class="vault-hero-title">The AeroVolt <span class="glow-text">Vault</span></h2>
+                    <p class="vault-hero-desc">
+                        Our collections represent prime woodcraft timber selections, aerodynamic tennis and badminton geometries, and dual-compound sole constructions. Unlock the next level of competitive performance.
+                    </p>
+                    <a href="#configurator-section" class="login-btn" style="width: fit-content;">Start Gear Configurator</a>
+                </div>
+                
+                <div class="vault-hero-visual">
+                    <div class="isometric-card-stack">
+                        <div class="iso-card iso-card-1">
+                            <img src="images/collection-hero.jpg" alt="Overlapping collection gears preview block">
+                        </div>
+                        <div class="iso-card iso-card-2">
+                            <img src="images/collection-navigator.jpg" alt="Overlapping collection gears preview block">
+                        </div>
+                        <div class="iso-card iso-card-3">
+                            <img src="images/sports-accessories.jpg" alt="Overlapping collection gears preview block">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: Horizontal Snap Category Showcase -->
+            <section class="locator-container" id="snap-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Swipe categories</span></div>
+                    <h3 class="blog-section-title">Horizontal Category Showcase</h3>
+                    <p class="blog-section-desc">Swipe left or right to explore each specialized equipment segment vault.</p>
+                </div>
+
+                <div class="snap-carousel-wrapper">
+                    <div class="snap-carousel-container" id="snap-carousel">
+                        <!-- Card 1: Cricket -->
+                        <div class="snap-card">
+                            <div class="snap-card-image">
+                                <img src="images/cricket-equipment.jpg" alt="High grain English willow cricket bat in workshop">
+                            </div>
+                            <div class="snap-card-content">
+                                <h4 class="snap-card-title">Cricket Gear Vault</h4>
+                                <p class="snap-card-desc">Sourced Grade 1 willow bats, safety helmet visors, and sheepskin leather batting gloves.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Football -->
+                        <div class="snap-card">
+                            <div class="snap-card-image">
+                                <img src="images/football-equipment.jpg" alt="Thermobonded professional soccer ball on turf">
+                            </div>
+                            <div class="snap-card-content">
+                                <h4 class="snap-card-title">Football Equipment</h4>
+                                <p class="snap-card-desc">Waterproof matchballs, lightweight guard plates, and speedplate soccer cleats.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Badminton -->
+                        <div class="snap-card">
+                            <div class="snap-card-image">
+                                <img src="images/badminton-equipment.jpg" alt="High tension badminton racket next to shuttlecocks">
+                            </div>
+                            <div class="snap-card-content">
+                                <h4 class="snap-card-title">Badminton Pro-Court</h4>
+                                <p class="snap-card-desc">Nanocarbon graphite rackets, Goose feather shuttles, and non-slip polyurethane grip tapes.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Gym -->
+                        <div class="snap-card">
+                            <div class="snap-card-image">
+                                <img src="images/gym-fitness-equipment.jpg" alt="Steel hex dumbbells and cast iron kettlebells">
+                            </div>
+                            <div class="snap-card-content">
+                                <h4 class="snap-card-title">Gym & Strength Zone</h4>
+                                <p class="snap-card-desc">Adjustable selector blocks, competition kettlebells, and latex resistance speedbands.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-controls">
+                        <button class="carousel-nav-btn" onclick="scrollCarousel(-380)" aria-label="Scroll left">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+                        <button class="carousel-nav-btn" onclick="scrollCarousel(380)" aria-label="Scroll right">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Comparison Matrix -->
+            <section class="locator-container" id="matrix-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Tier Matrix</span></div>
+                    <h3 class="blog-section-title">Equipment Comparison Matrix</h3>
+                    <p class="blog-section-desc">Technical parameters comparing our three specialized competitive gear tiers.</p>
+                </div>
+
+                <div class="matrix-wrapper">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th class="matrix-th">Feature Parameter</th>
+                                <th class="matrix-th">Club Series</th>
+                                <th class="matrix-th">Varsity Pro</th>
+                                <th class="matrix-th">World Cup Elite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="matrix-tr">
+                                <td class="matrix-td"><strong>Willow selection (Cricket)</strong></td>
+                                <td class="matrix-td">Grade 2 English Willow</td>
+                                <td class="matrix-td tier-highlight">Grade 1 English Willow</td>
+                                <td class="matrix-td accent-highlight">Super Grade 1 Willow</td>
+                            </tr>
+                            <tr class="matrix-tr">
+                                <td class="matrix-td"><strong>Cleat Base Plate (Football)</strong></td>
+                                <td class="matrix-td">TPU Stud Plate</td>
+                                <td class="matrix-td tier-highlight">Dual-Flex Composite</td>
+                                <td class="matrix-td accent-highlight">Woven Carbon Fiber</td>
+                            </tr>
+                            <tr class="matrix-tr">
+                                <td class="matrix-td"><strong>Racket Shaft stiffness</strong></td>
+                                <td class="matrix-td">Medium Flexible</td>
+                                <td class="matrix-td tier-highlight">Stiff High-Modulus</td>
+                                <td class="matrix-td accent-highlight">Extra Stiff Nanocarbon</td>
+                            </tr>
+                            <tr class="matrix-tr">
+                                <td class="matrix-td"><strong>Weight tolerance variation</strong></td>
+                                <td class="matrix-td">± 5 Grams</td>
+                                <td class="matrix-td tier-highlight">± 2 Grams</td>
+                                <td class="matrix-td accent-highlight">± 0.5 Grams</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Circular Spec Performance Indicators -->
+            <section class="locator-container" id="indicators-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Calibration specs</span></div>
+                    <h3 class="blog-section-title">Circular Performance Meters</h3>
+                    <p class="blog-section-desc">Scientific calibration outcomes of our flagship carbon-woven frames and structures.</p>
+                </div>
+
+                <div class="circle-spec-grid">
+                    <!-- Circle 1 -->
+                    <div class="circle-spec-card">
+                        <div class="circle-progress-box">
+                            <svg class="circle-svg">
+                                <circle class="circle-bg" cx="60" cy="60" r="45"></circle>
+                                <circle class="circle-fill" cx="60" cy="60" r="45" id="circle-flex"></circle>
+                            </svg>
+                            <span class="circle-val">96%</span>
+                        </div>
+                        <h4 class="circle-spec-title">Shaft Flex Whipping</h4>
+                    </div>
+
+                    <!-- Circle 2 -->
+                    <div class="circle-spec-card">
+                        <div class="circle-progress-box">
+                            <svg class="circle-svg">
+                                <circle class="circle-bg" cx="60" cy="60" r="45"></circle>
+                                <circle class="circle-fill" cx="60" cy="60" r="45" id="circle-shock"></circle>
+                            </svg>
+                            <span class="circle-val">92%</span>
+                        </div>
+                        <h4 class="circle-spec-title">Impact Absorption</h4>
+                    </div>
+
+                    <!-- Circle 3 -->
+                    <div class="circle-spec-card">
+                        <div class="circle-progress-box">
+                            <svg class="circle-svg">
+                                <circle class="circle-bg" cx="60" cy="60" r="45"></circle>
+                                <circle class="circle-fill" cx="60" cy="60" r="45" id="circle-aerodynamic"></circle>
+                            </svg>
+                            <span class="circle-val">95%</span>
+                        </div>
+                        <h4 class="circle-spec-title">Aerodynamic Stability</h4>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Raw Material Cross-Sections -->
+            <section class="locator-container" id="materials-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Cross-Section details</span></div>
+                    <h3 class="blog-section-title">Raw Material Cross-Sections</h3>
+                    <p class="blog-section-desc">Technical parameters of the raw components going into AeroVolt gear lines.</p>
+                </div>
+
+                <div class="material-panel-card">
+                    <div class="material-layout">
+                        <div class="material-visual-box">
+                            <img src="images/gym-fitness-equipment.jpg" alt="Newly launched hex dumbbells and kettlebells resting on gym floor tiles">
+                        </div>
+                        <div class="material-details">
+                            <h4>Raw Material Engineering</h4>
+                            <p>
+                                Performance starts at the raw level. We source English willow from sustainable forests, nanocarbon fibers from high-tension bobbins, and impact-resistant vulcanized rubber blocks.
+                            </p>
+                            
+                            <div class="cross-sections-list">
+                                <div class="cross-section-node">
+                                    <span class="cross-section-num">A</span>
+                                    <div class="cross-section-text-stack">
+                                        <span class="cross-section-text-title">English Willow blocks</span>
+                                        <span class="cross-section-text-desc">Prime English willow slabs naturally dried to ensure moisture content sits precisely between 8% and 12%.</span>
+                                    </div>
+                                </div>
+                                <div class="cross-section-node">
+                                    <span class="cross-section-num">B</span>
+                                    <div class="cross-section-text-stack">
+                                        <span class="cross-section-text-title">High-tension Carbon fibers</span>
+                                        <span class="cross-section-text-desc">High modulus nanocarbon weaves wrapping shafts to handle tension pressures up to 32 lbs.</span>
+                                    </div>
+                                </div>
+                                <div class="cross-section-node">
+                                    <span class="cross-section-num">C</span>
+                                    <div class="cross-section-text-stack">
+                                        <span class="cross-section-text-title">Vulcanized Rubber compounds</span>
+                                        <span class="cross-section-text-desc">Thick hex dumbbell shell castings optimized to protect floor tiles from drop impacts.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: Accessories Vault Preview -->
+            <section class="locator-container" id="accessories-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Vault Accessories</span></div>
+                    <h3 class="blog-section-title">Accessories Grid Gallery</h3>
+                    <p class="blog-section-desc">Explore final additions to round off your professional tournament catalog kit.</p>
+                </div>
+
+                <div class="accessories-grid">
+                    <!-- Product 1 -->
+                    <div class="accessory-card">
+                        <span class="item-sport-tag">Travel</span>
+                        <h4 class="snap-card-title">Custom Duffle Bags</h4>
+                        <p class="snap-card-desc">Waterproof 1680D nylon duffles featuring separate compartments for shoes and up to 2 bats.</p>
+                        <div class="accessory-specs">
+                            <div class="spec-item"><span>Material:</span><strong>1680D Waterproof Nylon</strong></div>
+                            <div class="spec-item"><span>Capacity:</span><strong>95 Liters</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="accessory-card">
+                        <span class="item-sport-tag">Hydration</span>
+                        <h4 class="snap-card-title">Vacuum Thermal Flasks</h4>
+                        <p class="snap-card-desc">Double-walled stainless steel flasks that maintain liquid temperature cold up to 24 hours.</p>
+                        <div class="accessory-specs">
+                            <div class="spec-item"><span>Material:</span><strong>18/8 Stainless Steel</strong></div>
+                            <div class="spec-item"><span>Temp Retention:</span><strong>24 Hrs Cold / 12 Hrs Hot</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="accessory-card">
+                        <span class="item-sport-tag">Training</span>
+                        <h4 class="snap-card-title">Aero-Dry Training Caps</h4>
+                        <p class="snap-card-desc">Lightweight polyester mesh caps equipped with speed-wick sweatbands for hot training matches.</p>
+                        <div class="accessory-specs">
+                            <div class="spec-item"><span>Material:</span><strong>Polyester Mesh</strong></div>
+                            <div class="spec-item"><span>Weight:</span><strong>48 Grams (Featherlight)</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: Smart Collection Finder -->
+            <section class="locator-container" id="configurator-section" style="margin-bottom: 3rem;">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Vault Navigator</span></div>
+                    <h3 class="blog-section-title">Smart Collection Finder</h3>
+                    <p class="blog-section-desc">Select your primary sport and playing level to obtain instant recommended collections.</p>
+                </div>
+
+                <div class="finder-card">
+                    <div class="finder-info">
+                        <h4>Configure Your Match</h4>
+                        <p>
+                            Choose your sport and estimated playing level. Our dynamic category database calculates the optimal equipment recommendation.
+                        </p>
+                        <div class="finder-info-visual">
+                            <img src="images/collection-navigator.jpg" alt="Athlete looking at curated sports gear vault collection display">
+                        </div>
+                    </div>
+
+                    <div class="finder-wizard">
+                        <div class="wizard-row">
+                            <div class="wizard-group">
+                                <label for="wizard-sport">Primary Sport</label>
+                                <select id="wizard-sport" onchange="runCollectionDiscovery()">
+                                    <option value="cricket">Cricket</option>
+                                    <option value="football">Football</option>
+                                    <option value="badminton">Badminton</option>
+                                    <option value="gym">Gym & Fitness</option>
+                                </select>
+                            </div>
+                            <div class="wizard-group">
+                                <label for="wizard-level">Playing Level</label>
+                                <select id="wizard-level" onchange="runCollectionDiscovery()">
+                                    <option value="beginner">Beginner / Academy</option>
+                                    <option value="pro">Pro League / Varsity</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic result panel -->
+                        <div class="wizard-result-box">
+                            <div class="result-header">
+                                <span>Recommended Collection:</span>
+                                <span class="result-item-badge" id="discovery-result-badge">Cricket English Willow</span>
+                            </div>
+                            <p class="result-body-text" id="discovery-result-text">
+                                The English Willow bats are recommended for beginner academy players, offering traditional grain profiles and easy pick-up balances.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ----------------------------------------------------
+       FOOTER CONTAINER (Matches navbar.html)
+    ----------------------------------------------------- -->
+    <footer class="footer">
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <div class="footer-container">
+            <!-- Column 1: Brand Info -->
+            <div class="footer-col brand-col">
+                <a href="index.html" class="logo-section" style="text-decoration: none;">
+                    <div class="logo-badge" aria-hidden="true">
+                        <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                            <defs>
+                                <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--primary)"></stop>
+                                    <stop offset="100%" stop-color="var(--accent)"></stop>
+                                </linearGradient>
+                            </defs>
+                            <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradFooter)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                            <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                            <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradFooter)"></path>
+                            <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                        </svg>
+                    </div>
+                    <div class="logo-text-wrapper">
+                        <h2 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h2>
+                    </div>
+                </a>
+                <p class="brand-desc">
+                    Engineered with premium craftsmanship and elite sports science, AeroVolt designs game-changing cricket gear, performance apparel, and athletic essentials.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Column 2: Shop Collection -->
+            <div class="footer-col">
+                <h3 class="footer-title">Shop Collection</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Equipment</a></li>
+                    <li><a href="#" class="footer-link">Football Equipment</a></li>
+                    <li><a href="#" class="footer-link">Badminton Equipment</a></li>
+                    <li><a href="#" class="footer-link">Gym & Fitness</a></li>
+                    <li><a href="#" class="footer-link">Sports Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Custom Services -->
+            <div class="footer-col">
+                <h3 class="footer-title">Custom Services</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Team Jerseys</a></li>
+                    <li><a href="#" class="footer-link">Custom Logo Printing</a></li>
+                    <li><a href="#" class="footer-link">Club Uniform Packages</a></li>
+                    <li><a href="#" class="footer-link">Bulk Orders Tier</a></li>
+                    <li><a href="#" class="footer-link">School & College Quote</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Quick Links -->
+            <div class="footer-col">
+                <h3 class="footer-title">Sports Blog</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Training Tips</a></li>
+                    <li><a href="#" class="footer-link">Football Playbooks</a></li>
+                    <li><a href="#" class="footer-link">Fitness & Nutrition</a></li>
+                    <li><a href="#" class="footer-link">Equipment Reviews</a></li>
+                    <li><a href="#" class="footer-link">Store Locations</a></li>
+                </ul>
+            </div>
+
+            
+        </div>
+        
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p class="copyright-text">
+                    &copy; 2026 AeroVolt Sports Lab. All rights reserved.
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ----------------------------------------------------
+       9. INTERACTIVITY CONTROLLER (JAVASCRIPT)
+    ----------------------------------------------------- -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- Contextual Active Navbar Highlight ---
+            const currentPath = window.location.pathname.split("/").pop() || "index.html";
+            const navLinks = document.querySelectorAll(".nav-menu .nav-link");
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href");
+                link.parentElement.classList.remove("active");
+                
+                if (href === currentPath) {
+                    link.parentElement.classList.add("active");
+                } else if ((currentPath === "index.html" || currentPath === "home 2.html" || currentPath === "") && link.textContent.trim().includes("Home")) {
+                    link.parentElement.classList.add("active");
+                }
+            });
+
+            
+            // --- DOM Selectors ---
+            const htmlElement = document.documentElement;
+            const mobileHamburger = document.getElementById("mobile-hamburger");
+            const navMenu = document.getElementById("nav-menu-list");
+            const drawerOverlay = document.getElementById("drawer-overlay");
+
+            // --- Theme Controller (Light/Dark Mode) ---
+            const savedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+            
+            htmlElement.setAttribute("data-theme", initialTheme);
+
+            const themeToggleBtns = document.querySelectorAll(".theme-toggle");
+            themeToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentTheme = htmlElement.getAttribute("data-theme");
+                    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+                    htmlElement.setAttribute("data-theme", nextTheme);
+                    localStorage.setItem("theme", nextTheme);
+                });
+            });
+
+            // --- Layout Controller (RTL / LTR layout) ---
+            const rtlToggleBtns = document.querySelectorAll(".rtl-toggle");
+            
+            rtlToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentDir = htmlElement.getAttribute("dir") || "ltr";
+                    if (currentDir === "ltr") {
+                        htmlElement.setAttribute("dir", "rtl");
+                        htmlElement.setAttribute("lang", "ar");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction RTL to LTR"));
+                    } else {
+                        htmlElement.setAttribute("dir", "ltr");
+                        htmlElement.setAttribute("lang", "en");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction LTR to RTL"));
+                    }
+                });
+            });
+
+            // --- Mobile Navigation Hamburger Controller ---
+            const drawerCloseBtn = document.getElementById("drawer-close-btn");
+            
+            const toggleDrawer = () => {
+                mobileHamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+                drawerOverlay.classList.toggle("active");
+                
+                const isExpanded = mobileHamburger.classList.contains("active");
+                mobileHamburger.setAttribute("aria-expanded", isExpanded);
+            };
+
+            mobileHamburger.addEventListener("click", toggleDrawer);
+            drawerOverlay.addEventListener("click", toggleDrawer);
+            if (drawerCloseBtn) {
+                drawerCloseBtn.addEventListener("click", toggleDrawer);
+            }
+
+            // --- Mobile Dropdown Accordion Controller (Generic) ---
+            const dropdownLinks = document.querySelectorAll(".nav-item > .nav-link");
+            dropdownLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    if (window.innerWidth <= 1320) {
+                        const navItem = link.closest(".nav-item");
+                        const hasDropdown = navItem ? navItem.querySelector(".dropdown-menu") : null;
+                        if (!hasDropdown) return;
+                        
+                        e.preventDefault();
+                        
+                        document.querySelectorAll(".nav-item").forEach(item => {
+                            if (item !== navItem) {
+                                item.classList.remove("mobile-open");
+                                const itemLink = item.querySelector(".nav-link");
+                                if (itemLink) itemLink.setAttribute("aria-expanded", "false");
+                            }
+                        });
+
+                        navItem.classList.toggle("mobile-open");
+                        const isExpanded = navItem.classList.contains("mobile-open");
+                        link.setAttribute("aria-expanded", isExpanded);
+                    }
+                });
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 1320) {
+                    document.querySelectorAll(".nav-item").forEach(item => {
+                        item.classList.remove("mobile-open");
+                    });
+                    dropdownLinks.forEach(link => {
+                        link.setAttribute("aria-expanded", "false");
+                    });
+                    mobileHamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
+                    drawerOverlay.classList.remove("active");
+                    mobileHamburger.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            // --- Trigger Circular Progress meters ---
+            setTimeout(() => {
+                document.getElementById("circle-flex").style.strokeDashoffset = "11.3"; // 96%
+                document.getElementById("circle-shock").style.strokeDashoffset = "22.6"; // 92%
+                document.getElementById("circle-aerodynamic").style.strokeDashoffset = "14.15"; // 95%
+            }, 300);
+
+            // --- Run default collection match ---
+            runCollectionDiscovery();
+        });
+
+        // ----------------------------------------------------
+        // --- HORIZONTAL CAROUSEL SWIPE SCRIPT ---
+        // ----------------------------------------------------
+        function scrollCarousel(offset) {
+            const container = document.getElementById("snap-carousel");
+            container.scrollBy({
+                left: offset,
+                behavior: 'smooth'
+            });
+        }
+
+        // ----------------------------------------------------
+        // --- COLLECTION MATCHING WIZARD LOGIC ---
+        // ----------------------------------------------------
+        function runCollectionDiscovery() {
+            const sport = document.getElementById("wizard-sport").value;
+            const level = document.getElementById("wizard-level").value;
+            
+            const badge = document.getElementById("discovery-result-badge");
+            const desc = document.getElementById("discovery-result-text");
+            
+            let recommendedItem = "Cricket English Willow";
+            let recommendedText = "The English Willow bats are recommended for beginner academy players, offering traditional grain profiles and easy pick-up balances.";
+            
+            if (sport === "cricket") {
+                if (level === "pro") {
+                    recommendedItem = "Elite Player Willow Bats";
+                    recommendedText = "The Elite Player Willow Bats are recommended for pro varsity leagues, offering Grade 1 English willow with high spines and custom knocking-in.";
+                } else {
+                    recommendedItem = "Cricket English Willow";
+                    recommendedText = "The English Willow bats are recommended for beginner academy players, offering traditional grain profiles and easy pick-up balances.";
+                }
+            } else if (sport === "football") {
+                if (level === "pro") {
+                    recommendedItem = "Thermobonded Match Balls";
+                    recommendedText = "The Thermobonded Match Balls are recommended for pro tournaments, featuring water-resistant panel seams and high rebound butyl bladders.";
+                } else {
+                    recommendedItem = "Recreation Football Kits";
+                    recommendedText = "The Recreation Football Kits are recommended for weekly recreation play, offering durable panel stitchings and latex bladders.";
+                }
+            } else if (sport === "badminton") {
+                if (level === "pro") {
+                    recommendedItem = "Carbon Graphite Rackets";
+                    recommendedText = "The Carbon Graphite Rackets are recommended for pro court athletes, offering tensions up to 30 lbs and isometric heads.";
+                } else {
+                    recommendedItem = "Nylon Shuttlecocks Pack";
+                    recommendedText = "The Nylon Shuttlecocks Pack is recommended for beginner court players, offering long flight lifespans and durable skirts.";
+                }
+            } else if (sport === "gym") {
+                if (level === "pro") {
+                    recommendedItem = "Rubber Hex Dumbbells";
+                    recommendedText = "The Rubber Hex Dumbbells are recommended for strength gym training, offering hex designs with vulcanized rubber coatings.";
+                } else {
+                    recommendedItem = "Latex Resistance Tubes";
+                    recommendedText = "The Latex Resistance Tubes are recommended for gym workout beginners, offering handles and anchors up to 100 lbs resistance.";
+                }
+            }
+            
+            badge.innerText = recommendedItem;
+            desc.innerText = recommendedText;
+        }
+    </script>
+</body>
+</html>
+         

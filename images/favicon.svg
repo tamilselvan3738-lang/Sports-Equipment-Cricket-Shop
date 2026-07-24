@@ -1,0 +1,19 @@
+<svg viewBox="0 0 32 32" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="logoGradFav" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4f46e5"></stop>
+            <stop offset="100%" stop-color="#ff6b00"></stop>
+        </linearGradient>
+    </defs>
+    <!-- Outer Shield Outline -->
+    <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradFav)" stroke-width="2.5" stroke-linejoin="round" fill="rgba(79, 70, 229, 0.08)"></path>
+    <!-- Left Wing Feathers -->
+    <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradFav)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+    <!-- Right Wing Feathers -->
+    <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradFav)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+    <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+    <rect x="15" y="7" width="2" height="6" rx="0.5" fill="#0f172a"></rect>
+    <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradFav)"></path>
+    <!-- Energy Glow Dot -->
+    <circle cx="16" cy="25" r="1.8" fill="#ff6b00"></circle>
+</svg>

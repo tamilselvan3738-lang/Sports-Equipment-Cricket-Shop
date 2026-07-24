@@ -1,0 +1,3007 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AeroVolt Sports publication hub - Read expert cricket tips, football guides, badminton wristwork training, fitness science advice, and raw equipment lab reviews.">
+    <title>Sports Publication Lab - AeroVolt Sports</title>
+    
+    <!-- Google Fonts: Outfit (headings), Plus Jakarta Sans (UI elements), Poppins (Blog Page contents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ----------------------------------------------------
+           1. DESIGN SYSTEM & CSS VARIABLES (Matches navbar.html)
+        ---------------------------------------------------- */
+        :root[data-theme="light"] {
+            --bg-page: hsl(220, 20%, 97%);
+            --bg-navbar: hsla(220, 20%, 97%, 0.85);
+            --bg-card: hsl(0, 0%, 100%);
+            --bg-hover: hsl(245, 100%, 97%);
+            --bg-dropdown: hsla(0, 0%, 100%, 0.92);
+            
+            --text-primary: hsl(245, 50%, 15%);
+            --text-secondary: hsl(245, 20%, 35%);
+            --text-muted: hsl(240, 10%, 55%);
+            
+            --primary: hsl(245, 75%, 52%);
+            --primary-hover: hsl(245, 75%, 45%);
+            --primary-glow: rgba(79, 70, 229, 0.15);
+            
+            --accent: hsl(14, 100%, 53%); /* Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.2);
+            
+            --border: hsla(245, 20%, 80%, 0.35);
+            --border-hover: hsla(245, 20%, 70%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(79, 70, 229, 0.04);
+            --shadow-md: 0 10px 30px rgba(79, 70, 229, 0.06);
+            --shadow-lg: 0 20px 40px rgba(79, 70, 229, 0.08);
+            
+            --glass-blur: 16px;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-page: hsl(240, 35%, 6%);
+            --bg-navbar: hsla(240, 35%, 6%, 0.85);
+            --bg-card: hsl(240, 25%, 11%);
+            --bg-hover: hsl(245, 30%, 18%);
+            --bg-dropdown: hsla(240, 25%, 11%, 0.92);
+            
+            --text-primary: hsl(210, 40%, 98%);
+            --text-secondary: hsl(240, 15%, 80%);
+            --text-muted: hsl(240, 10%, 65%);
+            
+            --primary: hsl(245, 90%, 65%);
+            --primary-hover: hsl(245, 90%, 72%);
+            --primary-glow: rgba(129, 140, 248, 0.25);
+            
+            --accent: hsl(14, 100%, 55%); /* Neon Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.25);
+            
+            --border: hsla(245, 20%, 25%, 0.4);
+            --border-hover: hsla(245, 20%, 35%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
+            
+            --glass-blur: 16px;
+        }
+
+        /* Base Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ----------------------------------------------------
+           2. HEADER & NAVIGATION BAR
+        ---------------------------------------------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            inset-inline-start: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--bg-navbar);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            flex-shrink: 0;
+            justify-self: start;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-section:hover .logo-badge {
+            transform: translateY(-2px) rotate(-3deg) scale(1.05);
+            filter: drop-shadow(0 4px 12px var(--primary-glow));
+        }
+
+        .logo-section:hover .logo-title span.highlight {
+            filter: brightness(1.1);
+        }
+
+        #main-navigation {
+            justify-self: center;
+        }
+
+        .logo-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+            animation: bounce-slow 4s infinite ease-in-out;
+        }
+
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .logo-title span.highlight {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Center Navigation Menu */
+        .nav-menu {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.15rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.55rem;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        .nav-link:hover::after,
+        .nav-item.active .nav-link::after {
+            width: 70%;
+            left: 15%;
+        }
+
+        .nav-link:hover, .nav-item.active .nav-link {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+        }
+
+        .nav-link svg.arrow-icon {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.2s ease;
+            stroke-width: 3px;
+        }
+
+        .nav-item:hover .nav-link svg.arrow-icon {
+            transform: translateY(1px);
+        }
+
+        /* Dropdown Menus */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            inset-inline-start: 0;
+            margin-top: 0.5rem;
+            background-color: var(--bg-dropdown);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px) scale(0.98);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 100;
+            overflow: hidden;
+            padding: 0.4rem;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .dropdown-item:hover {
+            transform: translateX(-4px);
+        }
+
+        /* Right Actions Layout */
+        .actions-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            justify-self: end;
+        }
+
+        /* Utility Toggle Buttons */
+        .action-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .action-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateY(-1px);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Dark Mode Button Icon Switcher */
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        /* RTL Toggle Button */
+        .rtl-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .rtl-toggle:hover svg {
+            animation: swap-arrow-slide 0.6s ease-in-out infinite alternate;
+        }
+
+        [dir="rtl"] .rtl-toggle:hover svg {
+            animation: swap-arrow-slide-rtl 0.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes swap-arrow-slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(3px);
+            }
+        }
+
+        @keyframes swap-arrow-slide-rtl {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-3px);
+            }
+        }
+
+        /* Login Button */
+        .login-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), hsl(245, 75%, 40%));
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.35rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--primary-glow);
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            box-shadow: 0 6px 18px var(--primary-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.08);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke-width: 2.5;
+        }
+
+        /* Mobile Hamburger & Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22px;
+            height: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1100;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2.5px;
+            background-color: var(--text-primary);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Drawer Dark Overlay Backdrop */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer-actions-item-wrapper,
+        .drawer-header-item {
+            display: none;
+        }
+
+        /* ----------------------------------------------------
+           3. MAIN CONTAINER / DEMO BODY
+        ---------------------------------------------------- */
+        .demo-body {
+            margin-top: 80px; /* offset navbar height */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
+        /* ----------------------------------------------------
+           4. RESPONSIVE MEDIA QUERIES (COLLAPSE AT 1320PX)
+        ---------------------------------------------------- */
+        @media (max-width: 1320px) {
+            .header {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: var(--bg-card);
+                z-index: 1060;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1.5rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            /* Toggle desktop menu hiding, hamburger showing */
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active {
+                display: none !important;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                inset-inline-end: -320px;
+                width: 320px;
+                height: 100vh;
+                background-color: var(--bg-card);
+                border-inline-start: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0;
+                gap: 0;
+                z-index: 1050;
+                transition: inset-inline-end 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                visibility: hidden;
+                display: flex;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                inset-inline-end: 0;
+                visibility: visible;
+            }
+
+            .drawer-header-item {
+                display: block;
+                width: 100%;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 1rem;
+            }
+
+            .drawer-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.25rem 1.5rem;
+                background-color: var(--bg-card);
+            }
+
+            .drawer-close-btn {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                transition: all 0.2s ease;
+                padding: 0;
+            }
+
+            .drawer-close-btn:hover {
+                color: var(--primary);
+                transform: scale(1.1);
+            }
+
+            .drawer-close-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .nav-item {
+                width: 100%;
+                padding: 0 1.5rem;
+            }
+
+            .nav-link {
+                justify-content: space-between;
+                width: 100%;
+                padding: 0.85rem 0;
+                font-size: 0.95rem;
+                border-bottom: 1px solid hsla(215, 20%, 80%, 0.1);
+            }
+
+            /* Submenu in mobile view acts as accordion */
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background-color: var(--bg-hover);
+                padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+                margin-top: 0.25rem;
+            }
+
+            /* Disable desktop floating borders and underlines on mobile drawer */
+            .nav-link::after,
+            .dropdown-menu::before {
+                display: none !important;
+            }
+
+            .nav-item.mobile-open .dropdown-menu {
+                display: block;
+            }
+
+            .nav-item.mobile-open .nav-link svg.arrow-icon {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-item {
+                padding: 0.6rem 1rem;
+            }
+
+            .actions-section {
+                gap: 0.5rem;
+            }
+
+            .actions-section .theme-toggle,
+            .actions-section .rtl-toggle,
+            .actions-section .login-btn {
+                display: none;
+            }
+
+            .drawer-actions-item-wrapper {
+                display: block;
+                margin-top: auto;
+                padding: 1.5rem;
+            }
+
+            .drawer-divider {
+                height: 1px;
+                background-color: var(--border);
+                margin-bottom: 1.5rem;
+                opacity: 0.5;
+            }
+
+            .drawer-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row .action-btn {
+                flex: 1 !important;
+                height: 44px !important;
+                border-radius: 10px !important;
+                border: 1px solid var(--border) !important;
+                background-color: var(--bg-card) !important;
+                color: var(--text-secondary) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: auto !important;
+            }
+
+            .drawer-toggles-row .action-btn:hover {
+                border-color: var(--primary);
+                background-color: var(--bg-hover);
+                color: var(--primary);
+            }
+
+            .drawer-login-btn {
+                width: 100% !important;
+                height: 46px !important;
+                justify-content: center !important;
+                background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%)) !important;
+                box-shadow: 0 4px 15px var(--accent-glow) !important;
+                border-radius: 10px !important;
+                font-size: 0.95rem !important;
+                font-weight: 700 !important;
+                color: #ffffff !important;
+                border: none !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.5rem !important;
+                transition: all 0.3s ease;
+            }
+
+            .drawer-login-btn:hover {
+                box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4) !important;
+                transform: translateY(-1px);
+                filter: brightness(1.05);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .logo-tagline {
+                display: none;
+            }
+
+            .logo-title {
+                font-size: 1.15rem;
+            }
+        }
+
+        /* ----------------------------------------------------
+           3.5. BLOG HUB STYLING
+        ---------------------------------------------------- */
+        .blog-body {
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+            padding: 5rem 2rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .blog-hero-banner {
+            position: relative;
+            height: 480px;
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 4rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+        .blog-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            z-index: 1;
+        }
+        .blog-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.2) 100%);
+            z-index: 2;
+        }
+        .blog-hero-card {
+            position: relative;
+            z-index: 3;
+            max-width: 550px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: start;
+        }
+        .blog-hero-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 850;
+            color: #ffffff;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+            text-transform: capitalize;
+        }
+        .blog-hero-card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .search-container {
+            display: flex;
+            width: 100%;
+            max-width: 450px;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.35rem;
+            border-radius: 30px;
+            gap: 0.5rem;
+        }
+        .search-container input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0.5rem 1rem;
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-family: inherit;
+        }
+        .search-container input::placeholder {
+            color: rgba(255, 255, 255, 0.65);
+        }
+        .search-container button {
+            background-color: #ffffff;
+            color: var(--primary);
+            border: none;
+            outline: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .search-container button:hover {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+        }
+        .main-featured-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            text-align: start;
+            height: 100%;
+        }
+        .main-featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+        .featured-img-box {
+            height: 300px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+        .featured-img-box img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+        .featured-content-box {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .featured-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: 100%;
+            justify-content: space-between;
+        }
+        .side-article-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+            text-align: start;
+        }
+        .side-article-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .side-img-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        .side-img-box img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+        .side-article-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .side-article-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            line-height: 1.3;
+            transition: color 0.2s ease;
+        }
+        .side-article-title:hover {
+            color: var(--primary);
+        }
+
+        .article-meta {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .article-title-link {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            line-height: 1.35;
+            transition: color 0.2s ease;
+        }
+        .article-title-link:hover {
+            color: var(--primary);
+        }
+        .article-excerpt {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .category-section-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+        }
+        .cricket-panel-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .panel-visual-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-page);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            height: 100%;
+            min-height: 300px;
+        }
+        .panel-visual-box img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 12px;
+        }
+        .panel-guides-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+        }
+        .guide-card-item {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.25s ease;
+        }
+        .guide-card-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .guide-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .guide-card-title:hover {
+            color: var(--accent);
+        }
+        .guide-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .football-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .football-tactical-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        .football-tactical-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .support-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .support-card-body {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .support-card-btn {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: color 0.2s ease;
+        }
+        .support-card-btn:hover {
+            color: var(--primary-hover);
+        }
+        .support-card-btn svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
+        .support-card-btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        .badminton-alternating-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+        .badminton-row {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .badminton-row.reverse {
+            grid-template-columns: 1.2fr 1fr;
+        }
+        .badminton-info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+        }
+        .step-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .step-number {
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-weight: 850;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .step-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .step-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .fitness-dashboard-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .fitness-card-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+            align-items: flex-start;
+        }
+        .fitness-card-right {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .metric-card {
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .metric-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 850;
+            color: var(--primary);
+        }
+        .metric-title {
+            font-size: 0.72rem;
+            font-weight: 750;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        .review-lab-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem;
+            box-shadow: var(--shadow-sm);
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .review-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+        .review-heading-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .review-item-cat {
+            font-size: 0.7rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .review-item-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .review-score-badge {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 850;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+        .review-pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .pros-list, .cons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .pros-list h5, .cons-list h5 {
+            font-size: 0.78rem;
+            font-weight: 750;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .pros-list h5 {
+            color: #10b981;
+        }
+        .cons-list h5 {
+            color: #ef4444;
+        }
+        .pros-list ul, .cons-list ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+        .pros-list ul li::before {
+            content: '✓ ';
+            color: #10b981;
+            font-weight: 700;
+        }
+        .cons-list ul li::before {
+            content: '✗ ';
+            color: #ef4444;
+            font-weight: 700;
+        }
+        .review-verdict {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        /* Section 8: Responsive */
+        @media (max-width: 1024px) {
+            .blog-body {
+                gap: 4rem;
+            }
+
+            .blog-hero-banner {
+                height: auto;
+                padding: 3rem 2rem;
+            }
+
+            .cricket-panel-layout,
+            .badminton-row,
+            .badminton-row.reverse,
+            .fitness-dashboard-card {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+
+            .badminton-row.reverse .panel-visual-box {
+                grid-row: 2;
+            }
+
+            .featured-grid,
+            .football-grid,
+            .review-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .featured-grid,
+            .football-grid,
+            .review-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .category-section-panel,
+            .fitness-dashboard-card {
+                padding: 2rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-title {
+                font-size: 1rem !important;
+            }
+
+            .logo-badge svg {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .logo-section {
+                gap: 0.5rem !important;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1rem !important;
+            }
+
+            .blog-badge {
+                font-size: 0.72rem !important;
+                padding: 0.35rem 0.75rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .blog-hero-card h2 {
+                font-size: 1.85rem !important;
+            }
+
+            .blog-hero-card p {
+                font-size: 0.88rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .search-container {
+                padding: 0.25rem !important;
+                flex-direction: column !important;
+                border-radius: 16px !important;
+            }
+
+            .search-container button {
+                width: 100% !important;
+                border-radius: 12px !important;
+            }
+
+            .category-section-panel,
+            .fitness-dashboard-card,
+            .review-lab-card,
+            .football-tactical-card {
+                padding: 1.25rem !important;
+            }
+
+            .panel-visual-box {
+                min-height: 200px !important;
+                padding: 1rem !important;
+            }
+
+            .fitness-card-right {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            .review-pros-cons-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.25rem !important;
+            }
+
+            .featured-content-box {
+                padding: 1.25rem !important;
+            }
+
+            .featured-img-box {
+                height: 200px !important;
+            }
+
+            .side-article-card {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                padding: 1.25rem !important;
+            }
+
+            .side-img-box {
+                width: 100% !important;
+                height: 150px !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .blog-hero-card h2 {
+                font-size: 1.55rem !important;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .blog-hero-card h2 {
+                font-size: 1.35rem !important;
+            }
+        }
+
+        /* ----------------------------------------------------
+           5. SYSTEM KEYFRAMES & UTILITIES
+           5. SYSTEM KEYFRAMES & UTILITIES
+        ---------------------------------------------------- */
+        @keyframes bounce-slow {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-4px) rotate(5deg);
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2.2);
+                opacity: 0;
+            }
+        }
+
+        /* ----------------------------------------------------
+           6. FOOTER STYLING & RESPONSIVENESS
+        ---------------------------------------------------- */
+        .footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 5rem 2rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: auto;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.2fr 1.2fr 1.2fr 1.2fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+        }
+
+        .brand-col .brand-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%));
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            inset-inline-start: 0;
+            width: 36px;
+            height: 2px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .footer-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .contact-info-item {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            text-align: start;
+        }
+
+        .contact-info-item svg.contact-icon-svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .footer-bottom-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-link {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--primary);
+        }
+
+                        /* Responsive Footer Media Queries */
+        @media (max-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 3;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 1.5rem;
+            }
+            .brand-col .footer-desc {
+                max-width: 600px;
+                margin: 0.75rem auto 1.5rem auto;
+            }
+            .brand-col .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 4rem 1.25rem 2rem 1.25rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 1;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 0;
+            }
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col ul {
+                padding: 0;
+            }
+            .footer-col ul li {
+                justify-content: center;
+            }
+            .footer-bottom-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+
+        /* ====================================================
+           GLOBAL RESPONSIVENESS OVERRIDES
+        ==================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box !important;
+        }
+        
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            width: 100% !important;
+        }
+
+        img, video, iframe {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid, .telemetry-grid, .materials-grid, .calendar-grid, .radar-grid, .booking-grid, 
+            .about-hero-grid, .collage-container, .why-diagonal-grid, .orbit-container, .location-section-grid,
+            .custom-hero-grid, .custom-step-grid, .custom-benefits-grid, .bulk-hero-grid, .steps-grid, 
+            .benefits-grid, .blog-hero-grid, .blog-featured-grid, .blog-archive-grid, .contact-hero-grid, 
+            .contact-form-grid, .brands-hero-grid, .brands-showcase-grid,
+            .accessories-grid, .athletes-flex-row, .audit-layout, .calendar-phase-specs, .catalog-grid, 
+            .circle-spec-grid, .configurator-card, .flex-grid-wrapper, .grid-container, .material-layout, 
+            .quiz-card, .quiz-row, .testimonial-card, .vault-hero-grid, .wizard-row {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 4rem 1.5rem !important;
+            }
+
+            /* Responsive Footer overrides (Laptop & Tablet viewports) */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 768px Breakpoint (Tablets) */
+        @media (max-width: 768px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 3rem 1.25rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.85rem !important;
+                line-height: 1.25 !important;
+            }
+            
+            h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Navbar adjustments */
+            .desktop-nav {
+                display: none !important;
+            }
+            
+            .mobile-hamburger {
+                display: flex !important;
+            }
+
+            .logo-title {
+                font-size: 1.15rem !important;
+            }
+
+            /* Responsive Footer overrides */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 480px Breakpoint (Mobile Portrait) */
+        @media (max-width: 480px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2.5rem 1rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.6rem !important;
+            }
+            
+            .btn-primary, .btn-secondary, .btn-accent, button.btn-primary, button.btn-secondary {
+                width: 100% !important;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .logo-tagline {
+                display: none !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.85) !important;
+                margin: -1.5rem auto !important;
+            }
+            .telemetry-tabs {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 0.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            .tab-trigger {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.75rem !important;
+                flex: 1 1 calc(33.333% - 0.5rem) !important;
+                min-width: 75px !important;
+                text-align: center !important;
+            }
+            .telemetry-readouts {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)) !important;
+                gap: 0.75rem !important;
+            }
+        }
+
+        /* 320px Breakpoint (Small Mobile Screen) */
+        @media (max-width: 320px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2rem 0.75rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 1.75rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.45rem !important;
+            }
+
+            .logo-title {
+                font-size: 1rem !important;
+            }
+            
+            /* Force absolute overflow prevention */
+            * {
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.75) !important;
+                margin: -2.5rem auto !important;
+            }
+            .telemetry-dashboard {
+                padding: 0.85rem !important;
+            }
+            .tab-trigger {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.5rem !important;
+            }
+        }
+    
+        /* --- Injecting Missing Layout Styles --- */
+        .locator-container {
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .blog-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-section-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .blog-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            width: fit-content;
+            margin-bottom: 0.75rem;
+        }
+
+        .glow-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .rtl-icon, .logo-icon-svg {
+            display: inline-block;
+        }
+        
+        /* --- Badminton Skills Key Drills --- */
+        .step-key-drills {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding-left: 0.5rem;
+        }
+        .drill-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+        .drill-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            margin-top: 6px;
+            flex-shrink: 0;
+            box-shadow: 0 0 6px var(--primary-glow);
+        }
+        .drill-content {
+            line-height: 1.4;
+        }
+        .drill-content strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+    
+        /* Hamburger custom SVG toggle button styling */
+        .hamburger {
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            z-index: 1100 !important;
+        }
+        .hamburger svg {
+            width: 20px !important;
+            height: 20px !important;
+            color: var(--text-secondary) !important;
+            transition: transform 0.3s ease !important;
+        }
+        .hamburger:hover svg {
+            color: var(--primary) !important;
+            transform: scale(1.05) !important;
+        }
+</style>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+
+    <!-- Drawer Dark Overlay Backdrop -->
+    <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+
+    <!-- ----------------------------------------------------
+       HEADER & NAVIGATION BAR CONTAINER (Matches navbar.html)
+    ----------------------------------------------------- -->
+    <header class="header">
+        <div class="nav-container">
+            
+            <!-- Left: Logo & Tagline -->
+            <a href="index.html" class="logo-section" aria-label="AeroVolt Sports Lab Home">
+                <div class="logo-badge" aria-hidden="true">
+                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                            </linearGradient>
+                        </defs>
+                        <!-- Outer Shield Outline -->
+                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                        <!-- Left Wing Feathers -->
+                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <!-- Right Wing Feathers -->
+                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGrad)"></path>
+                        <!-- Energy Glow Dot -->
+                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                    </svg>
+                </div>
+                <div class="logo-text-wrapper">
+                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                </div>
+            </a>
+
+            <!-- Center: Navigation Menu Links -->
+            <nav id="main-navigation">
+                                                                <ul class="nav-menu" id="nav-menu-list">
+                    <!-- Drawer Header (visible only on mobile/tablet viewports inside the drawer) -->
+                    <li class="drawer-header-item">
+                        <div class="drawer-header">
+                            <a href="index.html" class="logo-section">
+                                <div class="logo-badge" aria-hidden="true">
+                                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                                        <defs>
+                                            <linearGradient id="logoGradDrawer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <!-- Outer Shield Outline -->
+                                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradDrawer)" stroke-width="2" stroke-linejoin="round" fill="rgba(124, 58, 237, 0.04)"></path>
+                                        <!-- Left Wing Feathers -->
+                                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Right Wing Feathers -->
+                                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+                                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradDrawer)"></path>
+                                        <!-- Energy Glow Dot -->
+                                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                                    </svg>
+                                </div>
+                                <div class="logo-text-wrapper">
+                                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                                </div>
+                            </a>
+                            <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Menu">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+
+                    <!-- 1. Home Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" aria-expanded="false" aria-haspopup="true">
+                            Home
+                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">Home 1</a>
+                            <a href="home 2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </li>
+
+                    <!-- 2. About Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <!-- 3. Collection Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.html">Collection</a>
+                    </li>
+
+                    <!-- 4. Arrivals Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="arrivals.html">Arrivals</a>
+                    </li>
+
+                    <!-- 5. Brands Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="brands.html">Brands</a>
+                    </li>
+
+                    <!-- 6. Custom Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="customization.html">Custom</a>
+                    </li>
+
+                    <!-- 7. Bulk Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.html">Bulk</a>
+                    </li>
+
+                    <!-- 8. Blog Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+
+                    <!-- 9. Contact Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    
+                    <!-- Drawer Actions (visible only on mobile/tablet viewport drawer) -->
+                    <li class="drawer-actions-item-wrapper">
+                        <div class="drawer-divider"></div>
+                        <div class="drawer-actions">
+                            <div class="drawer-toggles-row">
+                                <!-- Dark Mode Toggle Button -->
+                                <button class="action-btn theme-toggle" aria-label="Toggle Dark Mode">
+                                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M12 2v2"></path>
+                                        <path d="M12 20v2"></path>
+                                        <path d="M4.93 4.93l1.41 1.41"></path>
+                                        <path d="M17.66 17.66l1.41 1.41"></path>
+                                        <path d="M2 12h2"></path>
+                                        <path d="M20 12h2"></path>
+                                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                                    </svg>
+                                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                    </svg>
+                                    
+                                </button>
+                                
+                                <!-- RTL Toggle Button -->
+                                <button class="action-btn rtl-toggle" aria-label="Toggle Direction">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="rtl-icon">
+                                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                                    </svg>
+                                    
+                                </button>
+                            </div>
+                            
+                            <!-- Login Button in Mobile Drawer -->
+                            <button class="login-btn drawer-login-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span>Login</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right: Actions (Theme Toggle, RTL Toggle, Login Button, Hamburger) -->
+            <div class="actions-section">
+                <!-- Dark Mode Toggle Button -->
+                <button class="action-btn theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <!-- Sun SVG (visible in Light Mode) -->
+                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                    <!-- Moon SVG (visible in Dark Mode) -->
+                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6.364 6.364 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </button>
+
+                <!-- RTL Layout Toggle Button -->
+                <button class="action-btn rtl-toggle" id="rtl-toggle-btn" aria-label="Toggle Layout Direction LTR to RTL">
+                    <!-- Double Arrow Swap SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                    </svg>
+                </button>
+
+                <!-- Login Button -->
+                <button class="login-btn" id="login-btn" aria-label="Login"><!-- Lock Icon -->
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Login</span>
+                </button>
+
+                <!-- Mobile Hamburger Trigger -->
+                <button class="hamburger" id="mobile-hamburger" aria-label="Toggle Navigation Menu" aria-controls="main-navigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ----------------------------------------------------
+       MAIN CONTENT BODY (VISUALLY UNIQUE BLOG HUB)
+    ----------------------------------------------------- -->
+    <main class="demo-body">
+        <div class="blog-body">
+            
+            <!-- SECTION 1: Blog Hero Section -->
+            <section class="blog-hero-banner" id="hero-section">
+                <!-- Background image generated by Gemini -->
+                <img class="blog-hero-bg" src="images/blog-hero.jpg" alt="AeroVolt Sports Lab Training Facility">
+                <div class="blog-hero-overlay"></div>
+                <div class="blog-hero-card">
+                    <div class="blog-badge" style="background-color: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); color: #ffffff;">
+                        <span>Inside the Sports Science</span>
+                    </div>
+                    <h2>AeroVolt Lab publication</h2>
+                    <p>
+                        Articles, guides, and raw equipment reviews written by master bat makers, apparel designers, and physical scientists.
+                    </p>
+                    <div class="search-container">
+                        <input type="text" id="blog-search" placeholder="Search tips, guides, reviews..." oninput="handleSearch(this.value)">
+                        <button type="button" aria-label="Search articles">Search</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: Featured Sports Articles -->
+            <section class="locator-container" id="featured-articles-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Trending Now</span></div>
+                    <h3 class="blog-section-title">Featured Sports Articles</h3>
+                    <p class="blog-section-desc">The most read and cited publications in modern cricket engineering and sports fitness.</p>
+                </div>
+
+                <!-- Asymmetrical featured layout -->
+                <div class="featured-grid">
+                    <!-- Left: Large Featured Article Card -->
+                    <article class="main-featured-card" data-category="cricket">
+                        <div class="featured-img-box">
+                            <img src="images/featured-articles.jpg" alt="Athlete reading sports science article on tablet inside modern gym showroom">
+                        </div>
+                        <div class="featured-content-box">
+                            <div class="article-meta">
+                                <span>Cricket Tips</span>
+                                <span class="reading-time">10 Min Read</span>
+                            </div>
+                            <a href="#" class="article-title-link">The Physics of Willow Pressing: Weight vs. Stroke Performance</a>
+                            <p class="article-excerpt">
+                                How compression levels during the pressing phase of English Willow dictate the deflection coefficient of cricket bats. Learn how the wood grains warp under pressure.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Right: Stack of Two Side Articles -->
+                    <div class="featured-stack">
+                        <!-- Side Article 1 -->
+                        <article class="side-article-card" data-category="fitness">
+                            <div class="side-img-box">
+                                <img src="images/fitness-advice.jpg" alt="Athlete doing kettlebell swing exercises">
+                            </div>
+                            <div class="side-article-info">
+                                <div class="article-meta">
+                                    <span>Fitness Advice</span>
+                                    <span>6 Min Read</span>
+                                </div>
+                                <a href="#" class="side-article-title">Explosive Hip Hinge Drills for Power-Hitting</a>
+                            </div>
+                        </article>
+
+                        <!-- Side Article 2 -->
+                        <article class="side-article-card" data-category="football">
+                            <div class="side-img-box">
+                                <img src="images/football-guide.jpg" alt="Football coach showing tactics board to player">
+                            </div>
+                            <div class="side-article-info">
+                                <div class="article-meta">
+                                    <span>Football Guides</span>
+                                    <span>8 Min Read</span>
+                                </div>
+                                <a href="#" class="side-article-title">Sideline Overlaps: Full Tactical Wing Playbook</a>
+                            </div>
+                        </article>
+
+                        <!-- Side Article 3 -->
+                        <article class="side-article-card" data-category="badminton">
+                            <div class="side-img-box">
+                                <img src="images/badminton-training.jpg" alt="Badminton player practicing shadow play movements">
+                            </div>
+                            <div class="side-article-info">
+                                <div class="article-meta">
+                                    <span>Badminton Training</span>
+                                    <span>5 Min Read</span>
+                                </div>
+                                <a href="#" class="side-article-title">Dynamic Footwork Patterns for Shadow Play</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Cricket Masterclass (Cricket Tips) -->
+            <section class="locator-container" id="cricket-tips-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Cricket Tips</span></div>
+                    <h3 class="blog-section-title">Cricket Masterclass</h3>
+                    <p class="blog-section-desc">Meticulous woodcraft and playing tips straight from our master bat craftsmen and quality inspectors.</p>
+                </div>
+
+                <div class="category-section-panel">
+                    <div class="cricket-panel-layout">
+                        <div class="panel-visual-box">
+                            <img src="images/cricket-tips.jpg" alt="Close-up of cricket batsman holding willow grip in batting stance">
+                        </div>
+                        <div class="panel-guides-stack">
+                            <div class="guide-card-item">
+                                <a href="#" class="guide-card-title">How to select bat grains for your playing style</a>
+                                <p class="guide-card-desc">Six grains vs twelve grains. Understand how grain density affects the longevity, sweet spot density, and raw spring response of premium English Willow.</p>
+                            </div>
+                            <div class="guide-card-item">
+                                <a href="#" class="guide-card-title">The art of knocking in English Willow</a>
+                                <p class="guide-card-desc">Step-by-step bat preparation. Why linseed oiling and raw hammer compression are mandatory before stepping onto turf pitches.</p>
+                            </div>
+                            <div class="guide-card-item">
+                                <a href="#" class="guide-card-title">Bat weight balance vs. swing speed physics</a>
+                                <p class="guide-card-desc">A deep dive into how weight profiles and pick-up index balance dictate bat speed velocity and boundary clearance energy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Football Strategy Corner (Football Guides) -->
+            <section class="locator-container" id="football-guides-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Football Guides</span></div>
+                    <h3 class="blog-section-title">Football Strategy Corner</h3>
+                    <p class="blog-section-desc">Modern formations, boot selections, and structural ball physics to increase your match-day impact.</p>
+                </div>
+
+                <div class="football-grid">
+                    <!-- Tactic Card 1 -->
+                    <div class="football-tactical-card">
+                        <div class="article-meta">
+                            <span>Guides</span>
+                            <span>7 Min Read</span>
+                        </div>
+                        <h4 class="support-card-title">Aerodynamics of Match-Ball Curve Physics</h4>
+                        <p class="support-card-body">
+                            The science of the Magnus effect. Learn how spinning kicks warp local air pressures to curve soccer balls around defenders.
+                        </p>
+                        <a href="#" class="support-card-btn">
+                            <span>Read Tactic</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Tactic Card 2 -->
+                    <div class="football-tactical-card">
+                        <div class="article-meta">
+                            <span>Boot Science</span>
+                            <span>5 Min Read</span>
+                        </div>
+                        <h4 class="support-card-title">Choosing Cleats for Wet Turf Conditions</h4>
+                        <p class="support-card-body">
+                            Sizing plate studs and material structures. Selecting between SG (Soft Ground) and FG (Firm Ground) configurations for maximum grip.
+                        </p>
+                        <a href="#" class="support-card-btn">
+                            <span>Read Tactic</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Tactic Card 3 -->
+                    <div class="football-tactical-card">
+                        <div class="article-meta">
+                            <span>Apparel tech</span>
+                            <span>6 Min Read</span>
+                        </div>
+                        <h4 class="support-card-title">Sublimation Fabric Thread Breathability</h4>
+                        <p class="support-card-body">
+                            How synthetic polyester mesh fibers wick sweat away from dynamic skin surfaces during ninety minutes of physical strain.
+                        </p>
+                        <a href="#" class="support-card-btn">
+                            <span>Read Tactic</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Badminton Skills Academy (Badminton Training) -->
+            <section class="locator-container" id="badminton-training-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Badminton Training</span></div>
+                    <h3 class="blog-section-title">Badminton Skills Academy</h3>
+                    <p class="blog-section-desc">Visual guides detailing wrist snaps, lunging geometries, and court positioning to speed up shuttlecock deflections.</p>
+                </div>
+
+                <div class="badminton-alternating-layout">
+                    <!-- Row Step 1 -->
+                    <div class="badminton-row">
+                        <div class="badminton-info-panel">
+                            <div class="step-badge-row">
+                                <div class="step-number">01</div>
+                                <h4 class="step-title">Wrist Flick & Forearm Rotation</h4>
+                            </div>
+                            <p class="step-desc">
+                                Master the pronation swing. Rapidly rotate your forearm inwards right before hitting the shuttlecock to generate maximum wrist snap speeds. Keep your shoulder socket relaxed.
+                            </p>
+                            <div class="step-key-drills">
+                                <div class="drill-item">
+                                    <span class="drill-bullet"></span>
+                                    <div class="drill-content"><strong>Forearm Pronation Snap:</strong> Rapidly pronate the forearm inwards 90 degrees right at impact to redirect deflections.</div>
+                                </div>
+                                <div class="drill-item">
+                                    <span class="drill-bullet"></span>
+                                    <div class="drill-content"><strong>Loose Grip Control:</strong> Hold racquet handle loosely until 0.1s before contact to increase recoil snap.</div>
+                                </div>
+                                <div class="drill-item">
+                                    <span class="drill-bullet"></span>
+                                    <div class="drill-content"><strong>Target Velocity:</strong> Speeds up high racquet snap actions for smash speeds up to 120 mph.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-visual-box">
+                            <img src="images/badminton-training.jpg" alt="High speed action shot of badminton racket hitting shuttlecock in mid-air">
+                        </div>
+                    </div>
+
+                    <!-- Row Step 2 -->
+                    <div class="badminton-row reverse">
+                        <div class="badminton-info-panel">
+                            <div class="step-badge-row">
+                                <div class="step-number">02</div>
+                                <h4 class="step-title">Split Step Agility Footwork</h4>
+                            </div>
+                            <p class="step-desc">
+                                Perform a micro-hop right as your opponent strikes the shuttlecock. This pre-activates your calves and allows you to lunge instantly towards all four court boundaries.
+                            </p>
+                            <div class="step-key-drills">
+                                <div class="drill-item">
+                                    <span class="drill-bullet"></span>
+                                    <div class="drill-content"><strong>Split Pre-Hop Timing:</strong> Time the micro-hop bounce exactly as the opponent racquet meets shuttlecock.</div>
+                                </div>
+                                <div class="drill-item">
+                                    <span class="drill-bullet"></span>
+                                    <div class="drill-content"><strong>Low Stance Agility:</strong> Maintain feet wider than shoulders and low center of gravity to activate calves.</div>
+                                </div>
+                                <div class="drill-item">
+                                    <span class="drill-bullet"></span>
+                                    <div class="drill-content"><strong>Explosive Directional Launch:</strong> Push off the outer foot instantly to drive towards the court boundaries.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-visual-box">
+                            <img src="images/fitness-advice.jpg" alt="Athletic training footwork conditioning">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: Fitness & Performance Hub (Fitness Advice) -->
+            <section class="locator-container" id="fitness-advice-section">
+                <div class="section-header" style="text-align: center; align-items: center; display: flex; flex-direction: column;">
+                    <div class="blog-badge"><span>Sports Science</span></div>
+                    <h3 class="blog-section-title" style="text-align: center;">Fitness & Performance Hub</h3>
+                    <p class="blog-section-desc" style="text-align: center;">Heart-rate thresholds, training nutrition, and explosive agility advice to condition sports athletes.</p>
+                </div>
+
+                <div class="fitness-dashboard-card">
+                    <div class="fitness-card-left">
+                        <h4 class="contact-hero-title" style="font-size: 1.8rem; line-height: 1.35; margin-bottom: 0.5rem;">
+                            The 48-Hour Athlete Recovery Protocol
+                        </h4>
+                        <p class="contact-hero-desc" style="font-size: 0.95rem; margin-bottom: 1rem;">
+                            Active recovery, myofascial releases, and hydration indexes to rebuild muscle structures after high-intensity matches.
+                        </p>
+                        <a href="#" class="login-btn" style="width: fit-content; border-radius: 10px;">Read Recovery Science</a>
+                    </div>
+                    
+                    <div class="fitness-card-right">
+                        <div class="metric-card">
+                            <span class="metric-value">140</span>
+                            <span class="metric-title">Target Recovery HR</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">4.5L</span>
+                            <span class="metric-title">Daily Hydration</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">12%</span>
+                            <span class="metric-title">Grip Fatigue Drop</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value">8Hrs</span>
+                            <span class="metric-title">Deep Sleep Target</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: Equipment Review Lab (Equipment Reviews) -->
+            <section class="locator-container" id="equipment-reviews-section" style="margin-bottom: 3rem;">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Laboratory Tests</span></div>
+                    <h3 class="blog-section-title">Equipment Review Lab</h3>
+                    <p class="blog-section-desc">Raw evaluations and specs tables for premium bats, rackets, and fabrics. We inspect each thread and willow grain.</p>
+                </div>
+
+                <div class="review-grid">
+                    <!-- Review Card 1 -->
+                    <div class="review-lab-card" data-category="cricket">
+                        <div class="review-card-header">
+                            <div class="review-heading-group">
+                                <span class="review-item-cat">Cricket Bat</span>
+                                <h4 class="review-item-name">AeroVolt Grade-1 English Willow</h4>
+                            </div>
+                            <div class="review-score-badge">9.4</div>
+                        </div>
+                        
+                        <div class="review-pros-cons-grid">
+                            <div class="pros-list">
+                                <h6>Pros</h6>
+                                <ul>
+                                    <li>9 straight parallel grains</li>
+                                    <li>Ultra-balanced pick-up</li>
+                                    <li>Immediate deflection response</li>
+                                </ul>
+                            </div>
+                            <div class="cons-list">
+                                <h6>Cons</h6>
+                                <ul>
+                                    <li>Linear weight profiles</li>
+                                    <li> Linseed oiling required</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="review-verdict">
+                            <strong>Verdict:</strong> An outstanding premier bat pressing. The grain symmetry is impeccable, delivering a massive sweet spot with a feather-light pick-up.
+                        </p>
+                    </div>
+
+                    <!-- Review Card 2 -->
+                    <div class="review-lab-card" data-category="equipment">
+                        <div class="review-card-header">
+                            <div class="review-heading-group">
+                                <span class="review-item-cat">Badminton Racket</span>
+                                <h4 class="review-item-name">AeroVolt Carbon-V3 High Tension</h4>
+                            </div>
+                            <div class="review-score-badge">9.1</div>
+                        </div>
+                        
+                        <div class="review-pros-cons-grid">
+                            <div class="pros-list">
+                                <h6>Pros</h6>
+                                <ul>
+                                    <li>Carbon fiber composite</li>
+                                    <li>30 lbs string tension limit</li>
+                                    <li>Stiff shaft flex response</li>
+                                </ul>
+                            </div>
+                            <div class="cons-list">
+                                <h6>Cons</h6>
+                                <ul>
+                                    <li>Small throat area</li>
+                                    <li>Wrist snap training needed</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="review-verdict">
+                            <strong>Verdict:</strong> Perfect for aggressive offensive smash play. The racket frame remains completely rigid during impact, maximizing flick velocities.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ----------------------------------------------------
+       FOOTER CONTAINER (Matches navbar.html)
+    ----------------------------------------------------- -->
+    <footer class="footer">
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <div class="footer-container">
+            <!-- Column 1: Brand Info -->
+            <div class="footer-col brand-col">
+                <a href="index.html" class="logo-section" style="text-decoration: none;">
+                    <div class="logo-badge" aria-hidden="true">
+                        <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                            <defs>
+                                <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--primary)"></stop>
+                                    <stop offset="100%" stop-color="var(--accent)"></stop>
+                                </linearGradient>
+                            </defs>
+                            <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradFooter)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                            <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                            <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradFooter)"></path>
+                            <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                        </svg>
+                    </div>
+                    <div class="logo-text-wrapper">
+                        <h2 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h2>
+                    </div>
+                </a>
+                <p class="brand-desc">
+                    Engineered with premium craftsmanship and elite sports science, AeroVolt designs game-changing cricket gear, performance apparel, and athletic essentials.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Column 2: Shop Collection -->
+            <div class="footer-col">
+                <h3 class="footer-title">Shop Collection</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Equipment</a></li>
+                    <li><a href="#" class="footer-link">Football Equipment</a></li>
+                    <li><a href="#" class="footer-link">Badminton Equipment</a></li>
+                    <li><a href="#" class="footer-link">Gym & Fitness</a></li>
+                    <li><a href="#" class="footer-link">Sports Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Custom Services -->
+            <div class="footer-col">
+                <h3 class="footer-title">Custom Services</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Team Jerseys</a></li>
+                    <li><a href="#" class="footer-link">Custom Logo Printing</a></li>
+                    <li><a href="#" class="footer-link">Club Uniform Packages</a></li>
+                    <li><a href="#" class="footer-link">Bulk Orders Tier</a></li>
+                    <li><a href="#" class="footer-link">School & College Quote</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Quick Links -->
+            <div class="footer-col">
+                <h3 class="footer-title">Sports Blog</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Training Tips</a></li>
+                    <li><a href="#" class="footer-link">Football Playbooks</a></li>
+                    <li><a href="#" class="footer-link">Fitness & Nutrition</a></li>
+                    <li><a href="#" class="footer-link">Equipment Reviews</a></li>
+                    <li><a href="#" class="footer-link">Store Locations</a></li>
+                </ul>
+            </div>
+
+            
+        </div>
+        
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p class="copyright-text">
+                    &copy; 2026 AeroVolt Sports Lab. All rights reserved.
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ----------------------------------------------------
+       9. INTERACTIVITY CONTROLLER (JAVASCRIPT)
+    ----------------------------------------------------- -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- Contextual Active Navbar Highlight ---
+            const currentPath = window.location.pathname.split("/").pop() || "index.html";
+            const navLinks = document.querySelectorAll(".nav-menu .nav-link");
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href");
+                link.parentElement.classList.remove("active");
+                
+                if (href === currentPath) {
+                    link.parentElement.classList.add("active");
+                } else if ((currentPath === "index.html" || currentPath === "home 2.html" || currentPath === "") && link.textContent.trim().includes("Home")) {
+                    link.parentElement.classList.add("active");
+                }
+            });
+
+            
+            // --- DOM Selectors ---
+            const htmlElement = document.documentElement;
+            const mobileHamburger = document.getElementById("mobile-hamburger");
+            const navMenu = document.getElementById("nav-menu-list");
+            const drawerOverlay = document.getElementById("drawer-overlay");
+
+            // --- Theme Controller (Light/Dark Mode) ---
+            const savedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+            
+            htmlElement.setAttribute("data-theme", initialTheme);
+
+            const themeToggleBtns = document.querySelectorAll(".theme-toggle");
+            themeToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentTheme = htmlElement.getAttribute("data-theme");
+                    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+                    htmlElement.setAttribute("data-theme", nextTheme);
+                    localStorage.setItem("theme", nextTheme);
+                });
+            });
+
+            // --- Layout Controller (RTL / LTR layout) ---
+            const rtlToggleBtns = document.querySelectorAll(".rtl-toggle");
+            
+            rtlToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentDir = htmlElement.getAttribute("dir") || "ltr";
+                    if (currentDir === "ltr") {
+                        htmlElement.setAttribute("dir", "rtl");
+                        htmlElement.setAttribute("lang", "ar");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction RTL to LTR"));
+                    } else {
+                        htmlElement.setAttribute("dir", "ltr");
+                        htmlElement.setAttribute("lang", "en");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction LTR to RTL"));
+                    }
+                });
+            });
+
+            // --- Mobile Navigation Hamburger Controller ---
+            const drawerCloseBtn = document.getElementById("drawer-close-btn");
+            
+            const toggleDrawer = () => {
+                mobileHamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+                drawerOverlay.classList.toggle("active");
+                
+                const isExpanded = mobileHamburger.classList.contains("active");
+                mobileHamburger.setAttribute("aria-expanded", isExpanded);
+            };
+
+            mobileHamburger.addEventListener("click", toggleDrawer);
+            drawerOverlay.addEventListener("click", toggleDrawer);
+            if (drawerCloseBtn) {
+                drawerCloseBtn.addEventListener("click", toggleDrawer);
+            }
+
+            // --- Mobile Dropdown Accordion Controller (Generic) ---
+            const dropdownLinks = document.querySelectorAll(".nav-item > .nav-link");
+            dropdownLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    if (window.innerWidth <= 1320) {
+                        const navItem = link.closest(".nav-item");
+                        const hasDropdown = navItem ? navItem.querySelector(".dropdown-menu") : null;
+                        if (!hasDropdown) return;
+                        
+                        e.preventDefault();
+                        
+                        document.querySelectorAll(".nav-item").forEach(item => {
+                            if (item !== navItem) {
+                                item.classList.remove("mobile-open");
+                                const itemLink = item.querySelector(".nav-link");
+                                if (itemLink) itemLink.setAttribute("aria-expanded", "false");
+                            }
+                        });
+
+                        navItem.classList.toggle("mobile-open");
+                        const isExpanded = navItem.classList.contains("mobile-open");
+                        link.setAttribute("aria-expanded", isExpanded);
+                    }
+                });
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 1320) {
+                    document.querySelectorAll(".nav-item").forEach(item => {
+                        item.classList.remove("mobile-open");
+                    });
+                    dropdownLinks.forEach(link => {
+                        link.setAttribute("aria-expanded", "false");
+                    });
+                    mobileHamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
+                    drawerOverlay.classList.remove("active");
+                    mobileHamburger.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            // --- Login Button Action ---
+            const loginBtns = document.querySelectorAll(".login-btn");
+            loginBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    alert("Login modal simulation: In production, this would route to your identity provider or launch a sign-in dialog.");
+                });
+            });
+        });
+
+        // ----------------------------------------------------
+        // --- CLIENT SIDE SEARCH FILTER LOGIC ---
+        // ----------------------------------------------------
+        function handleSearch(searchQuery) {
+            const query = searchQuery.toLowerCase().trim();
+            
+            // Search across featured articles, tactical guides, review cards
+            const articles = document.querySelectorAll("article, .football-tactical-card, .guide-card-item, .review-lab-card");
+            
+            articles.forEach(article => {
+                const text = article.innerText.toLowerCase();
+                if (query === "" || text.includes(query)) {
+                    article.style.display = "";
+                    article.style.opacity = "1";
+                } else {
+                    article.style.display = "none";
+                    article.style.opacity = "0";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+          

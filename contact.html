@@ -1,0 +1,3141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AeroVolt Sports Lab - Sourcing for Champions. Sourcing premium sports gears, custom printing, and lab calibration experience centers.">
+    <title>About Our Sports Lab - AeroVolt Sports</title>
+    
+    <!-- Google Fonts: Outfit (headings), Plus Jakarta Sans (UI elements), Poppins (About Page contents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ----------------------------------------------------
+           1. DESIGN SYSTEM & CSS VARIABLES (Matches navbar.html)
+        ---------------------------------------------------- */
+        :root[data-theme="light"] {
+            --bg-page: hsl(220, 20%, 97%);
+            --bg-navbar: hsla(220, 20%, 97%, 0.85);
+            --bg-card: hsl(0, 0%, 100%);
+            --bg-hover: hsl(245, 100%, 97%);
+            --bg-dropdown: hsla(0, 0%, 100%, 0.92);
+            
+            --text-primary: hsl(245, 50%, 15%);
+            --text-secondary: hsl(245, 20%, 35%);
+            --text-muted: hsl(240, 10%, 55%);
+            
+            --primary: hsl(245, 75%, 52%);
+            --primary-hover: hsl(245, 75%, 45%);
+            --primary-glow: rgba(79, 70, 229, 0.15);
+            
+            --accent: hsl(14, 100%, 53%); /* Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.2);
+            
+            --border: hsla(245, 20%, 80%, 0.35);
+            --border-hover: hsla(245, 20%, 70%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(79, 70, 229, 0.04);
+            --shadow-md: 0 10px 30px rgba(79, 70, 229, 0.06);
+            --shadow-lg: 0 20px 40px rgba(79, 70, 229, 0.08);
+            
+            --glass-blur: 16px;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-page: hsl(240, 35%, 6%);
+            --bg-navbar: hsla(240, 35%, 6%, 0.85);
+            --bg-card: hsl(240, 25%, 11%);
+            --bg-hover: hsl(245, 30%, 18%);
+            --bg-dropdown: hsla(240, 25%, 11%, 0.92);
+            
+            --text-primary: hsl(210, 40%, 98%);
+            --text-secondary: hsl(240, 15%, 80%);
+            --text-muted: hsl(240, 10%, 65%);
+            
+            --primary: hsl(245, 90%, 65%);
+            --primary-hover: hsl(245, 90%, 72%);
+            --primary-glow: rgba(129, 140, 248, 0.25);
+            
+            --accent: hsl(14, 100%, 55%); /* Neon Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.25);
+            
+            --border: hsla(245, 20%, 25%, 0.4);
+            --border-hover: hsla(245, 20%, 35%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
+            
+            --glass-blur: 16px;
+        }
+
+        /* Base Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ----------------------------------------------------
+           2. HEADER & NAVIGATION BAR
+        ---------------------------------------------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            inset-inline-start: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--bg-navbar);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            flex-shrink: 0;
+            justify-self: start;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-section:hover .logo-badge {
+            transform: translateY(-2px) rotate(-3deg) scale(1.05);
+            filter: drop-shadow(0 4px 12px var(--primary-glow));
+        }
+
+        .logo-section:hover .logo-title span.highlight {
+            filter: brightness(1.1);
+        }
+
+        #main-navigation {
+            justify-self: center;
+        }
+
+        .logo-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+            animation: bounce-slow 4s infinite ease-in-out;
+        }
+
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .logo-title span.highlight {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Center Navigation Menu */
+        .nav-menu {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.15rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.55rem;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        .nav-link:hover::after,
+        .nav-item.active .nav-link::after {
+            width: 70%;
+            left: 15%;
+        }
+
+        .nav-link:hover, .nav-item.active .nav-link {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+        }
+
+        .nav-link svg.arrow-icon {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.2s ease;
+            stroke-width: 3px;
+        }
+
+        .nav-item:hover .nav-link svg.arrow-icon {
+            transform: translateY(1px);
+        }
+
+        /* Dropdown Menus */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            inset-inline-start: 0;
+            margin-top: 0.5rem;
+            background-color: var(--bg-dropdown);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px) scale(0.98);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 100;
+            overflow: hidden;
+            padding: 0.4rem;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .dropdown-item:hover {
+            transform: translateX(-4px);
+        }
+
+        /* Right Actions Layout */
+        .actions-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            justify-self: end;
+        }
+
+        /* Utility Toggle Buttons */
+        .action-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .action-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateY(-1px);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Dark Mode Button Icon Switcher */
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        /* RTL Toggle Button */
+        .rtl-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .rtl-toggle:hover svg {
+            animation: swap-arrow-slide 0.6s ease-in-out infinite alternate;
+        }
+
+        [dir="rtl"] .rtl-toggle:hover svg {
+            animation: swap-arrow-slide-rtl 0.6s ease-in-out infinite alternate;
+        }
+
+        /* Login Button */
+        .login-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), hsl(245, 75%, 40%));
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.35rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--primary-glow);
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            box-shadow: 0 6px 18px var(--primary-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.08);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke-width: 2.5;
+        }
+
+        /* Mobile Hamburger & Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22px;
+            height: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1100;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2.5px;
+            background-color: var(--text-primary);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Drawer Dark Overlay Backdrop */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer-actions-item-wrapper,
+        .drawer-header-item {
+            display: none;
+        }
+
+        /* ----------------------------------------------------
+           3. MAIN CONTAINER / DEMO BODY
+        ---------------------------------------------------- */
+        .demo-body {
+            margin-top: 80px; /* offset navbar height */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+            padding: 5rem 2rem;
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+
+
+        /* ----------------------------------------------------
+           4. RESPONSIVE MEDIA QUERIES (COLLAPSE AT 1320PX)
+        ---------------------------------------------------- */
+        @media (max-width: 1320px) {
+            .header {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: var(--bg-card);
+                z-index: 1060;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1.5rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active {
+                display: none !important;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                inset-inline-end: -320px;
+                width: 320px;
+                height: 100vh;
+                background-color: var(--bg-card);
+                border-inline-start: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0;
+                gap: 0;
+                z-index: 1050;
+                transition: inset-inline-end 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                visibility: hidden;
+                display: flex;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                inset-inline-end: 0;
+                visibility: visible;
+            }
+
+            .drawer-header-item {
+                display: block;
+                width: 100%;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 1rem;
+            }
+
+            .drawer-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.25rem 1.5rem;
+                background-color: var(--bg-card);
+            }
+
+            .drawer-close-btn {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                transition: all 0.2s ease;
+                padding: 0;
+            }
+
+            .drawer-close-btn:hover {
+                color: var(--primary);
+                transform: scale(1.1);
+            }
+
+            .drawer-close-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .nav-item {
+                width: 100%;
+                padding: 0 1.5rem;
+            }
+
+            .nav-link {
+                justify-content: space-between;
+                width: 100%;
+                padding: 0.85rem 0;
+                font-size: 0.95rem;
+                border-bottom: 1px solid hsla(215, 20%, 80%, 0.1);
+            }
+
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background-color: var(--bg-hover);
+                padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+                margin-top: 0.25rem;
+            }
+
+            .nav-link::after,
+            .dropdown-menu::before {
+                display: none !important;
+            }
+
+            .nav-item.mobile-open .dropdown-menu {
+                display: block;
+            }
+
+            .nav-item.mobile-open .nav-link svg.arrow-icon {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-item {
+                padding: 0.6rem 1rem;
+            }
+
+            .actions-section {
+                gap: 0.5rem;
+            }
+
+            .actions-section .theme-toggle,
+            .actions-section .rtl-toggle,
+            .actions-section .login-btn {
+                display: none;
+            }
+
+            .drawer-actions-item-wrapper {
+                display: block;
+                margin-top: auto;
+                padding: 1.5rem;
+            }
+
+            .drawer-divider {
+                height: 1px;
+                background-color: var(--border);
+                margin-bottom: 1.5rem;
+                opacity: 0.5;
+            }
+
+            .drawer-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row .action-btn {
+                flex: 1;
+                height: 44px;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                background-color: var(--bg-card);
+                color: var(--text-secondary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: auto;
+            }
+
+            .drawer-toggles-row .action-btn:hover {
+                border-color: var(--primary);
+                background-color: var(--bg-hover);
+                color: var(--primary);
+            }
+
+            .drawer-login-btn {
+                width: 100% !important;
+                height: 46px;
+                justify-content: center;
+                background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%)) !important;
+                box-shadow: 0 4px 15px var(--accent-glow) !important;
+                border-radius: 10px;
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: #ffffff !important;
+                border: none;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: all 0.3s ease;
+            }
+
+            .drawer-login-btn:hover {
+                box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4) !important;
+                transform: translateY(-1px);
+                filter: brightness(1.05);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .logo-tagline {
+                display: none;
+            }
+
+            .logo-title {
+                font-size: 1.15rem;
+            }
+        }
+
+        /* ----------------------------------------------------
+           5. SYSTEM KEYFRAMES & UTILITIES
+        ---------------------------------------------------- */
+        @keyframes bounce-slow {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-4px) rotate(5deg);
+            }
+        }
+
+        /* ----------------------------------------------------
+           6. FOOTER STYLING & RESPONSIVENESS
+        ---------------------------------------------------- */
+        .footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 5rem 2rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: auto;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.2fr 1.2fr 1.2fr 1.2fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+        }
+
+        .brand-col .brand-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%));
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            inset-inline-start: 0;
+            width: 36px;
+            height: 2px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .footer-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .contact-info-item {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            text-align: start;
+        }
+
+        .contact-info-item svg.contact-icon-svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .footer-bottom-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-link {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--primary);
+        }
+
+                /* Responsive Footer Media Queries */
+        @media (max-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 3;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 1.5rem;
+            }
+            .brand-col .footer-desc {
+                max-width: 600px;
+                margin: 0.75rem auto 1.5rem auto;
+            }
+            .brand-col .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 4rem 1.25rem 2rem 1.25rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 1;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 0;
+            }
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col ul {
+                padding: 0;
+            }
+            .footer-col ul li {
+                justify-content: center;
+            }
+            .footer-bottom-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+/* 1. Vision Hero */
+        .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .about-hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 850;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            text-align: start;
+        }
+
+        .about-hero-title span.glow-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            text-align: start;
+        }
+
+        .about-hero-visual {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            aspect-ratio: 4/3;
+            border: 1px solid var(--border);
+        }
+
+        .about-hero-visual img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
+        /* 2. Our Story (Collage) */
+        .collage-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .collage-visual-stack {
+            position: relative;
+            height: 420px;
+            width: 100%;
+        }
+
+        .collage-bg-card {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            top: 0;
+            left: 0;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .collage-bg-card img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
+        .collage-fg-card {
+            position: absolute;
+            width: 55%;
+            height: 55%;
+            bottom: 0;
+            right: 0;
+            background-color: var(--bg-card);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: start;
+            z-index: 5;
+        }
+
+        .collage-fg-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .collage-fg-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .story-text-block {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+        }
+
+        .story-text-block h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .story-text-block p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* 3. Why Choose Us (Offset Diagonal Grid) */
+        .why-diagonal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .diagonal-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+            transition: all 0.3s ease;
+        }
+
+        .diagonal-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .diagonal-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .diagonal-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .diagonal-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* 4. Brand Partner Orbit */
+        .orbit-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .orbit-visual-box {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .orbit-center-core {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 0 30px var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+
+        .orbit-ring-svg {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            z-index: 1;
+            animation: spin-slow 20s infinite linear;
+        }
+
+        .orbit-node {
+            position: absolute;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 850;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 5. Experience Centers (Interactive locations & Blueprint) */
+        .location-section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .location-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .location-selector-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            text-align: start;
+            transition: all 0.3s ease;
+        }
+
+        .location-selector-card.active {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            background-color: var(--bg-hover);
+        }
+
+        .location-city {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .location-selector-card.active .location-city {
+            color: var(--primary);
+        }
+
+        .location-details {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .blueprint-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .blueprint-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 750;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            text-align: start;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blueprint-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        .blueprint-svg {
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background-color: var(--bg-page);
+        }
+
+        .blueprint-bay {
+            transition: opacity 0.3s ease, fill 0.3s ease;
+            opacity: 0.4;
+        }
+
+        .blueprint-bay.highlighted {
+            opacity: 1;
+        }
+
+        .blueprint-bay.highlighted rect {
+            fill: var(--bg-card);
+            stroke: var(--primary);
+            stroke-width: 2px;
+        }
+
+        /* 6. Calibration Standards */
+        .specs-panel-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: start;
+        }
+
+        .specs-table th {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border);
+            padding: 1rem;
+        }
+
+        .specs-table td {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 1rem;
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .spec-status-tag {
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 750;
+            color: var(--accent);
+            display: inline-block;
+        }
+
+        /* 7. Call to Action */
+        .cta-card {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-hover));
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cta-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 850;
+            color: var(--text-primary);
+        }
+
+        .cta-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* 8. Responsive */
+        @media (max-width: 1024px) {
+            .about-body {
+                gap: 4rem;
+            }
+
+            .about-hero-grid,
+            .collage-container,
+            .why-diagonal-grid,
+            .orbit-container,
+            .location-section-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .collage-visual-stack {
+                height: 320px;
+            }
+
+            .specs-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .diagonal-card,
+            .specs-panel-card,
+            .blueprint-container {
+                padding: 2rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-title {
+                font-size: 1rem !important;
+            }
+
+            .logo-badge svg {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .logo-section {
+                gap: 0.5rem !important;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1rem !important;
+            }
+
+            .about-badge,
+            .blog-badge {
+                font-size: 0.72rem !important;
+                padding: 0.35rem 0.75rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .about-hero-title {
+                font-size: 1.65rem !important;
+            }
+
+            .about-hero-desc {
+                font-size: 0.88rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .diagonal-card,
+            .specs-panel-card,
+            .blueprint-container {
+                padding: 1.25rem !important;
+            }
+
+            .location-selector-card {
+                padding: 1.25rem !important;
+            }
+
+            .collage-visual-stack {
+                height: 240px;
+            }
+
+            .collage-fg-card {
+                padding: 1rem !important;
+            }
+
+            .orbit-visual-box {
+                transform: scale(0.75) !important;
+                margin: -2.5rem auto !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .about-hero-title {
+                font-size: 1.45rem !important;
+            }
+
+            .orbit-visual-box {
+                transform: scale(0.65) !important;
+                margin: -3.5rem auto !important;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .about-hero-title {
+                font-size: 1.30rem !important;
+            }
+
+            .orbit-visual-box {
+                transform: scale(0.55) !important;
+                margin: -4.5rem auto !important;
+            }
+        }
+        
+        /* Headers styling */
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .blog-badge,
+        .about-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+            width: fit-content;
+            max-width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .blog-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+            text-align: start;
+        }
+
+        .blog-section-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            max-width: 650px;
+            text-align: start;
+        }
+    
+        /* ====================================================
+           GLOBAL RESPONSIVENESS OVERRIDES
+        ==================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box !important;
+        }
+        
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            width: 100% !important;
+        }
+
+        img, video, iframe {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid, .telemetry-grid, .materials-grid, .calendar-grid, .radar-grid, .booking-grid, 
+            .about-hero-grid, .collage-container, .why-diagonal-grid, .orbit-container, .location-section-grid,
+            .custom-hero-grid, .custom-step-grid, .custom-benefits-grid, .bulk-hero-grid, .steps-grid, 
+            .benefits-grid, .blog-hero-grid, .blog-featured-grid, .blog-archive-grid, .contact-hero-grid, 
+            .contact-form-grid, .brands-hero-grid, .brands-showcase-grid,
+            .accessories-grid, .athletes-flex-row, .audit-layout, .calendar-phase-specs, .catalog-grid, 
+            .circle-spec-grid, .configurator-card, .flex-grid-wrapper, .grid-container, .material-layout, 
+            .quiz-card, .quiz-row, .testimonial-card, .vault-hero-grid, .wizard-row {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 4rem 1.5rem !important;
+            }
+
+            .demo-body {
+                padding: 0 !important;
+            }
+
+            /* Responsive Footer overrides (Laptop & Tablet viewports) */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 768px Breakpoint (Tablets) */
+        @media (max-width: 768px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 3rem 1.25rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.85rem !important;
+                line-height: 1.25 !important;
+            }
+            
+            h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Navbar adjustments */
+            .desktop-nav {
+                display: none !important;
+            }
+            
+            .mobile-hamburger {
+                display: flex !important;
+            }
+
+            .logo-title {
+                font-size: 1.15rem !important;
+            }
+
+            /* Responsive Footer overrides */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 480px Breakpoint (Mobile Portrait) */
+        @media (max-width: 480px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2.5rem 1rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.6rem !important;
+            }
+            
+            .btn-primary, .btn-secondary, .btn-accent, button.btn-primary, button.btn-secondary {
+                width: 100% !important;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .logo-tagline {
+                display: none !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.85) !important;
+                margin: -1.5rem auto !important;
+            }
+            .telemetry-tabs {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 0.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            .tab-trigger {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.75rem !important;
+                flex: 1 1 calc(33.333% - 0.5rem) !important;
+                min-width: 75px !important;
+                text-align: center !important;
+            }
+            .telemetry-readouts {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)) !important;
+                gap: 0.75rem !important;
+            }
+        }
+
+        /* 320px Breakpoint (Small Mobile Screen) */
+        @media (max-width: 320px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2rem 0.75rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 1.75rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.45rem !important;
+            }
+
+            .logo-title {
+                font-size: 1rem !important;
+            }
+            
+            /* Force absolute overflow prevention */
+            * {
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.75) !important;
+                margin: -2.5rem auto !important;
+            }
+            .telemetry-dashboard {
+                padding: 0.85rem !important;
+            }
+            .tab-trigger {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.5rem !important;
+            }
+        }
+    
+        /* --- Injecting Missing Layout Styles --- */
+        .locator-container {
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .blog-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-section-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .blog-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            width: fit-content;
+            margin-bottom: 0.75rem;
+        }
+
+        .glow-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .rtl-icon, .logo-icon-svg {
+            display: inline-block;
+        }
+        
+        /* Hamburger custom SVG toggle button styling */
+        .hamburger {
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            z-index: 1100 !important;
+        }
+        .hamburger svg {
+            width: 20px !important;
+            height: 20px !important;
+            color: var(--text-secondary) !important;
+            transition: transform 0.3s ease !important;
+        }
+        .hamburger:hover svg {
+            color: var(--primary) !important;
+            transform: scale(1.05) !important;
+        }
+</style>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS Variables & Header/Footer Styles -->
+    <link rel="stylesheet" href="contact.css?v=2026-07-24-3">
+</head>
+<body>
+
+    <!-- Drawer Dark Overlay Backdrop -->
+    <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+
+    <!-- ----------------------------------------------------
+       HEADER & NAVIGATION BAR CONTAINER (Matches navbar.html)
+    ----------------------------------------------------- -->
+    <header class="header">
+        <div class="nav-container">
+            
+            <!-- Left: Logo & Tagline -->
+            <a href="index.html" class="logo-section" aria-label="AeroVolt Sports Lab Home">
+                <div class="logo-badge" aria-hidden="true">
+                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                            </linearGradient>
+                        </defs>
+                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGrad)"></path>
+                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                    </svg>
+                </div>
+                <div class="logo-text-wrapper">
+                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                </div>
+            </a>
+
+            <!-- Center: Navigation Menu Links -->
+            <nav id="main-navigation">
+                                                                <ul class="nav-menu" id="nav-menu-list">
+                    <!-- Drawer Header (visible only on mobile/tablet viewports inside the drawer) -->
+                    <li class="drawer-header-item">
+                        <div class="drawer-header">
+                            <a href="index.html" class="logo-section">
+                                <div class="logo-badge" aria-hidden="true">
+                                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                                        <defs>
+                                            <linearGradient id="logoGradDrawer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <!-- Outer Shield Outline -->
+                                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradDrawer)" stroke-width="2" stroke-linejoin="round" fill="rgba(124, 58, 237, 0.04)"></path>
+                                        <!-- Left Wing Feathers -->
+                                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Right Wing Feathers -->
+                                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+                                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradDrawer)"></path>
+                                        <!-- Energy Glow Dot -->
+                                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                                    </svg>
+                                </div>
+                                <div class="logo-text-wrapper">
+                                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                                </div>
+                            </a>
+                            <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Menu">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+
+                    <!-- 1. Home Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" aria-expanded="false" aria-haspopup="true">
+                            Home
+                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">Home 1</a>
+                            <a href="home 2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </li>
+
+                    <!-- 2. About Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <!-- 3. Collection Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.html">Collection</a>
+                    </li>
+
+                    <!-- 4. Arrivals Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="arrivals.html">Arrivals</a>
+                    </li>
+
+                    <!-- 5. Brands Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="brands.html">Brands</a>
+                    </li>
+
+                    <!-- 6. Custom Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="customization.html">Custom</a>
+                    </li>
+
+                    <!-- 7. Bulk Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.html">Bulk</a>
+                    </li>
+
+                    <!-- 8. Blog Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+
+                    <!-- 9. Contact Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    
+                    <!-- Drawer Actions (visible only on mobile/tablet viewport drawer) -->
+                    <li class="drawer-actions-item-wrapper">
+                        <div class="drawer-divider"></div>
+                        <div class="drawer-actions">
+                            <div class="drawer-toggles-row">
+                                <!-- Dark Mode Toggle Button -->
+                                <button class="action-btn theme-toggle" aria-label="Toggle Dark Mode">
+                                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M12 2v2"></path>
+                                        <path d="M12 20v2"></path>
+                                        <path d="M4.93 4.93l1.41 1.41"></path>
+                                        <path d="M17.66 17.66l1.41 1.41"></path>
+                                        <path d="M2 12h2"></path>
+                                        <path d="M20 12h2"></path>
+                                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                                    </svg>
+                                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                    </svg>
+                                    
+                                </button>
+                                
+                                <!-- RTL Toggle Button -->
+                                <button class="action-btn rtl-toggle" aria-label="Toggle Direction">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="rtl-icon">
+                                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                                    </svg>
+                                    
+                                </button>
+                            </div>
+                            
+                            <!-- Login Button in Mobile Drawer -->
+                            <button class="login-btn drawer-login-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span>Login</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="actions-section">
+                <button class="action-btn theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6.364 6.364 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </button>
+
+                <button class="action-btn rtl-toggle" id="rtl-toggle-btn" aria-label="Toggle Layout Direction LTR to RTL">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                    </svg>
+                </button>
+
+                <button class="login-btn" id="login-btn" aria-label="Login"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Login</span>
+                </button>
+
+                <button class="hamburger" id="mobile-hamburger" aria-label="Toggle Navigation Menu" aria-controls="main-navigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ----------------------------------------------------
+       MAIN CONTENT BODY (VISUALLY UNIQUE ABOUT LAB)
+    ----------------------------------------------------- -->
+    <main class="demo-body">
+        <div class="contact-body container-fluid p-0">
+            
+            <!-- SECTION 1: Hero Section (Desktop/Mobile split) -->
+            <section class="contact-section-container py-5" id="hero-section">
+                <div class="row align-items-center g-3 g-lg-5">
+                    <div class="col-lg-6 col-12 order-lg-1 order-2">
+                        <div class="contact-badge mb-3">
+                            <span class="pulse-dot"></span>
+                            <span>AeroVolt Innovation Desk</span>
+                        </div>
+                        <h2 class="contact-hero-title mb-4">Connect with our <span class="glow-text">Sports Science Lab</span></h2>
+                        <p class="contact-hero-desc mb-5">
+                            Whether tuning the flex profile of your English Willow bat or engineering custom team kits, our master craftsmen and performance advisory team are ready to calibrate your gear.
+                        </p>
+                        
+                        <div class="row g-4 mt-2">
+                            <div class="col-md-4 col-6">
+                                <div class="stat-box">
+                                    <span class="stat-num">4.9/5</span>
+                                    <span class="stat-label">Advisory Rating</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6">
+                                <div class="stat-box">
+                                    <span class="stat-num">&lt; 90 Mins</span>
+                                    <span class="stat-label">Mean Response</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="stat-box">
+                                    <span class="stat-num">100%</span>
+                                    <span class="stat-label">Authenticity Check</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 order-lg-2 order-1">
+                        <div class="contact-hero-visual">
+                            <img src="images/contact-hero.jpg" alt="Experienced craftsman meticulously oiling an English Willow cricket bat in a workspace">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: About Section (Store Locator Hubs) -->
+            <section class="contact-section-container py-5" id="locator-section">
+                <div class="row mb-5">
+                    <div class="col-12 text-start">
+                        <div class="contact-badge mb-2"><span>Experience Showrooms</span></div>
+                        <h3 class="contact-section-title">Flagship Experience Chambers</h3>
+                        <p class="contact-section-desc">Step into an AeroVolt workspace to custom-profile your swing speed, test willow densities under impact load, and select the perfect handle flex.</p>
+                    </div>
+                </div>
+
+                <div class="row g-3 g-lg-4">
+                    <div class="col-12">
+                        <div class="tab-row" role="tablist">
+                            <button class="tab-btn active" id="tab-chennai" role="tab" aria-selected="true" aria-controls="locator-details-card">Chennai HQ</button>
+                            <button class="tab-btn" id="tab-bangalore" role="tab" aria-selected="false" aria-controls="locator-details-card">Bangalore Hub</button>
+                            <button class="tab-btn" id="tab-mumbai" role="tab" aria-selected="false" aria-controls="locator-details-card">Mumbai Outlet</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 g-lg-5 align-items-center">
+                    <div class="col-lg-5 col-12">
+                        <div class="locator-details" id="locator-details-card" aria-live="polite">
+                            <!-- Detail 1 -->
+                            <div class="detail-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <div class="detail-content">
+                                    <h5>Address Location</h5>
+                                    <p id="store-address">AeroVolt HQ & Flagship, 42 Stadium Row, Anna Salai, Chennai - 600002</p>
+                                </div>
+                            </div>
+                            <!-- Detail 2 -->
+                            <div class="detail-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <div class="detail-content">
+                                    <h5>Store Hours</h5>
+                                    <p id="store-hours">Monday – Saturday: 09:00 AM – 09:00 PM<br>Sunday: 10:00 AM – 06:00 PM</p>
+                                </div>
+                            </div>
+                            <!-- Detail 3 -->
+                            <div class="detail-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                <div class="detail-content">
+                                    <h5>Direct Hotline</h5>
+                                    <p id="store-phone">+91 44 2876 5432</p>
+                                </div>
+                            </div>
+                            <!-- Detail 4 -->
+                            <div class="detail-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                    <polyline points="2 17 12 22 22 17"></polyline>
+                                    <polyline points="2 12 12 17 22 12"></polyline>
+                                </svg>
+                                <div class="detail-content">
+                                    <h5>Services Offered</h5>
+                                    <p id="store-services">Instant Bat Knocking-In, Profile Balancing, Customized Grip Fitting, Jersey Sublimation Proofing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-12">
+                        <div class="locator-map-panel">
+                            <img id="store-map-img" src="images/store-locator.jpg" alt="Modern sports showroom showcase store locator photo">
+                            <div class="locator-map-overlay">
+                                <span class="pulse-dot"></span>
+                                <span id="store-label">Chennai HQ Location</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Services Section (Advisory Desks) -->
+            <section class="contact-section-container py-5" id="support-section">
+                <div class="row mb-5">
+                    <div class="col-12 text-start">
+                        <div class="contact-badge mb-2"><span>Help Desks</span></div>
+                        <h3 class="contact-section-title">Specialized Advisory Desks</h3>
+                        <p class="contact-section-desc">Skip the bots and talk directly to our specialized sports engineers. We speak your language and understand your performance goals.</p>
+                    </div>
+                </div>
+
+                <div class="row g-3 g-lg-4">
+                    <!-- Desk 1 -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="support-card h-100">
+                            <div class="support-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 3a2.45 2.45 0 0 0-3.5 0L3.3 14.2a2.45 2.45 0 0 0 0 3.5l3 3a2.45 2.45 0 0 0 3.5 0L21 9.5A2.45 2.45 0 0 0 21 6Z"></path>
+                                    <path d="M3 21l3-3"></path>
+                                </svg>
+                            </div>
+                            <h4 class="support-card-title">Willow Balancing & Tuning</h4>
+                            <p class="support-card-body">
+                                Consult our master bat makers on bat moisture levels, custom linseed oiling regimes, toe guard installations, or face cracking repair.
+                            </p>
+                            <a href="mailto:craftsman@aerovoltsports.com" class="support-card-btn">
+                                <span>Email Craftsman</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Desk 2 -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="support-card h-100">
+                            <div class="support-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="support-card-title">Skeletal Fitment Advisory</h4>
+                            <p class="support-card-body">
+                                Struggling with helmet shell profiles, thigh-pad strap offsets, or glove split-finger sizes? Talk to our biomechanical fitment advisors.
+                            </p>
+                            <a href="mailto:advisory@aerovoltsports.com" class="support-card-btn">
+                                <span>Ask Fitment Pro</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Desk 3 -->
+                    <div class="col-lg-4 col-12">
+                        <div class="support-card h-100">
+                            <div class="support-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.38 3.46L16 2.14a2 2 0 0 0-2.4 1.42l-.46 1.7a2 2 0 0 1-1.28 1.28l-1.7.46a2 2 0 0 0-1.42 2.4l1.32 4.38a2 2 0 0 0 2.4 1.42l1.7-.46a2 2 0 0 1 1.28-1.28l1.7-.46a2 2 0 0 0 1.42-2.4l-1.32-4.38a2 2 0 0 0-2.4-1.42Z"></path>
+                                    <path d="M12 14v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6"></path>
+                                </svg>
+                            </div>
+                            <h4 class="support-card-title">Kit Sublimation & Styling</h4>
+                            <p class="support-card-body">
+                                Connect directly with our sportswear design department for rapid vector layout proofing, fabric trials, and club bulk quote delivery.
+                            </p>
+                            <a href="mailto:design@aerovoltsports.com" class="support-card-btn">
+                                <span>Email Designer</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Featured Content Section (Warranty Hub) -->
+            <section class="contact-section-container py-5" id="warranty-section">
+                <div class="row mb-5">
+                    <div class="col-12 text-start">
+                        <div class="contact-badge mb-2"><span>Warranty Lab</span></div>
+                        <h3 class="contact-section-title">Inspected & Certified: Warranty Lab</h3>
+                        <p class="contact-section-desc">We trace every batch back to its raw billet source. Verify your serial certificate and initiate a structural damage evaluation request.</p>
+                    </div>
+                </div>
+
+                <div class="row align-items-center g-3 g-lg-5">
+                    <div class="col-lg-7 col-12">
+                        <div class="warranty-steps">
+                            <!-- Step 1 -->
+                            <div class="step-item">
+                                <div class="step-badge">01</div>
+                                <div class="step-info">
+                                    <h5>Verify Hologram Serial</h5>
+                                    <p>Locate the silver holographic serial code on your bat handle or pad lining. Take a clear scan of the card.</p>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="step-item">
+                                <div class="step-badge">02</div>
+                                <div class="step-info">
+                                    <h5>Stress Proof Pictures</h5>
+                                    <p>Take close-up photos of bat willow grains or protective stitching defects under bright, natural daylight.</p>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="step-item">
+                                <div class="step-badge">03</div>
+                                <div class="step-info">
+                                    <h5>Submit Evaluation Request</h5>
+                                    <p>Forward serial tags and proof pictures to our quality evaluation desk. Inspections are finalized in 48 hours.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-12">
+                        <div class="warranty-card">
+                            <h4 class="warranty-card-title">Initiate Claim Inspection</h4>
+                            <p class="detail-content">
+                                Our warranty coverage guarantees replacement of structural bat handles, shoulder splitting, and defective stitch bounds for 12 months from purchase.
+                            </p>
+                            <div class="alert-box">
+                                <strong>Note on Willow:</strong> Surficial cracking and indentation on the willow face are natural and occur during leather-ball impacts. These are not defects. Structural handle breaks are covered.
+                            </div>
+                            <a href="mailto:warranty@aerovoltsports.com" class="login-btn w-100 py-3 mt-2 text-center d-block">
+                                <span>Submit Warranty Request</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Testimonials & FAQs Section -->
+            <section class="contact-section-container py-5" id="faq-section">
+                <div class="row mb-5 text-center justify-content-center">
+                    <div class="col-lg-8 col-12">
+                        <div class="contact-badge mb-2"><span>Help desk FAQs</span></div>
+                        <h3 class="contact-section-title">Instant Answers: Knowledge Base</h3>
+                        <p class="contact-section-desc">Find swift resolutions to common questions about linseed oiling regimes, international shipping customs, laser engraving, and kit returns.</p>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-12">
+                        <div class="faq-accordion-container">
+                            <!-- FAQ 1 -->
+                            <div class="faq-card">
+                                <button class="faq-header" aria-expanded="false" onclick="toggleFaq(this)">
+                                    <span>Do you offer international shipping for bulk orders?</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="faq-body">
+                                    <div class="faq-content">
+                                        Yes. AeroVolt ships custom team kits and willow gear globally via DHL and FedEx air express logistics. Customs documentations, weight calculations, and shipping insurances are handled by our transport managers.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FAQ 2 -->
+                            <div class="faq-card">
+                                <button class="faq-header" aria-expanded="false" onclick="toggleFaq(this)">
+                                    <span>How long does the master bat knocking-in and oiling service take?</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="faq-body">
+                                    <div class="faq-content">
+                                        Our master bat knocking-in service requires 3 to 5 business days. This involves a light coating of linseed oil, followed by 10,000 professional raw-hammer compressions and boundary-edge rolling to harden the willow matrix.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FAQ 3 -->
+                            <div class="faq-card">
+                                <button class="faq-header" aria-expanded="false" onclick="toggleFaq(this)">
+                                    <span>Can I request custom name engravings on the bat profile?</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="faq-body">
+                                    <div class="faq-content">
+                                        Absolutely. We offer clean precision laser engravings on the rear face of the bat handle or spine. You can submit your initials, team numbers, or custom typography drafts directly during checkout.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FAQ 4 -->
+                            <div class="faq-card">
+                                <button class="faq-header" aria-expanded="false" onclick="toggleFaq(this)">
+                                    <span>What is your return policy on customized sublimation jerseys?</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="faq-body">
+                                    <div class="faq-content">
+                                        Custom sublimation jersey kits cannot be returned or refunded once print proofs are signed off, as they feature unique club branding and personalized roster naming. Quality/fit replacements are issued for verified sizing errors.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: Contact Section (Feedback Form) -->
+            <section class="contact-section-container py-5" id="feedback-section">
+                <div class="row mb-5">
+                    <div class="col-12 text-start">
+                        <div class="contact-badge mb-2"><span>Feedback Lab</span></div>
+                        <h3 class="contact-section-title">Feedback Loop: Refine Our Engineering</h3>
+                        <p class="contact-section-desc">Every swing you take updates our laboratory calculations. Share your real-world feedback to help us refine our future design sweeps.</p>
+                    </div>
+                </div>
+
+                <div class="row g-3 g-lg-5">
+                    <div class="col-lg-5 col-12">
+                        <div class="feedback-text-content">
+                            <h4 class="contact-hero-title">
+                                Your Voice Tweaks Our <span class="glow-text">Sports Science</span>
+                            </h4>
+                            <p class="contact-hero-desc">
+                                Whether it's the rebound damping of your protective pads, the sweet spot of your willow, or customer support speed, your data updates our lab work.
+                            </p>
+                            <div class="contact-hero-visual">
+                                <img src="images/feedback-experience.jpg" alt="Smiling young cricketer holding a customized cricket bat on a green field">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-7 col-12">
+                        <form class="feedback-form-card" id="contact-feedback-form" onsubmit="handleFeedbackSubmit(event)">
+                            <!-- Emoji rating node selection -->
+                            <div class="rating-group mb-4">
+                                <span class="rating-title mb-3 d-block">How would you rate your AeroVolt experience?</span>
+                                <div class="rating-row">
+                                    <div class="rating-node" data-value="1" onclick="selectRating(this)">
+                                        <span class="rating-emoji">😠</span>
+                                        <span class="rating-label">Awful</span>
+                                    </div>
+                                    <div class="rating-node" data-value="2" onclick="selectRating(this)">
+                                        <span class="rating-emoji">🙁</span>
+                                        <span class="rating-label">Poor</span>
+                                    </div>
+                                    <div class="rating-node" data-value="3" onclick="selectRating(this)">
+                                        <span class="rating-emoji">😐</span>
+                                        <span class="rating-label">Neutral</span>
+                                    </div>
+                                    <div class="rating-node" data-value="4" onclick="selectRating(this)">
+                                        <span class="rating-emoji">🙂</span>
+                                        <span class="rating-label">Good</span>
+                                    </div>
+                                    <div class="rating-node selected" data-value="5" onclick="selectRating(this)">
+                                        <span class="rating-emoji">🤩</span>
+                                        <span class="rating-label">Excellent</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="rating-score" id="rating-score" value="5">
+                            </div>
+
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-input-group">
+                                        <label for="feedback-name" class="mb-2">Your Name</label>
+                                        <input type="text" id="feedback-name" required placeholder="John Doe">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-input-group">
+                                        <label for="feedback-email" class="mb-2">Email Address</label>
+                                        <input type="email" id="feedback-email" required placeholder="john@example.com">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-input-group mb-4">
+                                <label for="feedback-message" class="mb-2">Tell us about your experience</label>
+                                <textarea id="feedback-message" rows="4" required placeholder="Tell us what you loved, or what we should inspect..."></textarea>
+                            </div>
+
+                            <!-- Slide to Submit -->
+                            <div class="slider-submit-wrapper">
+                                <div class="slider-fill" id="slider-fill-element"></div>
+                                <span class="slider-text" id="slider-text-element">Slide to Submit Feedback</span>
+                                <div class="slider-handle" id="slider-handle-element">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: Team Section (Behind the Science) -->
+            <section class="contact-section-container py-5 mb-5" id="team-section">
+                <div class="row mb-5 text-start">
+                    <div class="col-12">
+                        <div class="contact-badge mb-2"><span>Team Bios</span></div>
+                        <h3 class="contact-section-title">Behind the Science: Meet the Team</h3>
+                        <p class="contact-section-desc">Reach out to our specialist crew members directly. We design, stitch, and press everything in-house.</p>
+                    </div>
+                </div>
+
+                <div class="row g-3 g-lg-4">
+                    <!-- Bio 1 -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="team-card h-100">
+                            <div class="team-portrait">
+                                <img src="images/contact-team.jpg" alt="Specialist bat maker holding a cricket bat and technical drawings inside the workshop">
+                            </div>
+                            <div class="team-info">
+                                <h4 class="team-name">Master Sundaram</h4>
+                                <span class="team-role">Chief Bat Craftsman</span>
+                                <p class="team-desc">25 years pressing English Willow and engineering custom bat weights for professional cricket squads.</p>
+                                <a href="mailto:sundaram@aerovoltsports.com" class="team-email">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>sundaram@aerovoltsports.com</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bio 2 -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="team-card h-100">
+                            <div class="team-portrait">
+                                <img src="images/faq-assistance.jpg" alt="Team kit designers reviewing textile proofs inside the showroom office">
+                            </div>
+                            <div class="team-info">
+                                <h4 class="team-name">Ananya Roy</h4>
+                                <span class="team-role">Lead Sublimation Designer</span>
+                                <p class="team-desc">Creator of the AeroVolt dynamic sportswear apparel catalog and digital vector print jersey mockups.</p>
+                                <a href="mailto:ananya@aerovoltsports.com" class="team-email">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>ananya@aerovoltsports.com</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bio 3 -->
+                    <div class="col-lg-4 col-12">
+                        <div class="team-card h-100">
+                            <div class="team-portrait">
+                                <img src="images/customer-support.jpg" alt="Customer support specialist smiling inside the store office">
+                            </div>
+                            <div class="team-info">
+                                <h4 class="team-name">Captain Vikram</h4>
+                                <span class="team-role">Customer Experience Lead</span>
+                                <p class="team-desc">Former first-class cricketer and head of logistics. Specializes in custom club bundle deals.</p>
+                                <a href="mailto:vikram@aerovoltsports.com" class="team-email">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>vikram@aerovoltsports.com</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ----------------------------------------------------
+       FOOTER CONTAINER (Matches navbar.html)
+    ----------------------------------------------------- -->
+    <footer class="footer">
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <div class="footer-container">
+            <!-- Column 1: Brand Info -->
+            <div class="footer-col brand-col">
+                <a href="index.html" class="logo-section" style="text-decoration: none;">
+                    <div class="logo-badge" aria-hidden="true">
+                        <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                            <defs>
+                                <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--primary)"></stop>
+                                    <stop offset="100%" stop-color="var(--accent)"></stop>
+                                </linearGradient>
+                            </defs>
+                            <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradFooter)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                            <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                            <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradFooter)"></path>
+                            <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                        </svg>
+                    </div>
+                    <div class="logo-text-wrapper">
+                        <h2 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h2>
+                    </div>
+                </a>
+                <p class="brand-desc">
+                    Engineered with premium craftsmanship and elite sports science, AeroVolt designs game-changing cricket gear, performance apparel, and athletic essentials.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Column 2: Shop Collection -->
+            <div class="footer-col">
+                <h3 class="footer-title">Shop Collection</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Equipment</a></li>
+                    <li><a href="#" class="footer-link">Football Equipment</a></li>
+                    <li><a href="#" class="footer-link">Badminton Equipment</a></li>
+                    <li><a href="#" class="footer-link">Gym & Fitness</a></li>
+                    <li><a href="#" class="footer-link">Sports Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Custom Services -->
+            <div class="footer-col">
+                <h3 class="footer-title">Custom Services</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Team Jerseys</a></li>
+                    <li><a href="#" class="footer-link">Custom Logo Printing</a></li>
+                    <li><a href="#" class="footer-link">Club Uniform Packages</a></li>
+                    <li><a href="#" class="footer-link">Bulk Orders Tier</a></li>
+                    <li><a href="#" class="footer-link">School & College Quote</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Quick Links -->
+            <div class="footer-col">
+                <h3 class="footer-title">Sports Blog</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Training Tips</a></li>
+                    <li><a href="#" class="footer-link">Football Playbooks</a></li>
+                    <li><a href="#" class="footer-link">Fitness & Nutrition</a></li>
+                    <li><a href="#" class="footer-link">Equipment Reviews</a></li>
+                    <li><a href="#" class="footer-link">Store Locations</a></li>
+                </ul>
+            </div>
+
+            
+        </div>
+        
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p class="copyright-text">
+                    &copy; 2026 AeroVolt Sports Lab. All rights reserved.
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ----------------------------------------------------
+       8. INTERACTIVITY CONTROLLER (JAVASCRIPT)
+    ----------------------------------------------------- -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- Contextual Active Navbar Highlight ---
+            const currentPath = window.location.pathname.split("/").pop() || "index.html";
+            const navLinks = document.querySelectorAll(".nav-menu .nav-link");
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href");
+                link.parentElement.classList.remove("active");
+                
+                if (href === currentPath) {
+                    link.parentElement.classList.add("active");
+                } else if ((currentPath === "index.html" || currentPath === "home 2.html" || currentPath === "") && link.textContent.trim().includes("Home")) {
+                    link.parentElement.classList.add("active");
+                }
+            });
+
+            
+            // --- DOM Selectors ---
+            const htmlElement = document.documentElement;
+            const mobileHamburger = document.getElementById("mobile-hamburger");
+            const navMenu = document.getElementById("nav-menu-list");
+            const drawerOverlay = document.getElementById("drawer-overlay");
+
+            // --- Theme Controller (Light/Dark Mode) ---
+            const savedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+            
+            htmlElement.setAttribute("data-theme", initialTheme);
+
+            const themeToggleBtns = document.querySelectorAll(".theme-toggle");
+            themeToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentTheme = htmlElement.getAttribute("data-theme");
+                    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+                    htmlElement.setAttribute("data-theme", nextTheme);
+                    localStorage.setItem("theme", nextTheme);
+                });
+            });
+
+            // --- Layout Controller (RTL / LTR layout) ---
+            const rtlToggleBtns = document.querySelectorAll(".rtl-toggle");
+            
+            rtlToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentDir = htmlElement.getAttribute("dir") || "ltr";
+                    if (currentDir === "ltr") {
+                        htmlElement.setAttribute("dir", "rtl");
+                        htmlElement.setAttribute("lang", "ar");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction RTL to LTR"));
+                    } else {
+                        htmlElement.setAttribute("dir", "ltr");
+                        htmlElement.setAttribute("lang", "en");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction LTR to RTL"));
+                    }
+                });
+            });
+
+            // --- Mobile Navigation Hamburger Controller ---
+            const drawerCloseBtn = document.getElementById("drawer-close-btn");
+            
+            const toggleDrawer = () => {
+                mobileHamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+                drawerOverlay.classList.toggle("active");
+                
+                const isExpanded = mobileHamburger.classList.contains("active");
+                mobileHamburger.setAttribute("aria-expanded", isExpanded);
+            };
+
+            mobileHamburger.addEventListener("click", toggleDrawer);
+            drawerOverlay.addEventListener("click", toggleDrawer);
+            if (drawerCloseBtn) {
+                drawerCloseBtn.addEventListener("click", toggleDrawer);
+            }
+
+            // --- Mobile Dropdown Accordion Controller (Generic) ---
+            const dropdownLinks = document.querySelectorAll(".nav-item > .nav-link");
+            dropdownLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    if (window.innerWidth <= 1320) {
+                        const navItem = link.closest(".nav-item");
+                        const hasDropdown = navItem ? navItem.querySelector(".dropdown-menu") : null;
+                        if (!hasDropdown) return;
+                        
+                        e.preventDefault();
+                        
+                        document.querySelectorAll(".nav-item").forEach(item => {
+                            if (item !== navItem) {
+                                item.classList.remove("mobile-open");
+                                const itemLink = item.querySelector(".nav-link");
+                                if (itemLink) itemLink.setAttribute("aria-expanded", "false");
+                            }
+                        });
+
+                        navItem.classList.toggle("mobile-open");
+                        const isExpanded = navItem.classList.contains("mobile-open");
+                        link.setAttribute("aria-expanded", isExpanded);
+                    }
+                });
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 1320) {
+                    document.querySelectorAll(".nav-item").forEach(item => {
+                        item.classList.remove("mobile-open");
+                    });
+                    dropdownLinks.forEach(link => {
+                        link.setAttribute("aria-expanded", "false");
+                    });
+                    mobileHamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
+                    drawerOverlay.classList.remove("active");
+                    mobileHamburger.setAttribute("aria-expanded", "false");
+                }
+            });
+        });
+
+
+    </script>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- Store Locator Tab Switcher ---
+            const tabChennaiBtn = document.getElementById("tab-chennai");
+            const tabBangaloreBtn = document.getElementById("tab-bangalore");
+            const tabMumbaiBtn = document.getElementById("tab-mumbai");
+
+            const stores = {
+                chennai: {
+                    address: "Ground Floor, AeroVolt Sports, 12, Khader Nawaz Khan Rd, Nungambakkam, Chennai, Tamil Nadu 600006",
+                    hours: "Mon - Sat: 10:00 AM - 8:30 PM<br>Sun: 11:00 AM - 7:00 PM",
+                    phone: "+91 44 4890 1234",
+                    services: "Bespoke Stringing, Willow Tuning, Grip Customization, Sensor Analysis",
+                    image: "images/chennai-store-blueprint.jpg",
+                    label: "Chennai Headquarters Hub"
+                },
+                bangalore: {
+                    address: "AeroVolt Sports Lab, 45, Lavelle Road, Shanthala Nagar, Bangalore, Karnataka 560001",
+                    hours: "Mon - Sat: 9:30 AM - 9:00 PM<br>Sun: 10:00 AM - 8:00 PM",
+                    phone: "+91 80 4123 5678",
+                    services: "sub-10ms Radar Tracking, Willow Calibration, Precision Profiling",
+                    image: "images/bangalore-store-blueprint.jpg",
+                    label: "Bangalore Advanced Lab"
+                },
+                mumbai: {
+                    address: "AeroVolt Premium, 89, Veer Nariman Rd, Churchgate, Mumbai, Maharashtra 400020",
+                    hours: "Mon - Sat: 10:30 AM - 8:30 PM<br>Sun: Closed",
+                    phone: "+91 22 2204 9012",
+                    services: "Custom Bat Profiling, Laser Spine Shaving, Weight Balancing",
+                    image: "images/mumbai-store-blueprint.jpg",
+                    label: "Mumbai Performance Center"
+                }
+            };
+
+            const switchStore = (storeKey, activeBtn) => {
+                // Toggle active button states
+                [tabChennaiBtn, tabBangaloreBtn, tabMumbaiBtn].forEach(btn => {
+                    if (btn) btn.classList.remove("active");
+                });
+                if (activeBtn) activeBtn.classList.add("active");
+
+                // Update text details
+                const store = stores[storeKey];
+                const addressEl = document.getElementById("store-address");
+                const hoursEl = document.getElementById("store-hours");
+                const phoneEl = document.getElementById("store-phone");
+                const servicesEl = document.getElementById("store-services");
+                const mapImgEl = document.getElementById("store-map-img");
+                const labelEl = document.getElementById("store-label");
+
+                if (addressEl) addressEl.textContent = store.address;
+                if (hoursEl) hoursEl.innerHTML = store.hours;
+                if (phoneEl) phoneEl.textContent = store.phone;
+                if (servicesEl) servicesEl.textContent = store.services;
+                if (mapImgEl) {
+                    mapImgEl.setAttribute("src", store.image);
+                    mapImgEl.setAttribute("alt", `AeroVolt Store Locator Map for ${store.label}`);
+                }
+                if (labelEl) labelEl.textContent = store.label;
+            };
+
+            if (tabChennaiBtn) tabChennaiBtn.addEventListener("click", () => switchStore("chennai", tabChennaiBtn));
+            if (tabBangaloreBtn) tabBangaloreBtn.addEventListener("click", () => switchStore("bangalore", tabBangaloreBtn));
+            if (tabMumbaiBtn) tabMumbaiBtn.addEventListener("click", () => switchStore("mumbai", tabMumbaiBtn));
+
+            // --- Feedback Slide-to-Submit form logic ---
+            const sliderHandle = document.getElementById("slider-handle-element");
+            const sliderFill = document.getElementById("slider-fill-element");
+            const sliderText = document.getElementById("slider-text-element");
+            const sliderWrapper = sliderHandle ? sliderHandle.parentElement : null;
+
+            if (sliderHandle && sliderWrapper) {
+                let isDragging = false;
+                let startX = 0;
+                let maxSlide = 0;
+                let currentDeltaX = 0;
+
+                const onDragStart = (e) => {
+                    isDragging = true;
+                    startX = e.type === "mousedown" ? e.clientX : e.touches[0].clientX;
+                    maxSlide = sliderWrapper.clientWidth - sliderHandle.clientWidth - 8;
+                    sliderHandle.style.transition = "none";
+                    sliderFill.style.transition = "none";
+                };
+
+                const onDragMove = (e) => {
+                    if (!isDragging) return;
+                    const clientX = e.type === "mousemove" ? e.clientX : e.touches[0].clientX;
+                    
+                    const isRtl = document.documentElement.getAttribute("dir") === "rtl";
+                    let deltaX = isRtl ? (startX - clientX) : (clientX - startX);
+                    if (deltaX < 0) deltaX = 0;
+                    if (deltaX > maxSlide) deltaX = maxSlide;
+
+                    currentDeltaX = deltaX;
+
+                    const translationX = isRtl ? -deltaX : deltaX;
+                    sliderHandle.style.transform = `translateX(${translationX}px)`;
+                    sliderFill.style.width = `${deltaX + 24}px`;
+
+                    if (deltaX / maxSlide > 0.85) {
+                        sliderText.textContent = "Release to Submit Feedback";
+                    } else {
+                        sliderText.textContent = "Slide to Submit Feedback";
+                    }
+                };
+
+                const onDragEnd = () => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    const isRtl = document.documentElement.getAttribute("dir") === "rtl";
+
+                    if (currentDeltaX / maxSlide > 0.9) {
+                        sliderHandle.style.transition = "transform 0.2s ease";
+                        sliderFill.style.transition = "width 0.2s ease";
+                        
+                        const finalTranslationX = isRtl ? -maxSlide : maxSlide;
+                        sliderHandle.style.transform = `translateX(${finalTranslationX}px)`;
+                        sliderFill.style.width = "100%";
+                        sliderText.textContent = "Submitted! Inspecting your feedback...";
+                        
+                        setTimeout(() => {
+                            const feedbackForm = document.getElementById("contact-feedback-form");
+                            if (feedbackForm) {
+                                feedbackForm.dispatchEvent(new Event("submit"));
+                            }
+                        }, 500);
+                    } else {
+                        sliderHandle.style.transition = "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
+                        sliderFill.style.transition = "width 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
+                        sliderHandle.style.transform = "translateX(0px)";
+                        sliderFill.style.width = "0px";
+                        sliderText.textContent = "Slide to Submit Feedback";
+                    }
+                };
+
+                sliderHandle.addEventListener("mousedown", onDragStart);
+                window.addEventListener("mousemove", onDragMove);
+                window.addEventListener("mouseup", onDragEnd);
+
+                sliderHandle.addEventListener("touchstart", onDragStart);
+                window.addEventListener("touchmove", onDragMove);
+                window.addEventListener("touchend", onDragEnd);
+            }
+        });
+
+        // FAQ Toggle Accordion
+        function toggleFaq(button) {
+            const faqCard = button.closest(".faq-card");
+            const isOpen = faqCard.classList.contains("open");
+            
+            document.querySelectorAll(".faq-card").forEach(card => {
+                card.classList.remove("open");
+                const btn = card.querySelector(".faq-header");
+                if (btn) btn.setAttribute("aria-expanded", "false");
+            });
+
+            if (!isOpen) {
+                faqCard.classList.add("open");
+                button.setAttribute("aria-expanded", "true");
+            }
+        }
+
+        // Emoji Ratings select
+        function selectRating(selectedNode) {
+            document.querySelectorAll(".rating-node").forEach(node => {
+                node.classList.remove("selected");
+            });
+            selectedNode.classList.add("selected");
+            const ratingValue = selectedNode.getAttribute("data-value");
+            const ratingScoreInput = document.getElementById("rating-score");
+            if (ratingScoreInput) {
+                ratingScoreInput.value = ratingValue;
+            }
+        }
+
+        // Form Submit
+        function handleFeedbackSubmit(event) {
+            event.preventDefault();
+            const ratingScore = document.getElementById("rating-score").value;
+            const feedbackName = document.getElementById("feedback-name").value;
+            const feedbackEmail = document.getElementById("feedback-email").value;
+            const feedbackMessage = document.getElementById("feedback-message").value;
+
+            alert(`Thank you ${feedbackName}!
+Feedback Submitted Successfully!
+
+Score: ${ratingScore}/5 Stars
+Email: ${feedbackEmail}
+Message: "${feedbackMessage}"
+
+Our Sports Lab designers and bat makers will inspect your feedback.`);
+
+            event.target.reset();
+            
+            const sliderHandle = document.getElementById("slider-handle-element");
+            const sliderFill = document.getElementById("slider-fill-element");
+            const sliderText = document.getElementById("slider-text-element");
+            
+            if (sliderHandle && sliderFill && sliderText) {
+                sliderHandle.style.transition = "transform 0.4s ease";
+                sliderFill.style.transition = "width 0.4s ease";
+                sliderHandle.style.transform = "translateX(0px)";
+                sliderFill.style.width = "0px";
+                sliderText.textContent = "Slide to Submit Feedback";
+            }
+        }
+    </script>
+</body>
+</html>                 

@@ -1,0 +1,5029 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AeroVolt Sports Lab - Charge Your Game, Defy Your Limits. Premium sports equipment, customized apparel, and professional gear.">
+    <title>AeroVolt Sports Lab - Premium Sports Shop</title>
+    
+    <!-- Google Fonts: Outfit (headings) & Plus Jakarta Sans (UI/Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ----------------------------------------------------
+           1. DESIGN SYSTEM & CSS VARIABLES
+        ---------------------------------------------------- */
+        :root[data-theme="light"] {
+            --bg-page: hsl(220, 20%, 97%);
+            --bg-navbar: hsla(220, 20%, 97%, 0.85);
+            --bg-card: hsl(0, 0%, 100%);
+            --bg-hover: hsl(245, 100%, 97%);
+            --bg-dropdown: hsla(0, 0%, 100%, 0.92);
+            --input-bg: hsl(220, 20%, 94%);
+            
+            --text-primary: hsl(245, 50%, 15%);
+            --text-secondary: hsl(245, 20%, 35%);
+            --text-muted: hsl(240, 10%, 55%);
+            
+            --primary: hsl(245, 75%, 52%);
+            --primary-hover: hsl(245, 75%, 45%);
+            --primary-glow: rgba(79, 70, 229, 0.15);
+            
+            --accent: hsl(14, 100%, 53%); /* Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.2);
+            
+            --border: hsla(245, 20%, 80%, 0.35);
+            --border-hover: hsla(245, 20%, 70%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(79, 70, 229, 0.04);
+            --shadow-md: 0 10px 30px rgba(79, 70, 229, 0.06);
+            --shadow-lg: 0 20px 40px rgba(79, 70, 229, 0.08);
+            
+            --glass-blur: 16px;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-page: hsl(240, 35%, 6%);
+            --bg-navbar: hsla(240, 35%, 6%, 0.85);
+            --bg-card: hsl(240, 25%, 11%);
+            --bg-hover: hsl(245, 30%, 18%);
+            --bg-dropdown: hsla(240, 25%, 11%, 0.92);
+            --input-bg: hsl(240, 35%, 4%);
+            
+            --text-primary: hsl(210, 40%, 98%);
+            --text-secondary: hsl(240, 15%, 80%);
+            --text-muted: hsl(240, 10%, 65%);
+            
+            --primary: hsl(245, 90%, 65%);
+            --primary-hover: hsl(245, 90%, 72%);
+            --primary-glow: rgba(129, 140, 248, 0.25);
+            
+            --accent: hsl(14, 100%, 55%); /* Neon Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.25);
+            
+            --border: hsla(245, 20%, 25%, 0.4);
+            --border-hover: hsla(245, 20%, 35%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
+            
+            --glass-blur: 16px;
+        }
+
+        /* Base Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ----------------------------------------------------
+           2. HEADER & NAVIGATION BAR
+        ---------------------------------------------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            inset-inline-start: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--bg-navbar);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            flex-shrink: 0;
+            justify-self: start;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-section:hover .logo-badge {
+            transform: translateY(-2px) rotate(-3deg) scale(1.05);
+            filter: drop-shadow(0 4px 12px var(--primary-glow));
+        }
+
+        .logo-section:hover .logo-title span.highlight {
+            filter: brightness(1.1);
+        }
+
+        #main-navigation {
+            justify-self: center;
+        }
+
+        .logo-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+            animation: bounce-slow 4s infinite ease-in-out;
+        }
+
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .logo-title span.highlight {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-tagline {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.15rem;
+        }
+
+        /* Center Navigation Menu */
+        .nav-menu {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.15rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.55rem;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        .nav-link:hover::after,
+        .nav-item.active .nav-link::after {
+            width: 70%;
+            left: 15%;
+        }
+
+        .nav-link:hover, .nav-item.active .nav-link {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+        }
+
+        .nav-link svg.arrow-icon {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.2s ease;
+            stroke-width: 3px;
+        }
+
+        .nav-item:hover .nav-link svg.arrow-icon {
+            transform: translateY(1px);
+        }
+
+        /* Dropdown Menus */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            inset-inline-start: 0;
+            margin-top: 0.5rem;
+            background-color: var(--bg-dropdown);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px) scale(0.98);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 100;
+            overflow: hidden;
+            padding: 0.4rem;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .dropdown-item:hover {
+            transform: translateX(-4px);
+        }
+
+        /* Right Actions Layout */
+        .actions-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            justify-self: end;
+        }
+
+        /* Utility Toggle Buttons */
+        .action-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .action-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateY(-1px);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Dark Mode Button Icon Switcher */
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        /* RTL Toggle Button */
+        .rtl-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .rtl-toggle:hover svg {
+            animation: swap-arrow-slide 0.6s ease-in-out infinite alternate;
+        }
+
+        [dir="rtl"] .rtl-toggle:hover svg {
+            animation: swap-arrow-slide-rtl 0.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes swap-arrow-slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(3px);
+            }
+        }
+
+        @keyframes swap-arrow-slide-rtl {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-3px);
+            }
+        }
+
+        /* Login Button */
+        .login-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), hsl(245, 75%, 40%));
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.35rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--primary-glow);
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            box-shadow: 0 6px 18px var(--primary-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.08);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke-width: 2.5;
+        }
+
+        /* Mobile Hamburger & Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22px;
+            height: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1100;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2.5px;
+            background-color: var(--text-primary);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* Hamburger active morphing to close X */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Drawer Dark Overlay Backdrop */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer-actions-item-wrapper,
+        .drawer-header-item {
+            display: none;
+        }
+
+        /* ----------------------------------------------------
+           3. MAIN CONTAINER / DEMO BODY
+        ---------------------------------------------------- */
+        .demo-body {
+            margin-top: 80px; /* offset navbar height */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hero Banner */
+        .hero-section {
+            position: relative;
+            padding: 6rem 2rem 5rem 2rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 10% 20%, var(--primary-glow) 0%, transparent 45%),
+                        radial-gradient(circle at 90% 80%, var(--accent-glow) 0%, transparent 45%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-badge span.pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .hero-badge span.pulse-dot::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: inherit;
+            border-radius: inherit;
+            top: 0;
+            left: 0;
+            animation: pulse-ring 1.8s infinite;
+        }
+
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .hero-title span.glow-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .hero-btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px var(--primary-glow);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--primary-glow);
+            filter: brightness(1.08);
+        }
+
+        .hero-btn-secondary {
+            background-color: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-btn-secondary:hover {
+            border-color: var(--border-hover);
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md), 0 10px 20px rgba(79, 70, 229, 0.05);
+            border-color: var(--border-hover);
+        }
+
+        .card:hover::before,
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            display: inline-flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .card-body {
+            font-size: 0.925rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .card-link {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: auto;
+        }
+
+        .card-link:hover {
+            color: var(--primary-hover);
+        }
+
+        .card-link svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .card-link:hover svg {
+            transform: translateX(3px);
+        }
+        
+        [dir="rtl"] .card-link:hover svg {
+            transform: translateX(-3px);
+        }
+
+        /* ----------------------------------------------------
+           4. RESPONSIVE MEDIA QUERIES (COLLAPSE AT 1320PX)
+        ---------------------------------------------------- */
+        @media (max-width: 1320px) {
+            .header {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: var(--bg-card);
+                z-index: 1060;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1.5rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            /* Toggle desktop menu hiding, hamburger showing */
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active {
+                display: none !important;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                inset-inline-end: -320px;
+                width: 320px;
+                height: 100vh;
+                background-color: var(--bg-card);
+                border-inline-start: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0;
+                gap: 0;
+                z-index: 1050;
+                transition: inset-inline-end 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                visibility: hidden;
+                display: flex;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                inset-inline-end: 0;
+                visibility: visible;
+            }
+
+            .drawer-header-item {
+                display: block;
+                width: 100%;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 1rem;
+            }
+
+            .drawer-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.25rem 1.5rem;
+                background-color: var(--bg-card);
+            }
+
+            .drawer-close-btn {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                transition: all 0.2s ease;
+                padding: 0;
+            }
+
+            .drawer-close-btn:hover {
+                color: var(--primary);
+                transform: scale(1.1);
+            }
+
+            .drawer-close-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .nav-item {
+                width: 100%;
+                padding: 0 1.5rem;
+            }
+
+            .nav-link {
+                justify-content: space-between;
+                width: 100%;
+                padding: 0.85rem 0;
+                font-size: 0.95rem;
+                border-bottom: 1px solid hsla(215, 20%, 80%, 0.1);
+            }
+
+            /* Submenu in mobile view acts as accordion */
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background-color: var(--bg-hover);
+                padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+                margin-top: 0.25rem;
+            }
+
+            /* Disable desktop floating borders and underlines on mobile drawer */
+            .nav-link::after,
+            .dropdown-menu::before {
+                display: none !important;
+            }
+
+            .nav-item.mobile-open .dropdown-menu {
+                display: block;
+            }
+
+            .nav-item.mobile-open .nav-link svg.arrow-icon {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-item {
+                padding: 0.6rem 1rem;
+            }
+
+            .actions-section {
+                gap: 0.5rem;
+            }
+
+            .actions-section .theme-toggle,
+            .actions-section .rtl-toggle,
+            .actions-section .login-btn {
+                display: none;
+            }
+
+            .drawer-actions-item-wrapper {
+                display: block;
+                margin-top: auto;
+                padding: 1.5rem;
+            }
+
+            .drawer-divider {
+                height: 1px;
+                background-color: var(--border);
+                margin-bottom: 1.5rem;
+                opacity: 0.5;
+            }
+
+            .drawer-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row .action-btn {
+                flex: 1 !important;
+                height: 44px !important;
+                border-radius: 10px !important;
+                border: 1px solid var(--border) !important;
+                background-color: var(--bg-card) !important;
+                color: var(--text-secondary) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: auto !important;
+            }
+
+            .drawer-toggles-row .action-btn:hover {
+                border-color: var(--primary);
+                background-color: var(--bg-hover);
+                color: var(--primary);
+            }
+
+
+            .drawer-login-btn {
+                width: 100% !important;
+                height: 46px !important;
+                justify-content: center !important;
+                background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%)) !important;
+                box-shadow: 0 4px 15px var(--accent-glow) !important;
+                border-radius: 10px !important;
+                font-size: 0.95rem !important;
+                font-weight: 700 !important;
+                color: #ffffff !important;
+                border: none !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.5rem !important;
+                transition: all 0.3s ease;
+            }
+
+            .drawer-login-btn:hover {
+                box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4) !important;
+                transform: translateY(-1px);
+                filter: brightness(1.05);
+            }
+
+
+        }
+
+        @media (max-width: 580px) {
+            .logo-tagline {
+                display: none;
+            }
+
+            .logo-title {
+                font-size: 1.15rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-btn-primary, .hero-btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* ----------------------------------------------------
+           5. SYSTEM KEYFRAMES & UTILITIES
+        ---------------------------------------------------- */
+        @keyframes bounce-slow {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-4px) rotate(5deg);
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2.2);
+                opacity: 0;
+            }
+        }
+
+        /* ----------------------------------------------------
+           6. FOOTER STYLING & RESPONSIVENESS
+        ---------------------------------------------------- */
+        .footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 5rem 2rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: auto;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.2fr 1.2fr 1.2fr 1.2fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+        }
+
+        .brand-col .brand-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%));
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            inset-inline-start: 0;
+            width: 36px;
+            height: 2px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .footer-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .contact-info-item {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            text-align: start;
+        }
+
+        .contact-info-item svg.contact-icon-svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .footer-bottom-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-link {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--primary);
+        }
+
+                /* Responsive Footer Media Queries */
+        @media (max-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 3;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 1.5rem;
+            }
+            .brand-col .footer-desc {
+                max-width: 600px;
+                margin: 0.75rem auto 1.5rem auto;
+            }
+            .brand-col .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 4rem 1.25rem 2rem 1.25rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 1;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 0;
+            }
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col ul {
+                padding: 0;
+            }
+            .footer-col ul li {
+                justify-content: center;
+            }
+            .footer-bottom-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            width: fit-content;
+            margin-bottom: 0.75rem;
+        }
+
+        /* 1. Hero Hologram */
+        .hero-hologram-sec {
+            background: radial-gradient(circle at 80% 20%, var(--primary-glow), transparent 60%);
+            display: flex;
+            align-items: center;
+            min-height: 85vh;
+        }
+
+        .hero-grid {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-title-main {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-actions-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2.25rem; /* space between text and buttons */
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px var(--accent-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--input-bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .hologram-showcase {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hologram-canvas-card {
+            background: hsla(240, 25%, 11%, 0.4);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hologram-backdrop-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .hud-grid-ring {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border: 1.5px dashed var(--border);
+            border-radius: 50%;
+            animation: spin-clockwise 30s linear infinite;
+            z-index: 2;
+        }
+
+        .hud-grid-ring-inner {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            border: 1px solid var(--primary-glow);
+            border-radius: 50%;
+            animation: spin-counter 20s linear infinite;
+            z-index: 2;
+        }
+
+        .hud-crosshair {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            z-index: 3;
+        }
+
+        .hud-crosshair::before, .hud-crosshair::after {
+            content: '';
+            position: absolute;
+            background-color: var(--accent);
+        }
+
+        .hud-crosshair::before {
+            top: 50%; left: 0; width: 100%; height: 2px;
+        }
+        .hud-crosshair::after {
+            left: 50%; top: 0; height: 100%; width: 2px;
+        }
+
+        .hologram-sport-gear {
+            width: 70%;
+            height: auto;
+            z-index: 4;
+            filter: drop-shadow(0 10px 30px var(--primary-glow));
+            transform: rotate(-15deg);
+            animation: hover-gear 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes hover-gear {
+            0% { transform: translateY(0) rotate(-15deg) scale(1); }
+            100% { transform: translateY(-15px) rotate(-10deg) scale(1.05); }
+        }
+
+        @keyframes spin-clockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-counter {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* 2. Live Telemetry */
+        .telemetry-grid {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .telemetry-dashboard {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .telemetry-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            margin-top: 1.75rem; /* space between text and buttons */
+        }
+
+        .tab-trigger {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            padding: 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .tab-trigger.active {
+            background-color: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+        }
+
+        .telemetry-readouts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .readout-card {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .readout-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .readout-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .telemetry-visual {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            aspect-ratio: 16/10;
+        }
+
+        .telemetry-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .telemetry-overlay-hud {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(11, 15, 25, 0.8));
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            z-index: 2;
+        }
+
+        .telemetry-status-tag {
+            background-color: #10b981;
+            color: #ffffff;
+            font-size: 0.82rem;
+            font-weight: 800;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .telemetry-status-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: pulse-live 1s infinite alternate;
+        }
+
+        @keyframes pulse-live {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        /* 3. Materials formula sliders */
+        .materials-grid {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .sliders-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            margin-top: 1.75rem; /* space between text and sliders */
+        }
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .slider-header-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .slider-val-readout {
+            color: var(--accent);
+        }
+
+        .formula-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .formula-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .wave-showcase-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave-image-backdrop {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        .wave-svg {
+            width: 100%;
+            height: 180px;
+            z-index: 2;
+        }
+
+        .wave-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.725rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 2;
+        }
+
+        /* 4. Drop Calendars (Circular selector) */
+        .calendar-grid {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .circular-selector-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            aspect-ratio: 1;
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        .rotating-dial-outer {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            position: absolute;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dial-quadrant-node {
+            position: absolute;
+            background-color: var(--bg-card);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 0.85rem;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transform-origin: center;
+        }
+
+        .dial-quadrant-node:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .dial-quadrant-node.active {
+            background-color: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Position node around circle edge */
+        .node-q1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
+        .node-q2 { top: 50%; right: 0; transform: translate(50%, -50%); }
+        .node-q3 { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+        .node-q4 { top: 50%; left: 0; transform: translate(-50%, -50%); }
+
+        .dial-center-core {
+            width: 50%;
+            height: 50%;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .core-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .calendar-details-pane {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .calendar-details-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        .calendar-details-content {
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .calendar-phase-tag {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .calendar-phase-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .calendar-phase-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .spec-cell-label {
+            font-size: 0.725rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .spec-cell-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-top: 0.25rem;
+        }
+
+        /* 5. Athlete Profiles */
+        .athletes-slider-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .athletes-flex-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .athlete-profile-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .athlete-profile-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .athlete-card-media {
+            width: 100%;
+            aspect-ratio: 16/11;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .athlete-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .athlete-sport-badge {
+            position: absolute;
+            top: 1rem;
+            inset-inline-start: 1rem;
+            background-color: var(--accent);
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.725rem;
+            font-weight: 800;
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .athlete-card-info {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .athlete-card-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .athlete-card-formula {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .athlete-setup-box {
+            background-color: var(--input-bg);
+            border: 1.5px dashed var(--border);
+            border-radius: 10px;
+            padding: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .athlete-setup-title {
+            font-size: 0.675rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .athlete-setup-gear {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* 6. Radar Chart */
+        .radar-grid {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .radar-control-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1.75rem; /* space between text and cards */
+        }
+
+        .radar-preset-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .radar-preset-card:hover {
+            border-color: var(--accent);
+        }
+
+        .radar-preset-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            background-color: var(--bg-hover);
+        }
+
+        .preset-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .preset-desc {
+            font-size: 0.825rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .radar-chart-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .radar-image-backdrop {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        .radar-svg-canvas {
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .radar-axis-line {
+            stroke: var(--border);
+            stroke-width: 1.5;
+        }
+
+        .radar-web-ring {
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 1;
+            stroke-dasharray: 4 2;
+        }
+
+        .radar-active-polygon {
+            fill: var(--accent-glow);
+            stroke: var(--accent);
+            stroke-width: 2.5;
+            transition: points 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .radar-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px;
+            font-weight: 800;
+            fill: var(--text-secondary);
+            text-anchor: middle;
+        }
+
+        /* 7. Diagnostic Booking */
+        .booking-grid {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+
+        .booking-left-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .slots-calendar {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.75rem; /* space between text and calendar */
+        }
+
+        .calendar-months-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            margin-bottom: 1.25rem;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .day-header {
+            font-size: 0.725rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .day-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .day-cell:hover:not(.empty) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .day-cell.active {
+            background-color: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+        }
+
+        .day-cell.empty {
+            cursor: default;
+        }
+
+        .session-types-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .type-pill {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .type-pill:hover {
+            border-color: var(--accent);
+        }
+
+        .type-pill.active {
+            border-color: var(--accent);
+            background-color: var(--bg-hover);
+        }
+
+        .type-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .type-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .type-duration {
+            font-size: 0.725rem;
+            color: var(--text-muted);
+        }
+
+        .type-check-svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .type-pill.active .type-check-svg {
+            opacity: 1;
+        }
+
+        .booking-right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: sticky;
+            top: 100px;
+        }
+
+        .booking-summary-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .telemetry-dashboard-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .telemetry-metrics-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
+        }
+
+        .telemetry-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .telemetry-meta {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .telemetry-data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .telemetry-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .telemetry-status-tag {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        .telemetry-status-tag.ok {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: rgb(16, 185, 129);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .telemetry-bar-bg {
+            background-color: var(--input-bg);
+            border-radius: 4px;
+            height: 6px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .telemetry-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .summary-header-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.25rem;
+        }
+
+        .summary-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .summary-detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-detail-val {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .hero-grid, .telemetry-grid, .materials-grid, .calendar-grid, .radar-grid, .booking-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .circular-selector-container, .radar-chart-container, .hologram-canvas-card {
+                max-width: 320px;
+            }
+
+            .athletes-flex-row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title-main {
+                font-size: 3rem;
+            }
+        }
+    
+        /* ====================================================
+           GLOBAL RESPONSIVENESS OVERRIDES
+        ==================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box !important;
+        }
+        
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            width: 100% !important;
+        }
+
+        img, video, iframe {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        /* Centered layout container matching home 2.html layout constraints */
+        .home-main {
+            display: block;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            max-width: 1440px;
+            margin: 80px auto 0 auto; /* offset fixed navbar height */
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Add vertical section spacing */
+        .home-section {
+            margin-bottom: 6rem;
+        }
+        .home-section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid, .telemetry-grid, .materials-grid, .calendar-grid, .radar-grid, .booking-grid, 
+            .about-hero-grid, .collage-container, .why-diagonal-grid, .orbit-container, .location-section-grid,
+            .custom-hero-grid, .custom-step-grid, .custom-benefits-grid, .bulk-hero-grid, .steps-grid, 
+            .benefits-grid, .blog-hero-grid, .blog-featured-grid, .blog-archive-grid, .contact-hero-grid, 
+            .contact-form-grid, .brands-hero-grid, .brands-showcase-grid,
+            .accessories-grid, .athletes-flex-row, .audit-layout, .calendar-phase-specs, .catalog-grid, 
+            .circle-spec-grid, .configurator-card, .flex-grid-wrapper, .grid-container, .material-layout, 
+            .quiz-card, .quiz-row, .testimonial-card, .vault-hero-grid, .wizard-row {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 4rem 1.5rem !important;
+            }
+
+            .home-main {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .home-section {
+                margin-bottom: 0 !important;
+            }
+
+            /* Responsive Footer overrides (Laptop & Tablet viewports) */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 768px Breakpoint (Tablets) */
+        @media (max-width: 768px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 3rem 1.25rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.85rem !important;
+                line-height: 1.25 !important;
+            }
+            
+            h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Navbar adjustments */
+            .desktop-nav {
+                display: none !important;
+            }
+            
+            .mobile-hamburger {
+                display: flex !important;
+            }
+
+            .logo-title {
+                font-size: 1.15rem !important;
+            }
+
+            /* Responsive Footer overrides */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 480px Breakpoint (Mobile Portrait) */
+        @media (max-width: 480px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2.5rem 1rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.6rem !important;
+            }
+            
+            .btn-primary, .btn-secondary, .btn-accent, button.btn-primary, button.btn-secondary {
+                width: 100% !important;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .logo-tagline {
+                display: none !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.85) !important;
+                margin: -1.5rem auto !important;
+            }
+            .telemetry-tabs {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 0.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            .tab-trigger {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.75rem !important;
+                flex: 1 1 calc(33.333% - 0.5rem) !important;
+                min-width: 75px !important;
+                text-align: center !important;
+            }
+            .telemetry-readouts {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)) !important;
+                gap: 0.75rem !important;
+            }
+        }
+
+        /* 320px Breakpoint (Small Mobile Screen) */
+        @media (max-width: 320px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2rem 0.75rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 1.75rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.45rem !important;
+            }
+
+            .logo-title {
+                font-size: 1rem !important;
+            }
+            
+            /* Force absolute overflow prevention */
+            * {
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.75) !important;
+                margin: -2.5rem auto !important;
+            }
+            .telemetry-dashboard {
+                padding: 0.85rem !important;
+            }
+            .tab-trigger {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.5rem !important;
+            }
+        }
+    
+        /* Hamburger custom SVG toggle button styling */
+        .hamburger {
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            z-index: 1100 !important;
+        }
+        .hamburger svg {
+            width: 20px !important;
+            height: 20px !important;
+            color: var(--text-secondary) !important;
+            transition: transform 0.3s ease !important;
+        }
+        .hamburger:hover svg {
+            color: var(--primary) !important;
+            transform: scale(1.05) !important;
+        }
+</style>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+
+    <!-- Drawer Dark Overlay Backdrop -->
+    <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+
+    <!-- ----------------------------------------------------
+       HEADER & NAVIGATION BAR CONTAINER
+    ----------------------------------------------------- -->
+    <header class="header">
+        <div class="nav-container">
+            
+            <!-- Left: Logo & Tagline -->
+            <a href="index.html" class="logo-section" aria-label="AeroVolt Sports Lab Home">
+                <div class="logo-badge" aria-hidden="true">
+                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                            </linearGradient>
+                        </defs>
+                        <!-- Outer Shield Outline -->
+                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                        <!-- Left Wing Feathers -->
+                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <!-- Right Wing Feathers -->
+                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGrad)"></path>
+                        <!-- Energy Glow Dot -->
+                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                    </svg>
+                </div>
+                <div class="logo-text-wrapper">
+                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                </div>
+            </a>
+
+            <!-- Center: Navigation Menu Links -->
+            <nav id="main-navigation">
+                                                                <ul class="nav-menu" id="nav-menu-list">
+                    <!-- Drawer Header (visible only on mobile/tablet viewports inside the drawer) -->
+                    <li class="drawer-header-item">
+                        <div class="drawer-header">
+                            <a href="index.html" class="logo-section">
+                                <div class="logo-badge" aria-hidden="true">
+                                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                                        <defs>
+                                            <linearGradient id="logoGradDrawer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <!-- Outer Shield Outline -->
+                                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradDrawer)" stroke-width="2" stroke-linejoin="round" fill="rgba(124, 58, 237, 0.04)"></path>
+                                        <!-- Left Wing Feathers -->
+                                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Right Wing Feathers -->
+                                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+                                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradDrawer)"></path>
+                                        <!-- Energy Glow Dot -->
+                                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                                    </svg>
+                                </div>
+                                <div class="logo-text-wrapper">
+                                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                                </div>
+                            </a>
+                            <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Menu">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+
+                    <!-- 1. Home Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" aria-expanded="false" aria-haspopup="true">
+                            Home
+                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">Home 1</a>
+                            <a href="home 2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </li>
+
+                    <!-- 2. About Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <!-- 3. Collection Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.html">Collection</a>
+                    </li>
+
+                    <!-- 4. Arrivals Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="arrivals.html">Arrivals</a>
+                    </li>
+
+                    <!-- 5. Brands Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="brands.html">Brands</a>
+                    </li>
+
+                    <!-- 6. Custom Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="customization.html">Custom</a>
+                    </li>
+
+                    <!-- 7. Bulk Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.html">Bulk</a>
+                    </li>
+
+                    <!-- 8. Blog Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+
+                    <!-- 9. Contact Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    
+                    <!-- Drawer Actions (visible only on mobile/tablet viewport drawer) -->
+                    <li class="drawer-actions-item-wrapper">
+                        <div class="drawer-divider"></div>
+                        <div class="drawer-actions">
+                            <div class="drawer-toggles-row">
+                                <!-- Dark Mode Toggle Button -->
+                                <button class="action-btn theme-toggle" aria-label="Toggle Dark Mode">
+                                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M12 2v2"></path>
+                                        <path d="M12 20v2"></path>
+                                        <path d="M4.93 4.93l1.41 1.41"></path>
+                                        <path d="M17.66 17.66l1.41 1.41"></path>
+                                        <path d="M2 12h2"></path>
+                                        <path d="M20 12h2"></path>
+                                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                                    </svg>
+                                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                    </svg>
+                                    
+                                </button>
+                                
+                                <!-- RTL Toggle Button -->
+                                <button class="action-btn rtl-toggle" aria-label="Toggle Direction">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="rtl-icon">
+                                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                                    </svg>
+                                    
+                                </button>
+                            </div>
+                            
+                            <!-- Login Button in Mobile Drawer -->
+                            <button class="login-btn drawer-login-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span>Login</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right: Actions (Theme Toggle, RTL Toggle, Login Button, Hamburger) -->
+            <div class="actions-section">
+                <!-- Dark Mode Toggle Button -->
+                <button class="action-btn theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <!-- Sun SVG (visible in Light Mode) -->
+                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                    <!-- Moon SVG (visible in Dark Mode) -->
+                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6.364 6.364 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </button>
+
+                <!-- RTL Layout Toggle Button -->
+                <button class="action-btn rtl-toggle" id="rtl-toggle-btn" aria-label="Toggle Layout Direction LTR to RTL">
+                    <!-- Double Arrow Swap SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                    </svg>
+                </button>
+
+                <!-- Login Button -->
+                <button class="login-btn" id="login-btn" aria-label="Login"><!-- Lock Icon -->
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Login</span>
+                </button>
+
+                <!-- Mobile Hamburger Trigger -->
+                <button class="hamburger" id="mobile-hamburger" aria-label="Toggle Navigation Menu" aria-controls="main-navigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="home-main">
+        <!-- 1. HERO HOLOGRAM SECTION -->
+        <section class="home-section hero-hologram-sec" id="hero-hologram">
+            <div class="hero-grid">
+                <div class="hero-content-col">
+                    <span class="section-tag">AeroVolt Molecular Biomechanics Lab</span>
+                    <h2 class="hero-title-main">ENGINEERED FOR SHOCKWAVE POWER.</h2>
+                    <p class="section-desc">
+                        AeroVolt constructs elite athletic equipment calibrated for shockwave energy transmission. By combining sub-millisecond laser tracking systems, multiaxial carbon composite sheets, and low-frequency vibration absorption compounds, our development team designs implements that exceed standard coefficient of restitution (CoR) performance limits. We do not just construct sports gear—we calibrate vectors of acceleration, deflection damping, and impact conservation to turn mechanical force into raw field speed.
+                    </p>
+                    <div class="hero-actions-row">
+                        <a href="collection.html" class="btn-primary">
+                            <span>Explore Equipment Vault</span>
+                        </a>
+                        <a href="contact.html" class="btn-secondary">
+                            <span>Book Flight Profile Session</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hologram-showcase">
+                    <div class="hologram-canvas-card">
+                        <!-- Background atmospheric laboratory image -->
+                        <img src="images/arrivals-hero.jpg" alt="AeroVolt Lab Diagnostics" class="hologram-backdrop-img">
+                        <!-- Hologram Grid Indicators -->
+                        <div class="hud-grid-ring"></div>
+                        <div class="hud-grid-ring-inner"></div>
+                        <div class="hud-crosshair"></div>
+                        
+                        <!-- Floating sports bat / racket -->
+                        <svg class="hologram-sport-gear" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Premium cricket bat vector -->
+                            <defs>
+                                <linearGradient id="hudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--primary)"></stop>
+                                    <stop offset="100%" stop-color="var(--accent)"></stop>
+                                </linearGradient>
+                            </defs>
+                            <path d="M 45 10 L 55 10 L 55 35 L 45 35 Z" fill="url(#hudGrad)" stroke="var(--text-primary)" stroke-width="0.5"></path>
+                            <path d="M 42 35 C 42 35 48 35 48 38 L 48 85 C 48 88 52 88 52 85 L 52 38 C 52 35 58 35 58 35 Z" fill="url(#hudGrad)" stroke="var(--text-primary)" stroke-width="0.5"></path>
+                            <!-- Tech target lines -->
+                            <circle cx="50" cy="60" r="8" stroke="var(--accent)" stroke-width="0.75" stroke-dasharray="2 1"></circle>
+                            <line x1="35" y1="60" x2="65" y2="60" stroke="var(--accent)" stroke-width="0.5"></line>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. LIVE TELEMETRY STREAM SECTION -->
+        <section class="home-section" id="telemetry-live">
+            <div class="telemetry-grid">
+                <div class="telemetry-dashboard">
+                    <span class="section-tag">Live Sensor Network</span>
+                    <h3 class="section-title">Real-Time Biomechanical Telemetry</h3>
+                    <p class="section-desc">
+                        Our advanced biomechanical test laboratory captures athletic swings in high resolution. Integrated sensor matrices calculate load deflection angles, shaft/handle twist values, and grip velocity immediately at the moment of ball collision. Toggle the selector below to view active test feedback from our indoor radar bays.
+                    </p>
+                    <div class="telemetry-tabs">
+                        <button class="tab-trigger active" data-sport="cricket">Cricket</button>
+                        <button class="tab-trigger" data-sport="football">Football</button>
+                        <button class="tab-trigger" data-sport="badminton">Badminton</button>
+                    </div>
+                    <div class="telemetry-readouts">
+                        <div class="readout-card">
+                            <div class="readout-label">Velocity Impact</div>
+                            <div class="readout-val" id="val-velocity">142 km/h</div>
+                        </div>
+                        <div class="readout-card">
+                            <div class="readout-label">Grip Torque</div>
+                            <div class="readout-val" id="val-torque">24.5 N·m</div>
+                        </div>
+                        <div class="readout-card">
+                            <div class="readout-label">Energy Return</div>
+                            <div class="readout-val" id="val-energy">94.8%</div>
+                        </div>
+                        <div class="readout-card">
+                            <div class="readout-label">Vibration Wave</div>
+                            <div class="readout-val" id="val-vibration">1.2 mm</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="telemetry-visual">
+                    <img src="images/why-choose-us.jpg" alt="Biomechanics Athlete Testing">
+                    <div class="telemetry-overlay-hud">
+                        <span class="telemetry-status-tag">Live Feed: Bay C</span>
+                        <h4 style="font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;color:#ffffff;">Sub-Millisecond Compression Analysis</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MATERIAL FORMULA SLIDERS SECTION -->
+        <section class="home-section" id="material-formulas">
+            <div class="materials-grid">
+                <div class="sliders-content-col">
+                    <span class="section-tag">Material Chemistry & Nanotech</span>
+                    <h3 class="section-title">Adjust Carbon Compression Metrics</h3>
+                    <p class="section-desc">
+                        Adjust the carbon composite formula metrics to calibrate molecular density limits, rigid tensile strain ratios, and elastomeric vibration absorption layers. The dispersion wave graph calculates wave propagation speed and dispersion frequencies across the composite matrix based on your custom configuration parameters.
+                    </p>
+                    <div class="sliders-panel">
+                        <div class="slider-group">
+                            <div class="slider-header-row">
+                                <span>Density Calibration (Willow/Carbon)</span>
+                                <span class="slider-val-readout" id="val-density-lbl">0.82 g/cm³</span>
+                            </div>
+                            <input type="range" class="formula-slider" id="density-slider" min="50" max="120" value="82">
+                        </div>
+                        <div class="slider-group">
+                            <div class="slider-header-row">
+                                <span>Rigid Tensile Strain</span>
+                                <span class="slider-val-readout" id="val-tensile-lbl">4.2 GPa</span>
+                            </div>
+                            <input type="range" class="formula-slider" id="tensile-slider" min="20" max="80" value="42">
+                        </div>
+                        <div class="slider-group">
+                            <div class="slider-header-row">
+                                <span>Vibration Absorption</span>
+                                <span class="slider-val-readout" id="val-absorption-lbl">65%</span>
+                            </div>
+                            <input type="range" class="formula-slider" id="absorption-slider" min="10" max="95" value="65">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wave-showcase-container">
+                    <img src="images/brand-innovation.jpg" alt="Molecular Grid Backdrop" class="wave-image-backdrop">
+                    <div class="wave-label-row">
+                        <span>Dispersion Graph</span>
+                        <span>Active Sweep</span>
+                    </div>
+                    <svg class="wave-svg" viewBox="0 0 400 180">
+                        <path id="dispersion-wave-path" d="M 0 90 Q 50 120 100 90 T 200 90 T 300 90 T 400 90" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"></path>
+                        <line x1="0" y1="90" x2="400" y2="90" stroke="var(--border)" stroke-width="1"></line>
+                    </svg>
+                    <div class="wave-label-row">
+                        <span>Frequency: <span id="wave-freq">2.4 GHz</span></span>
+                        <span>Tolerance: +/- 0.05%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. TECH-CALENDAR DROPS SECTION -->
+        <section class="home-section" id="calendar-drops">
+            <div class="calendar-grid">
+                <div class="circular-selector-container">
+                    <div class="rotating-dial-outer" id="rotating-dial">
+                        <div class="dial-quadrant-node active node-q1" data-phase="1">P-01</div>
+                        <div class="dial-quadrant-node node-q2" data-phase="2">P-02</div>
+                        <div class="dial-quadrant-node node-q3" data-phase="3">P-03</div>
+                        <div class="dial-quadrant-node node-q4" data-phase="4">P-04</div>
+                    </div>
+                    <div class="dial-center-core">
+                        <span class="core-text">CALENDAR</span>
+                        <span style="font-size:0.7rem;font-weight:800;color:var(--text-secondary);text-transform:uppercase;">Drop Cycle</span>
+                    </div>
+                </div>
+
+                <div class="calendar-details-pane">
+                    <img src="images/arrivals-finder.jpg" alt="Lab Drops Blueprints" class="calendar-details-img">
+                    <div class="calendar-details-content">
+                        <span class="calendar-phase-tag" id="phase-lbl">Phase 01: Aero-Fiber Willow</span>
+                        <h4 class="calendar-phase-title" id="phase-title">Drop 03: Curved Shock Impact Bats</h4>
+                        <p class="section-desc" id="phase-desc" style="margin-bottom: 0;">
+                            AeroVolt releases small-batch, certified diagnostic equipment drop phases. Each product series is manufactured within strict tolerance protocols to meet the rigorous physical requirements of professional and competitive sports. Click on the dial selector nodes to examine upcoming drops specifications, handle composite structures, and aerospace materials bindings.
+                        </p>
+                        <div class="calendar-phase-specs">
+                            <div>
+                                <div class="spec-cell-label">Wood Density</div>
+                                <div class="spec-cell-val" id="spec-density">0.78 g/cm³</div>
+                            </div>
+                            <div>
+                                <div class="spec-cell-label">Torque Rating</div>
+                                <div class="spec-cell-val" id="spec-torque">18.5 N·m</div>
+                            </div>
+                            <div>
+                                <div class="spec-cell-label">Weight Tolerance</div>
+                                <div class="spec-cell-val" id="spec-weight">+/- 1g</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CURATED ATHLETE SETUP PROFILES -->
+        <section class="home-section" id="athlete-profiles">
+            <div style="max-width:1440px;margin:0 auto;margin-bottom:3rem;">
+                <span class="section-tag">Elite Performance Alliance</span>
+                <h3 class="section-title">Biomechanical Pro Athlete Setup Configurations</h3>
+                <p class="section-desc" style="margin-bottom: 0;">
+                    Every elite ambassador has their implement customized down to the millimeter. Our team runs complete motion-capture testing profiles to calibrate grip torque feedback, aerodynamic sweep angles, and frame flex ratios. View the active profiles below to explore custom configurations of our team.
+                </p>
+            </div>
+            
+            <div class="athletes-slider-wrapper">
+                <div class="athletes-flex-row">
+                    <!-- Profile Card 1 -->
+                    <div class="athlete-profile-card">
+                        <div class="athlete-card-media">
+                            <img src="images/ss-sports.jpg" alt="Virat Sharma Cricket Ambassador">
+                            <span class="athlete-sport-badge">Cricket</span>
+                        </div>
+                        <div class="athlete-card-info">
+                            <h4 class="athlete-card-name">Virat Sharma</h4>
+                            <p class="athlete-card-formula">
+                                Optimized with high-spin spine configurations, targeting heavy wrist deflection impacts. Handle wrapped in a dual-phase vibration dampener. Calibrated for 140+ km/h impact velocity return.
+                            </p>
+                            <div class="athlete-setup-box">
+                                <div class="athlete-setup-title">Custom Spec Setup</div>
+                                <div class="athlete-setup-gear">AeroVolt Carbon-Spine Willow Bat</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Card 2 -->
+                    <div class="athlete-profile-card">
+                        <div class="athlete-card-media">
+                            <img src="images/football-team-kits.jpg" alt="Marcus Sterling Football Ambassador">
+                            <span class="athlete-sport-badge">Football</span>
+                        </div>
+                        <div class="athlete-card-info">
+                            <h4 class="athlete-card-name">Marcus Sterling</h4>
+                            <p class="athlete-card-formula">
+                                Custom stud profile geometry aligned to reduce rotation joint stress during cuts. Core built with multi-axial carbon plates for responsive flexion return and stability.
+                            </p>
+                            <div class="athlete-setup-box">
+                                <div class="athlete-setup-title">Custom Spec Setup</div>
+                                <div class="athlete-setup-gear">AeroVolt Vector Cleats (Phase 2)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Card 3 -->
+                    <div class="athlete-profile-card">
+                        <div class="athlete-card-media">
+                            <img src="images/yonex-performance.jpg" alt="Lin Yuki Badminton Ambassador">
+                            <span class="athlete-sport-badge">Badminton</span>
+                        </div>
+                        <div class="athlete-card-info">
+                            <h4 class="athlete-card-name">Lin Yuki</h4>
+                            <p class="athlete-card-formula">
+                                Frame profile engineered with slim aerodynamic sweeps. Balanced with a head-heavy weight distribution for high smash velocity and torsion recovery rate.
+                            </p>
+                            <div class="athlete-setup-box">
+                                <div class="athlete-setup-title">Custom Spec Setup</div>
+                                <div class="athlete-setup-gear">AeroVolt VoltStrike Racquet (Q4)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. INTERACTIVE RADAR CHART ANALYZER -->
+        <section class="home-section" id="radar-analyzer">
+            <div class="radar-grid">
+                <div class="radar-control-col">
+                    <span class="section-tag">HUD Diagnostic Tool</span>
+                    <h3 class="section-title">AeroVolt Diagnostic Specs Preset</h3>
+                    <p class="section-desc">
+                        Our laboratory software maps composite characteristics to visual HUD radar profiles. Attacking speed presets enhance structural stiffness, control balance presets increase deflection absorption, and aerodynamic velocity presets minimize weight profile load parameters. Click preset cards to view morphing polygon sweeps.
+                    </p>
+                    <div class="radar-control-panel">
+                        <div class="radar-preset-card active" data-preset="attack">
+                            <div class="preset-info">
+                                <h4 class="preset-title">ATTACK COMPRESSION</h4>
+                                <p class="preset-desc">Focuses on high velocity impact return and structural deflection rigidity.</p>
+                            </div>
+                        </div>
+                        <div class="radar-preset-card" data-preset="control">
+                            <div class="preset-info">
+                                <h4 class="preset-title">CONTROL BALANCE</h4>
+                                <p class="preset-desc">Prioritizes high vibration damping absorption and torque recovery.</p>
+                            </div>
+                        </div>
+                        <div class="radar-preset-card" data-preset="speed">
+                            <div class="preset-info">
+                                <h4 class="preset-title">AERODYNAMIC VELOCITY</h4>
+                                <p class="preset-desc">Minimizes drag coefficient and reduces weight load tolerances.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="radar-chart-container">
+                    <img src="images/brand-discovery.jpg" alt="Biomechanical Lab Backdrop" class="radar-image-backdrop">
+                    <svg class="radar-svg-canvas" viewBox="0 0 400 400">
+                        <!-- Web rings -->
+                        <polygon points="200,80 304,155 264,278 136,278 96,155" class="radar-web-ring"></polygon>
+                        <polygon points="200,120 270,170 242,252 158,252 130,170" class="radar-web-ring"></polygon>
+                        <polygon points="200,160 235,185 221,226 179,226 165,185" class="radar-web-ring"></polygon>
+                        
+                        <!-- Axis Lines -->
+                        <line x1="200" y1="200" x2="200" y2="40" class="radar-axis-line"></line>
+                        <line x1="200" y1="200" x2="352" y2="150" class="radar-axis-line"></line>
+                        <line x1="200" y1="200" x2="294" y2="326" class="radar-axis-line"></line>
+                        <line x1="200" y1="200" x2="106" y2="326" class="radar-axis-line"></line>
+                        <line x1="200" y1="200" x2="48" y2="150" class="radar-axis-line"></line>
+                        
+                        <!-- Active morphing polygon -->
+                        <polygon id="radar-poly" points="200,60 320,160 260,250 150,290 80,140" class="radar-active-polygon"></polygon>
+                        
+                        <!-- Labels -->
+                        <text x="200" y="30" class="radar-label">VELOCITY</text>
+                        <text x="375" y="155" class="radar-label">STIFFNESS</text>
+                        <text x="305" y="345" class="radar-label">DAMPING</text>
+                        <text x="95" y="345" class="radar-label">TORQUE</text>
+                        <text x="25" y="155" class="radar-label">AERO</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. DIAGNOSTICS RESERVATION BOOKING -->
+        <section class="home-section" id="lab-booking">
+            <div class="booking-grid">
+                <div class="booking-left-col">
+                    <div>
+                        <span class="section-tag">Session Registry</span>
+                        <h3 class="section-title">Schedule Diagnostic Lab Session</h3>
+                        <p class="section-desc">
+                            Schedule a physical swing diagnostics or compression analysis appointment at our laboratory facility. Our engineers will record your motion profile, calculate grip torque loads, and build a custom calibration spreadsheet specifically for your sports equipment configurations.
+                        </p>
+                    </div>
+
+                    <div class="slots-calendar">
+                        <div class="calendar-months-row">
+                            <span>August 2026</span>
+                            <span style="font-size:0.75rem;color:var(--text-muted);">Calibrated Calendar</span>
+                        </div>
+                        <div class="days-grid">
+                            <div class="day-header">Mo</div>
+                            <div class="day-header">Tu</div>
+                            <div class="day-header">We</div>
+                            <div class="day-header">Th</div>
+                            <div class="day-header">Fr</div>
+                            <div class="day-header">Sa</div>
+                            <div class="day-header">Su</div>
+                            
+                            <!-- Calendar padding days -->
+                            <div class="day-cell empty"></div>
+                            <div class="day-cell empty"></div>
+                            <div class="day-cell empty"></div>
+                            <div class="day-cell empty"></div>
+                            <div class="day-cell empty"></div>
+                            <div class="day-cell">1</div>
+                            <div class="day-cell">2</div>
+                            
+                            <div class="day-cell">3</div>
+                            <div class="day-cell active">4</div>
+                            <div class="day-cell">5</div>
+                            <div class="day-cell">6</div>
+                            <div class="day-cell">7</div>
+                            <div class="day-cell">8</div>
+                            <div class="day-cell">9</div>
+                        </div>
+                    </div>
+
+                    <div class="session-types-list">
+                        <div class="type-pill active" data-type="Biomechanical Swing Analysis">
+                            <div class="type-info">
+                                <span class="type-title">Biomechanical Swing Analysis</span>
+                                <span class="type-duration">Duration: 45 min</span>
+                            </div>
+                            <svg class="type-check-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="type-pill" data-type="Impact Compression Load Analysis">
+                            <div class="type-info">
+                                <span class="type-title">Impact Compression Load Analysis</span>
+                                <span class="type-duration">Duration: 60 min</span>
+                            </div>
+                            <svg class="type-check-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="type-pill" data-type="Custom Grip Torque Calibration">
+                            <div class="type-info">
+                                <span class="type-title">Custom Grip Torque Calibration</span>
+                                <span class="type-duration">Duration: 30 min</span>
+                            </div>
+                            <svg class="type-check-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-right-col">
+                    <div class="booking-summary-card">
+                        <div class="summary-header-row">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" style="width:24px;height:24px;">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <h4 class="summary-title">Lab Session Summary</h4>
+                        </div>
+
+                        <div class="summary-details-list" style="display:flex;flex-direction:column;gap:1rem;">
+                            <div class="summary-detail-row">
+                                <span>Selected Session</span>
+                                <span class="summary-detail-val" id="summary-session">Biomechanical Swing Analysis</span>
+                            </div>
+                            <div class="summary-detail-row">
+                                <span>Scheduled Date</span>
+                                <span class="summary-detail-val" id="summary-date">August 4, 2026</span>
+                            </div>
+                            <div class="summary-detail-row">
+                                <span>Diagnostics Space</span>
+                                <span class="summary-detail-val">Bay B (Biometrics Grid)</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" style="width:100%;margin-top:1rem;" onclick="alert('Session successfully reserved inside Biometrics registry!');">
+                            <span>Reserve Laboratory Slot</span>
+                        </button>
+                    </div>
+
+                    <!-- Telemetry dashboard filling the space -->
+                    <div class="telemetry-dashboard-card">
+                        <div class="summary-header-row" style="border-bottom:1px solid var(--border);padding-bottom:1rem;margin-bottom:0.5rem;">
+                            <!-- Pulse Wave SVG Icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" style="width:22px;height:22px;">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <h4 class="summary-title" style="font-size:1.15rem;">Chamber Telemetry Status</h4>
+                        </div>
+                        
+                        <div class="telemetry-metrics-grid">
+                            <div class="telemetry-item">
+                                <div class="telemetry-meta">SENSOR ARRAY CALIBRATION</div>
+                                <div class="telemetry-data-row">
+                                    <span class="telemetry-val">99.8% Calibrated</span>
+                                    <span class="telemetry-status-tag ok">READY</span>
+                                </div>
+                                <div class="telemetry-bar-bg">
+                                    <div class="telemetry-bar-fill" style="width:99.8%;background:linear-gradient(90deg, var(--primary), var(--accent));"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="telemetry-item">
+                                <div class="telemetry-meta">MOTION CAPTURE CAMERAS</div>
+                                <div class="telemetry-data-row">
+                                    <span class="telemetry-val">1,200 FPS OptiTrack</span>
+                                    <span class="telemetry-status-tag ok">LOCKED</span>
+                                </div>
+                                <div class="telemetry-bar-bg">
+                                    <div class="telemetry-bar-fill" style="width:100%;background:linear-gradient(90deg, var(--primary), var(--accent));"></div>
+                                </div>
+                            </div>
+
+                            <div class="telemetry-item">
+                                <div class="telemetry-meta">GRIP PRESSURE DAMPERS</div>
+                                <div class="telemetry-data-row">
+                                    <span class="telemetry-val">Standby Mode</span>
+                                    <span class="telemetry-status-tag ok" style="background-color:rgba(79,70,229,0.1);color:var(--primary);border-color:var(--primary);">STANDBY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ----------------------------------------------------
+       FOOTER CONTAINER
+    ----------------------------------------------------- -->
+    <footer class="footer">
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <div class="footer-container">
+            <!-- Column 1: Brand Info -->
+            <div class="footer-col brand-col">
+                <a href="index.html" class="logo-section" style="text-decoration: none;">
+                    <div class="logo-badge" aria-hidden="true">
+                        <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                            <defs>
+                                <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--primary)"></stop>
+                                    <stop offset="100%" stop-color="var(--accent)"></stop>
+                                </linearGradient>
+                            </defs>
+                            <!-- Outer Shield Outline -->
+                            <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradFooter)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                            <!-- Left Wing Feathers -->
+                            <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <!-- Right Wing Feathers -->
+                            <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+                            <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                            <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradFooter)"></path>
+                            <!-- Energy Glow Dot -->
+                            <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                        </svg>
+                    </div>
+                    <div class="logo-text-wrapper">
+                        <h2 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h2>
+                    </div>
+                </a>
+                <p class="brand-desc">
+                    Engineered with premium craftsmanship and elite sports science, AeroVolt designs game-changing cricket gear, performance apparel, and athletic essentials.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Column 2: Shop Collection -->
+            <div class="footer-col">
+                <h3 class="footer-title">Shop Collection</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Equipment</a></li>
+                    <li><a href="#" class="footer-link">Football Equipment</a></li>
+                    <li><a href="#" class="footer-link">Badminton Equipment</a></li>
+                    <li><a href="#" class="footer-link">Gym & Fitness</a></li>
+                    <li><a href="#" class="footer-link">Sports Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Custom Services -->
+            <div class="footer-col">
+                <h3 class="footer-title">Custom Services</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Team Jerseys</a></li>
+                    <li><a href="#" class="footer-link">Custom Logo Printing</a></li>
+                    <li><a href="#" class="footer-link">Club Uniform Packages</a></li>
+                    <li><a href="#" class="footer-link">Bulk Orders Tier</a></li>
+                    <li><a href="#" class="footer-link">School & College Quote</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Quick Links -->
+            <div class="footer-col">
+                <h3 class="footer-title">Sports Blog</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Training Tips</a></li>
+                    <li><a href="#" class="footer-link">Football Playbooks</a></li>
+                    <li><a href="#" class="footer-link">Fitness & Nutrition</a></li>
+                    <li><a href="#" class="footer-link">Equipment Reviews</a></li>
+                    <li><a href="#" class="footer-link">Store Locations</a></li>
+                </ul>
+            </div>
+
+            
+        </div>
+        
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p class="copyright-text">
+                    &copy; 2026 AeroVolt Sports Lab. All rights reserved.
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ----------------------------------------------------
+       6. INTERACTIVITY CONTROLLER (JAVASCRIPT)
+    ----------------------------------------------------- -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- Contextual Active Navbar Highlight ---
+            const currentPath = window.location.pathname.split("/").pop() || "index.html";
+            const navLinks = document.querySelectorAll(".nav-menu .nav-link");
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href");
+                link.parentElement.classList.remove("active");
+                
+                if (href === currentPath) {
+                    link.parentElement.classList.add("active");
+                } else if ((currentPath === "index.html" || currentPath === "home 2.html" || currentPath === "") && link.textContent.trim().includes("Home")) {
+                    link.parentElement.classList.add("active");
+                }
+            });
+
+            
+            // --- DOM Selectors ---
+            const htmlElement = document.documentElement;
+            const mobileHamburger = document.getElementById("mobile-hamburger");
+            const navMenu = document.getElementById("nav-menu-list");
+            const dropdownTrigger = document.querySelector(".nav-item > .nav-link");
+            const drawerOverlay = document.getElementById("drawer-overlay");
+
+            // --- Theme Controller (Light/Dark Mode) ---
+            const savedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+            
+            htmlElement.setAttribute("data-theme", initialTheme);
+
+            const themeToggleBtns = document.querySelectorAll(".theme-toggle");
+            themeToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentTheme = htmlElement.getAttribute("data-theme");
+                    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+                    htmlElement.setAttribute("data-theme", nextTheme);
+                    localStorage.setItem("theme", nextTheme);
+                });
+            });
+
+            // --- Layout Controller (RTL / LTR layout) ---
+            const rtlToggleBtns = document.querySelectorAll(".rtl-toggle");
+            
+            rtlToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentDir = htmlElement.getAttribute("dir") || "ltr";
+                    if (currentDir === "ltr") {
+                        htmlElement.setAttribute("dir", "rtl");
+                        htmlElement.setAttribute("lang", "ar");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction RTL to LTR"));
+                    } else {
+                        htmlElement.setAttribute("dir", "ltr");
+                        htmlElement.setAttribute("lang", "en");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction LTR to RTL"));
+                    }
+                });
+            });
+
+            // --- Mobile Navigation Hamburguer Controller ---
+            const drawerCloseBtn = document.getElementById("drawer-close-btn");
+            
+            const toggleDrawer = () => {
+                mobileHamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+                drawerOverlay.classList.toggle("active");
+                
+                // Toggle accessibility attributes
+                const isExpanded = mobileHamburger.classList.contains("active");
+                mobileHamburger.setAttribute("aria-expanded", isExpanded);
+            };
+
+            mobileHamburger.addEventListener("click", toggleDrawer);
+            drawerOverlay.addEventListener("click", toggleDrawer);
+            if (drawerCloseBtn) {
+                drawerCloseBtn.addEventListener("click", toggleDrawer);
+            }
+
+            // --- Mobile Dropdown Accordion Controller (Generic) ---
+            const dropdownLinks = document.querySelectorAll(".nav-item > .nav-link");
+            dropdownLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    if (window.innerWidth <= 1320) {
+                        const navItem = link.closest(".nav-item");
+                        const hasDropdown = navItem ? navItem.querySelector(".dropdown-menu") : null;
+                        if (!hasDropdown) return;
+                        
+                        e.preventDefault();
+                        
+                        document.querySelectorAll(".nav-item").forEach(item => {
+                            if (item !== navItem) {
+                                item.classList.remove("mobile-open");
+                                const itemLink = item.querySelector(".nav-link");
+                                if (itemLink) itemLink.setAttribute("aria-expanded", "false");
+                            }
+                        });
+
+                        navItem.classList.toggle("mobile-open");
+                        const isExpanded = navItem.classList.contains("mobile-open");
+                        link.setAttribute("aria-expanded", isExpanded);
+                    }
+                });
+            });
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 1320) {
+                    document.querySelectorAll(".nav-item").forEach(item => {
+                        item.classList.remove("mobile-open");
+                    });
+                    dropdownLinks.forEach(link => {
+                        link.setAttribute("aria-expanded", "false");
+                    });
+                    mobileHamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
+                    drawerOverlay.classList.remove("active");
+                    mobileHamburger.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            // --- Login Button Redirection ---
+            const loginBtns = document.querySelectorAll(".login-btn");
+            loginBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    window.location.href = "login.html";
+                });
+            });
+
+            // ----------------------------------------------------
+            // HOMEPAGE INTERACTIVE ACTIONS
+            // ----------------------------------------------------
+
+            // 1. Live Telemetry Tab Switcher
+            const tabTriggers = document.querySelectorAll(".tab-trigger");
+            const velocityVal = document.getElementById("val-velocity");
+            const torqueVal = document.getElementById("val-torque");
+            const energyVal = document.getElementById("val-energy");
+            const vibrationVal = document.getElementById("val-vibration");
+
+            const telemetryData = {
+                cricket: { velocity: "142 km/h", torque: "24.5 N·m", energy: "94.8%", vibration: "1.2 mm" },
+                football: { velocity: "118 km/h", torque: "32.0 N·m", energy: "91.2%", vibration: "2.4 mm" },
+                badminton: { velocity: "385 km/h", torque: "8.2 N·m", energy: "96.5%", vibration: "0.8 mm" }
+            };
+
+            tabTriggers.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    tabTriggers.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    
+                    const sport = btn.getAttribute("data-sport");
+                    const data = telemetryData[sport];
+                    if (data) {
+                        velocityVal.textContent = data.velocity;
+                        torqueVal.textContent = data.torque;
+                        energyVal.textContent = data.energy;
+                        vibrationVal.textContent = data.vibration;
+                    }
+                });
+            });
+
+            // 2. Wave Morpher Sliders
+            const densitySlider = document.getElementById("density-slider");
+            const tensileSlider = document.getElementById("tensile-slider");
+            const absorptionSlider = document.getElementById("absorption-slider");
+            const wavePath = document.getElementById("dispersion-wave-path");
+
+            const updateWave = () => {
+                const density = parseFloat(densitySlider.value);
+                const tensile = parseFloat(tensileSlider.value);
+                const absorption = parseFloat(absorptionSlider.value);
+
+                document.getElementById("val-density-lbl").textContent = `${(density/100).toFixed(2)} g/cm³`;
+                document.getElementById("val-tensile-lbl").textContent = `${(tensile/10).toFixed(1)} GPa`;
+                document.getElementById("val-absorption-lbl").textContent = `${absorption}%`;
+
+                const amp = (100 - absorption) * 0.8;
+                const freq = density * 0.05;
+                const phase = tensile * 0.1;
+
+                let points = [];
+                for (let x = 0; x <= 400; x += 5) {
+                    const y = 90 + amp * Math.sin(x * freq * 0.05 + phase);
+                    points.push(`${x} ${y}`);
+                }
+                wavePath.setAttribute("d", `M ${points.join(" L ")}`);
+                document.getElementById("wave-freq").textContent = `${(freq).toFixed(1)} GHz`;
+            };
+
+            if (densitySlider && tensileSlider && absorptionSlider) {
+                [densitySlider, tensileSlider, absorptionSlider].forEach(slider => {
+                    slider.addEventListener("input", updateWave);
+                });
+                updateWave(); // Initial draw
+            }
+
+            // 3. Drop Dial Calendar Switcher
+            const rotatingDial = document.getElementById("rotating-dial");
+            const dialNodes = document.querySelectorAll(".dial-quadrant-node");
+            const phaseLbl = document.getElementById("phase-lbl");
+            const phaseTitle = document.getElementById("phase-title");
+            const phaseDesc = document.getElementById("phase-desc");
+            const specDensity = document.getElementById("spec-density");
+            const specTorque = document.getElementById("spec-torque");
+            const specWeight = document.getElementById("spec-weight");
+
+            const phaseDetails = {
+                1: {
+                    lbl: "Phase 01: Aero-Fiber Willow",
+                    title: "Drop 03: Curved Shock Impact Bats",
+                    desc: "Engineered with a high-density spine profile and carbon-poly composite handle bindings. Designed to reduce shock vibration feedback under maximum speed runs.",
+                    density: "0.78 g/cm³",
+                    torque: "18.5 N·m",
+                    weight: "+/- 1g"
+                },
+                2: {
+                    lbl: "Phase 02: Multiaxial Carbon Cleats",
+                    title: "Drop 04: Traction Sole Boots",
+                    desc: "Formulated with 3D printed carbon fiber lattice plates to maximize energy conservation during rapid directional changes.",
+                    density: "1.15 g/cm³",
+                    torque: "34.0 N·m",
+                    weight: "+/- 0.5g"
+                },
+                3: {
+                    lbl: "Phase 03: VoltStrike Frames",
+                    title: "Drop 05: Head-Heavy Rackets",
+                    desc: "Balanced with a heavy frame ratio and high-modulus aero-wings to minimize aerodynamic drag sweeps.",
+                    density: "0.65 g/cm³",
+                    torque: "9.8 N·m",
+                    weight: "+/- 0.2g"
+                },
+                4: {
+                    lbl: "Phase 04: Velocity Grid Insoles",
+                    title: "Drop 06: Energy Return Trainers",
+                    desc: "Featuring an engineered energy return grid to cushion force displacement on concrete runs.",
+                    density: "0.45 g/cm³",
+                    torque: "12.5 N·m",
+                    weight: "+/- 1.5g"
+                }
+            };
+
+            dialNodes.forEach(node => {
+                node.addEventListener("click", () => {
+                    dialNodes.forEach(n => n.classList.remove("active"));
+                    node.classList.add("active");
+                    
+                    const phase = parseInt(node.getAttribute("data-phase"));
+                    rotatingDial.style.transform = `rotate(${(phase - 1) * -90}deg)`;
+
+                    const details = phaseDetails[phase];
+                    if (details) {
+                        phaseLbl.textContent = details.lbl;
+                        phaseTitle.textContent = details.title;
+                        phaseDesc.textContent = details.desc;
+                        specDensity.textContent = details.density;
+                        specTorque.textContent = details.torque;
+                        specWeight.textContent = details.weight;
+                    }
+                });
+            });
+
+            // 4. Radar Chart Morpher
+            const presetCards = document.querySelectorAll(".radar-preset-card");
+            const radarPoly = document.getElementById("radar-poly");
+
+            const radarPoints = {
+                attack: "200,50 330,150 250,270 140,290 70,160",
+                control: "200,110 260,180 280,240 170,230 130,190",
+                speed: "200,70 300,140 210,210 190,270 90,120"
+            };
+
+            presetCards.forEach(card => {
+                card.addEventListener("click", () => {
+                    presetCards.forEach(c => c.classList.remove("active"));
+                    card.classList.add("active");
+                    
+                    const preset = card.getAttribute("data-preset");
+                    const points = radarPoints[preset];
+                    if (points && radarPoly) {
+                        radarPoly.setAttribute("points", points);
+                    }
+                });
+            });
+
+            // 5. Diagnostics Booking Calendar
+            const dayCells = document.querySelectorAll(".day-cell:not(.empty)");
+            const summaryDate = document.getElementById("summary-date");
+
+            dayCells.forEach(cell => {
+                cell.addEventListener("click", () => {
+                    dayCells.forEach(c => c.classList.remove("active"));
+                    cell.classList.add("active");
+                    summaryDate.textContent = `August ${cell.textContent}, 2026`;
+                });
+            });
+
+            const typePills = document.querySelectorAll(".type-pill");
+            const summarySession = document.getElementById("summary-session");
+
+            typePills.forEach(pill => {
+                pill.addEventListener("click", () => {
+                    typePills.forEach(p => p.classList.remove("active"));
+                    pill.classList.add("active");
+                    summarySession.textContent = pill.getAttribute("data-type");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+               

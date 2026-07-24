@@ -1,0 +1,2810 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AeroVolt Team Customization Studio - Design custom cricket jerseys, football kits, embroidery logos, and player name/number printing.">
+    <title>Team Customization Studio - AeroVolt Sports</title>
+    
+    <!-- Google Fonts: Outfit (headings), Plus Jakarta Sans (UI elements), Poppins (Customization Page contents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ----------------------------------------------------
+           1. DESIGN SYSTEM & CSS VARIABLES (Matches navbar.html)
+        ---------------------------------------------------- */
+        :root[data-theme="light"] {
+            --bg-page: hsl(220, 20%, 97%);
+            --bg-navbar: hsla(220, 20%, 97%, 0.85);
+            --bg-card: hsl(0, 0%, 100%);
+            --bg-hover: hsl(245, 100%, 97%);
+            --bg-dropdown: hsla(0, 0%, 100%, 0.92);
+            
+            --text-primary: hsl(245, 50%, 15%);
+            --text-secondary: hsl(245, 20%, 35%);
+            --text-muted: hsl(240, 10%, 55%);
+            
+            --primary: hsl(245, 75%, 52%);
+            --primary-hover: hsl(245, 75%, 45%);
+            --primary-glow: rgba(79, 70, 229, 0.15);
+            
+            --accent: hsl(14, 100%, 53%); /* Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.2);
+            
+            --border: hsla(245, 20%, 80%, 0.35);
+            --border-hover: hsla(245, 20%, 70%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(79, 70, 229, 0.04);
+            --shadow-md: 0 10px 30px rgba(79, 70, 229, 0.06);
+            --shadow-lg: 0 20px 40px rgba(79, 70, 229, 0.08);
+            
+            --glass-blur: 16px;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-page: hsl(240, 35%, 6%);
+            --bg-navbar: hsla(240, 35%, 6%, 0.85);
+            --bg-card: hsl(240, 25%, 11%);
+            --bg-hover: hsl(245, 30%, 18%);
+            --bg-dropdown: hsla(240, 25%, 11%, 0.92);
+            
+            --text-primary: hsl(210, 40%, 98%);
+            --text-secondary: hsl(240, 15%, 80%);
+            --text-muted: hsl(240, 10%, 65%);
+            
+            --primary: hsl(245, 90%, 65%);
+            --primary-hover: hsl(245, 90%, 72%);
+            --primary-glow: rgba(129, 140, 248, 0.25);
+            
+            --accent: hsl(14, 100%, 55%); /* Neon Sunset Orange */
+            --accent-glow: rgba(249, 115, 22, 0.25);
+            
+            --border: hsla(245, 20%, 25%, 0.4);
+            --border-hover: hsla(245, 20%, 35%, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
+            
+            --glass-blur: 16px;
+        }
+
+        /* Base Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ----------------------------------------------------
+           2. HEADER & NAVIGATION BAR
+        ---------------------------------------------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            inset-inline-start: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--bg-navbar);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            flex-shrink: 0;
+            justify-self: start;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-section:hover .logo-badge {
+            transform: translateY(-2px) rotate(-3deg) scale(1.05);
+            filter: drop-shadow(0 4px 12px var(--primary-glow));
+        }
+
+        .logo-section:hover .logo-title span.highlight {
+            filter: brightness(1.1);
+        }
+
+        #main-navigation {
+            justify-self: center;
+        }
+
+        .logo-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+            animation: bounce-slow 4s infinite ease-in-out;
+        }
+
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .logo-title span.highlight {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Center Navigation Menu */
+        .nav-menu {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.15rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.55rem;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        .nav-link:hover::after,
+        .nav-item.active .nav-link::after {
+            width: 70%;
+            left: 15%;
+        }
+
+        .nav-link:hover, .nav-item.active .nav-link {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+        }
+
+        .nav-link svg.arrow-icon {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.2s ease;
+            stroke-width: 3px;
+        }
+
+        .nav-item:hover .nav-link svg.arrow-icon {
+            transform: translateY(1px);
+        }
+
+        /* Dropdown Menus */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            inset-inline-start: 0;
+            margin-top: 0.5rem;
+            background-color: var(--bg-dropdown);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px) scale(0.98);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 100;
+            overflow: hidden;
+            padding: 0.4rem;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-item:hover {
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .dropdown-item:hover {
+            transform: translateX(-4px);
+        }
+
+        /* Right Actions Layout */
+        .actions-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            justify-self: end;
+        }
+
+        /* Utility Toggle Buttons */
+        .action-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .action-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--primary);
+            background-color: var(--bg-hover);
+            transform: translateY(-1px);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Dark Mode Button Icon Switcher */
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+
+        :root[data-theme="dark"] .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        /* RTL Toggle Button */
+        .rtl-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .rtl-toggle:hover svg {
+            animation: swap-arrow-slide 0.6s ease-in-out infinite alternate;
+        }
+
+        [dir="rtl"] .rtl-toggle:hover svg {
+            animation: swap-arrow-slide-rtl 0.6s ease-in-out infinite alternate;
+        }
+
+        /* Login Button */
+        .login-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), hsl(245, 75%, 40%));
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.35rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--primary-glow);
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            box-shadow: 0 6px 18px var(--primary-glow);
+            transform: translateY(-1.5px);
+            filter: brightness(1.08);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke-width: 2.5;
+        }
+
+        /* Mobile Hamburger & Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22px;
+            height: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1100;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2.5px;
+            background-color: var(--text-primary);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Drawer Dark Overlay Backdrop */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer-actions-item-wrapper,
+        .drawer-header-item {
+            display: none;
+        }
+
+        /* ----------------------------------------------------
+           3. MAIN CONTAINER / DEMO BODY
+        ---------------------------------------------------- */
+        .demo-body {
+            margin-top: 80px; /* offset navbar height */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
+        /* ----------------------------------------------------
+           4. RESPONSIVE MEDIA QUERIES (COLLAPSE AT 1320PX)
+        ---------------------------------------------------- */
+        @media (max-width: 1320px) {
+            .header {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: var(--bg-card);
+                z-index: 1060;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1.5rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            /* Toggle desktop menu hiding, hamburger showing */
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active {
+                display: none !important;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                inset-inline-end: -320px;
+                width: 320px;
+                height: 100vh;
+                background-color: var(--bg-card);
+                border-inline-start: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0;
+                gap: 0;
+                z-index: 1050;
+                transition: inset-inline-end 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                visibility: hidden;
+                display: flex;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                inset-inline-end: 0;
+                visibility: visible;
+            }
+
+            .drawer-header-item {
+                display: block;
+                width: 100%;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 1rem;
+            }
+
+            .drawer-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.25rem 1.5rem;
+                background-color: var(--bg-card);
+            }
+
+            .drawer-close-btn {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                transition: all 0.2s ease;
+                padding: 0;
+            }
+
+            .drawer-close-btn:hover {
+                color: var(--primary);
+                transform: scale(1.1);
+            }
+
+            .drawer-close-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .nav-item {
+                width: 100%;
+                padding: 0 1.5rem;
+            }
+
+            .nav-link {
+                justify-content: space-between;
+                width: 100%;
+                padding: 0.85rem 0;
+                font-size: 0.95rem;
+                border-bottom: 1px solid hsla(215, 20%, 80%, 0.1);
+            }
+
+            /* Submenu in mobile view acts as accordion */
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background-color: var(--bg-hover);
+                padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+                margin-top: 0.25rem;
+            }
+
+            /* Disable desktop floating borders and underlines on mobile drawer */
+            .nav-link::after,
+            .dropdown-menu::before {
+                display: none !important;
+            }
+
+            .nav-item.mobile-open .dropdown-menu {
+                display: block;
+            }
+
+            .nav-item.mobile-open .nav-link svg.arrow-icon {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-item {
+                padding: 0.6rem 1rem;
+            }
+
+            .actions-section {
+                gap: 0.5rem;
+            }
+
+            .actions-section .theme-toggle,
+            .actions-section .rtl-toggle,
+            .actions-section .login-btn {
+                display: none;
+            }
+
+            .drawer-actions-item-wrapper {
+                display: block;
+                margin-top: auto;
+                padding: 1.5rem;
+            }
+
+            .drawer-divider {
+                height: 1px;
+                background-color: var(--border);
+                margin-bottom: 1.5rem;
+                opacity: 0.5;
+            }
+
+            .drawer-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.75rem;
+                width: 100%;
+            }
+
+            .drawer-toggles-row .action-btn {
+                flex: 1 !important;
+                height: 44px !important;
+                border-radius: 10px !important;
+                border: 1px solid var(--border) !important;
+                background-color: var(--bg-card) !important;
+                color: var(--text-secondary) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: auto !important;
+            }
+
+            .drawer-toggles-row .action-btn:hover {
+                border-color: var(--primary);
+                background-color: var(--bg-hover);
+                color: var(--primary);
+            }
+
+            .drawer-login-btn {
+                width: 100% !important;
+                height: 46px !important;
+                justify-content: center !important;
+                background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%)) !important;
+                box-shadow: 0 4px 15px var(--accent-glow) !important;
+                border-radius: 10px !important;
+                font-size: 0.95rem !important;
+                font-weight: 700 !important;
+                color: #ffffff !important;
+                border: none !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.5rem !important;
+                transition: all 0.3s ease;
+            }
+
+            .drawer-login-btn:hover {
+                box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4) !important;
+                transform: translateY(-1px);
+                filter: brightness(1.05);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .logo-tagline {
+                display: none;
+            }
+
+            .logo-title {
+                font-size: 1.15rem;
+            }
+        }
+
+        /* ----------------------------------------------------
+           3.5. CUSTOMIZATION STUDIO STYLING
+        ---------------------------------------------------- */
+        .custom-body {
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+            padding: 5rem 2rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .custom-hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .custom-hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: start;
+        }
+        .custom-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+            width: fit-content;
+            max-width: 100%;
+            flex-wrap: wrap;
+        }
+        .custom-hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 850;
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .custom-hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            text-align: start;
+        }
+        .custom-hero-visual {
+            position: relative;
+            height: 380px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+        .custom-hero-visual img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
+        .studio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .studio-controls {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+        }
+        .studio-controls h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.75rem;
+        }
+        .selector-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .selector-row label {
+            font-size: 0.8rem;
+            font-weight: 750;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .color-options-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .color-swatch-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        .color-swatch-btn:hover {
+            transform: scale(1.1);
+        }
+        .color-swatch-btn.active {
+            border-color: var(--text-primary);
+            transform: scale(1.1);
+        }
+        .pattern-options-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .pattern-btn {
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .pattern-btn:hover, .pattern-btn.active {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: transparent;
+        }
+        .studio-preview {
+            position: relative;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 350px;
+            overflow: hidden;
+        }
+        .jersey-vector-box {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+        }
+        .jersey-vector-box svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .football-kit-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .football-kit-left {
+            height: 100%;
+            min-height: 350px;
+            overflow: hidden;
+        }
+        .football-kit-left img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+        .football-kit-right {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+        }
+        .football-kit-right h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .kit-specs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .kit-spec-node {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+        .kit-spec-bullet {
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .logo-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .logo-tech-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        .logo-tech-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .logo-tech-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-tech-card-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+        .logo-tech-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .logo-tech-body {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .typo-panel-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .typo-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: start;
+        }
+        .font-options-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .font-tab-btn {
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .font-tab-btn:hover, .font-tab-btn.active {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: transparent;
+        }
+        .typo-right {
+            position: relative;
+            background-color: var(--bg-page);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .package-pkg-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem;
+            box-shadow: var(--shadow-sm);
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .package-pkg-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .package-card-price {
+            font-size: 0.7rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            width: fit-content;
+        }
+        .school-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .school-card-body {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .school-card-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+        .spec-item span {
+            font-weight: 500;
+        }
+        .spec-item strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .custom-form-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+        .custom-form-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .custom-form-visual {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            aspect-ratio: 4/3;
+            width: 100%;
+            height: auto;
+        }
+        .custom-form-visual img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+        .enquiry-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 750;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            background-color: var(--bg-page);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.25s ease;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        /* Section 8: Responsive */
+        @media (max-width: 1024px) {
+            .custom-body {
+                gap: 4rem;
+            }
+
+            .custom-hero-grid,
+            .studio-grid,
+            .football-kit-card,
+            .typo-panel-card,
+            .custom-form-card {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+
+            .football-kit-left {
+                height: 280px !important;
+                min-height: auto !important;
+            }
+
+            .logo-tech-grid,
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-tech-grid,
+            .packages-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr !important;
+            }
+
+            .studio-controls,
+            .studio-preview,
+            .football-kit-right,
+            .typo-panel-card,
+            .custom-form-card {
+                padding: 2rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-title {
+                font-size: 1rem !important;
+            }
+
+            .logo-badge svg {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .logo-section {
+                gap: 0.5rem !important;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1rem !important;
+            }
+
+            .custom-badge,
+            .blog-badge {
+                font-size: 0.72rem !important;
+                padding: 0.35rem 0.75rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .custom-hero-title {
+                font-size: 1.65rem !important;
+            }
+
+            .custom-hero-desc {
+                font-size: 0.88rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .studio-controls,
+            .studio-preview,
+            .football-kit-right,
+            .typo-panel-card,
+            .custom-form-card,
+            .package-pkg-card,
+            .logo-tech-card {
+                padding: 1.25rem !important;
+            }
+
+            .color-swatch-btn {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .font-tab-btn {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.78rem !important;
+            }
+
+            .jersey-vector-box {
+                max-width: 200px !important;
+            }
+
+            .typo-right {
+                min-height: 220px !important;
+                padding: 1rem !important;
+            }
+
+            .custom-form-visual {
+                height: 200px !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .custom-hero-title {
+                font-size: 1.45rem !important;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .custom-hero-title {
+                font-size: 1.30rem !important;
+            }
+        }
+
+        /* ----------------------------------------------------
+           5. SYSTEM KEYFRAMES & UTILITIES
+        ---------------------------------------------------- */
+        @keyframes bounce-slow {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-4px) rotate(5deg);
+            }
+        }
+
+        /* ----------------------------------------------------
+           6. FOOTER STYLING & RESPONSIVENESS
+        ---------------------------------------------------- */
+        .footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 5rem 2rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: auto;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 2;
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.2fr 1.2fr 1.2fr 1.2fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: start;
+        }
+
+        .brand-col .brand-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--accent), hsl(350, 90%, 55%));
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            inset-inline-start: 0;
+            width: 36px;
+            height: 2px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-hover);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .footer-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .contact-info-item {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            text-align: start;
+        }
+
+        .contact-info-item svg.contact-icon-svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .footer-bottom-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-link {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--primary);
+        }
+
+                /* Responsive Footer Media Queries */
+        @media (max-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 3;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 1.5rem;
+            }
+            .brand-col .footer-desc {
+                max-width: 600px;
+                margin: 0.75rem auto 1.5rem auto;
+            }
+            .brand-col .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 4rem 1.25rem 2rem 1.25rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .brand-col {
+                grid-column: span 1;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 0;
+            }
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col ul {
+                padding: 0;
+            }
+            .footer-col ul li {
+                justify-content: center;
+            }
+            .footer-bottom-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+
+        /* ====================================================
+           GLOBAL RESPONSIVENESS OVERRIDES
+        ==================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box !important;
+        }
+        
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            width: 100% !important;
+        }
+
+        img, video, iframe {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid, .telemetry-grid, .materials-grid, .calendar-grid, .radar-grid, .booking-grid, 
+            .about-hero-grid, .collage-container, .why-diagonal-grid, .orbit-container, .location-section-grid,
+            .custom-hero-grid, .custom-step-grid, .custom-benefits-grid, .bulk-hero-grid, .steps-grid, 
+            .benefits-grid, .blog-hero-grid, .blog-featured-grid, .blog-archive-grid, .contact-hero-grid, 
+            .contact-form-grid, .brands-hero-grid, .brands-showcase-grid,
+            .accessories-grid, .athletes-flex-row, .audit-layout, .calendar-phase-specs, .catalog-grid, 
+            .circle-spec-grid, .configurator-card, .flex-grid-wrapper, .grid-container, .material-layout, 
+            .quiz-card, .quiz-row, .testimonial-card, .vault-hero-grid, .wizard-row {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 4rem 1.5rem !important;
+            }
+
+            /* Responsive Footer overrides (Laptop & Tablet viewports) */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 768px Breakpoint (Tablets) */
+        @media (max-width: 768px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 3rem 1.25rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.85rem !important;
+                line-height: 1.25 !important;
+            }
+            
+            h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Navbar adjustments */
+            .desktop-nav {
+                display: none !important;
+            }
+            
+            .mobile-hamburger {
+                display: flex !important;
+            }
+
+            .logo-title {
+                font-size: 1.15rem !important;
+            }
+
+            /* Responsive Footer overrides */
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .brand-col {
+                grid-column: span 1 !important;
+                text-align: start !important;
+                align-items: flex-start !important;
+                margin-bottom: 0 !important;
+            }
+            .brand-col .footer-desc,
+            .brand-col .brand-desc {
+                margin-inline-start: 0 !important;
+                margin-inline-end: auto !important;
+                text-align: start !important;
+            }
+            .brand-col .social-links {
+                justify-content: flex-start !important;
+            }
+            .footer-col {
+                text-align: start !important;
+            }
+            .footer-col ul {
+                padding: 0 !important;
+            }
+            .footer-col ul li {
+                justify-content: flex-start !important;
+            }
+            .footer-bottom-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: start !important;
+                gap: 1rem !important;
+            }
+            .footer-bottom-links {
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* 480px Breakpoint (Mobile Portrait) */
+        @media (max-width: 480px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2.5rem 1rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 2rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.6rem !important;
+            }
+            
+            .btn-primary, .btn-secondary, .btn-accent, button.btn-primary, button.btn-secondary {
+                width: 100% !important;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .logo-tagline {
+                display: none !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.85) !important;
+                margin: -1.5rem auto !important;
+            }
+            .telemetry-tabs {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 0.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            .tab-trigger {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.75rem !important;
+                flex: 1 1 calc(33.333% - 0.5rem) !important;
+                min-width: 75px !important;
+                text-align: center !important;
+            }
+            .telemetry-readouts {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)) !important;
+                gap: 0.75rem !important;
+            }
+        }
+
+        /* 320px Breakpoint (Small Mobile Screen) */
+        @media (max-width: 320px) {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+                padding: 2rem 0.75rem !important;
+            }
+            
+            h1, .hero-title-main {
+                font-size: 1.75rem !important;
+            }
+            
+            h2, .section-title {
+                font-size: 1.45rem !important;
+            }
+
+            .logo-title {
+                font-size: 1rem !important;
+            }
+            
+            /* Force absolute overflow prevention */
+            * {
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+
+            /* Telemetry & Circular Selector & Orbit Alignments */
+            .circular-selector-container, .orbit-visual-box {
+                transform: scale(0.75) !important;
+                margin: -2.5rem auto !important;
+            }
+            .telemetry-dashboard {
+                padding: 0.85rem !important;
+            }
+            .tab-trigger {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.5rem !important;
+            }
+        }
+    
+        /* --- Injecting Missing Layout Styles --- */
+        .locator-container {
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .blog-section-title, .orders-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-section-desc, .orders-hero-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .blog-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            width: fit-content;
+            margin-bottom: 0.75rem;
+        }
+
+        .glow-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .rtl-icon, .logo-icon-svg {
+            display: inline-block;
+        }
+    
+        /* Hamburger custom SVG toggle button styling */
+        .hamburger {
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            z-index: 1100 !important;
+        }
+        .hamburger svg {
+            width: 20px !important;
+            height: 20px !important;
+            color: var(--text-secondary) !important;
+            transition: transform 0.3s ease !important;
+        }
+        .hamburger:hover svg {
+            color: var(--primary) !important;
+            transform: scale(1.05) !important;
+        }
+</style>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+
+    <!-- Drawer Dark Overlay Backdrop -->
+    <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+
+    <!-- ----------------------------------------------------
+       HEADER & NAVIGATION BAR CONTAINER (Matches navbar.html)
+    ----------------------------------------------------- -->
+    <header class="header">
+        <div class="nav-container">
+            
+            <!-- Left: Logo & Tagline -->
+            <a href="index.html" class="logo-section" aria-label="AeroVolt Sports Lab Home">
+                <div class="logo-badge" aria-hidden="true">
+                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                            </linearGradient>
+                        </defs>
+                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGrad)"></path>
+                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                    </svg>
+                </div>
+                <div class="logo-text-wrapper">
+                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                </div>
+            </a>
+
+            <!-- Center: Navigation Menu Links -->
+            <nav id="main-navigation">
+                                                                <ul class="nav-menu" id="nav-menu-list">
+                    <!-- Drawer Header (visible only on mobile/tablet viewports inside the drawer) -->
+                    <li class="drawer-header-item">
+                        <div class="drawer-header">
+                            <a href="index.html" class="logo-section">
+                                <div class="logo-badge" aria-hidden="true">
+                                    <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                                        <defs>
+                                            <linearGradient id="logoGradDrawer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="var(--primary)"></stop>
+                                                <stop offset="100%" stop-color="var(--accent)"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <!-- Outer Shield Outline -->
+                                        <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradDrawer)" stroke-width="2" stroke-linejoin="round" fill="rgba(124, 58, 237, 0.04)"></path>
+                                        <!-- Left Wing Feathers -->
+                                        <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Right Wing Feathers -->
+                                        <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradDrawer)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <!-- Centered Vertical Cricket Bat (Handle & Blade) -->
+                                        <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                                        <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradDrawer)"></path>
+                                        <!-- Energy Glow Dot -->
+                                        <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                                    </svg>
+                                </div>
+                                <div class="logo-text-wrapper">
+                                    <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                                </div>
+                            </a>
+                            <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Menu">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+
+                    <!-- 1. Home Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" aria-expanded="false" aria-haspopup="true">
+                            Home
+                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">Home 1</a>
+                            <a href="home 2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </li>
+
+                    <!-- 2. About Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <!-- 3. Collection Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.html">Collection</a>
+                    </li>
+
+                    <!-- 4. Arrivals Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="arrivals.html">Arrivals</a>
+                    </li>
+
+                    <!-- 5. Brands Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="brands.html">Brands</a>
+                    </li>
+
+                    <!-- 6. Custom Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="customization.html">Custom</a>
+                    </li>
+
+                    <!-- 7. Bulk Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.html">Bulk</a>
+                    </li>
+
+                    <!-- 8. Blog Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+
+                    <!-- 9. Contact Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    
+                    <!-- Drawer Actions (visible only on mobile/tablet viewport drawer) -->
+                    <li class="drawer-actions-item-wrapper">
+                        <div class="drawer-divider"></div>
+                        <div class="drawer-actions">
+                            <div class="drawer-toggles-row">
+                                <!-- Dark Mode Toggle Button -->
+                                <button class="action-btn theme-toggle" aria-label="Toggle Dark Mode">
+                                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M12 2v2"></path>
+                                        <path d="M12 20v2"></path>
+                                        <path d="M4.93 4.93l1.41 1.41"></path>
+                                        <path d="M17.66 17.66l1.41 1.41"></path>
+                                        <path d="M2 12h2"></path>
+                                        <path d="M20 12h2"></path>
+                                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                                    </svg>
+                                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                    </svg>
+                                    
+                                </button>
+                                
+                                <!-- RTL Toggle Button -->
+                                <button class="action-btn rtl-toggle" aria-label="Toggle Direction">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="rtl-icon">
+                                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                                    </svg>
+                                    
+                                </button>
+                            </div>
+                            
+                            <!-- Login Button in Mobile Drawer -->
+                            <button class="login-btn drawer-login-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span>Login</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right: Actions (Theme Toggle, RTL Toggle, Login Button, Hamburger) -->
+            <div class="actions-section">
+                <button class="action-btn theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6.364 6.364 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </button>
+
+                <button class="action-btn rtl-toggle" id="rtl-toggle-btn" aria-label="Toggle Layout Direction LTR to RTL">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 17H4M4 17L8 13M4 17L8 21M4 7H20M20 7L16 3M20 7L16 11"></path>
+                    </svg>
+                </button>
+
+                <button class="login-btn" id="login-btn" aria-label="Login"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Login</span>
+                </button>
+
+                <button class="hamburger" id="mobile-hamburger" aria-label="Toggle Navigation Menu" aria-controls="main-navigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ----------------------------------------------------
+       MAIN CONTENT BODY (VISUALLY UNIQUE TEAM CUSTOMIZATION)
+    ----------------------------------------------------- -->
+    <main class="demo-body">
+        <div class="custom-body">
+            
+            <!-- SECTION 1: Team Identity Hero Section -->
+            <section class="custom-hero-grid" id="hero-section">
+                <div class="custom-hero-text">
+                    <div class="custom-badge">
+                        <span>Locker Room Custom Studio</span>
+                    </div>
+                    <h2 class="custom-hero-title">Forge Your Team <span class="glow-text">Identity</span></h2>
+                    <p class="custom-hero-desc">
+                        AeroVolt brings high-performance sublimation printing, direct embroidery, and player customization to league clubs, universities, and school academies. Design your jerseys, shirts, and uniform packages on-screen.
+                    </p>
+                    <a href="#studio-section" class="login-btn" style="width: fit-content;">Enter Design Studio</a>
+                </div>
+                
+                <div class="custom-hero-visual">
+                    <img src="images/customization-hero.jpg" alt="Custom sublimated sports jerseys hanging inside modern stadium locker room">
+                </div>
+            </section>
+
+            <!-- SECTION 2: Cricket Jersey Design Studio (Interactive) -->
+            <section class="locator-container" id="studio-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Sublimation Playboard</span></div>
+                    <h3 class="blog-section-title">Cricket Jersey Design Studio</h3>
+                    <p class="blog-section-desc">Interact with our dynamic team color selector and custom pattern mockups. Select colors to see your jersey adapt on-screen.</p>
+                </div>
+
+                <div class="studio-grid">
+                    <!-- Left: Color Swatches & Pattern Selectors -->
+                    <div class="studio-controls">
+                        <h4>Configure Team Colors</h4>
+                        
+                        <div class="selector-row">
+                            <label>Primary Team Color</label>
+                            <div class="color-options-row" id="primary-color-pickers">
+                                <button class="color-swatch-btn active" style="background-color: hsl(245, 75%, 52%);" onclick="selectColor('primary', 'hsl(245, 75%, 52%)', this)"></button>
+                                <button class="color-swatch-btn" style="background-color: hsl(14, 100%, 53%);" onclick="selectColor('primary', 'hsl(14, 100%, 53%)', this)"></button>
+                                <button class="color-swatch-btn" style="background-color: hsl(134, 61%, 41%);" onclick="selectColor('primary', 'hsl(134, 61%, 41%)', this)"></button>
+                                <button class="color-swatch-btn" style="background-color: hsl(354, 70%, 53%);" onclick="selectColor('primary', 'hsl(354, 70%, 53%)', this)"></button>
+                                <button class="color-swatch-btn" style="background-color: hsl(200, 95%, 45%);" onclick="selectColor('primary', 'hsl(200, 95%, 45%)', this)"></button>
+                            </div>
+                        </div>
+
+                        <div class="selector-row">
+                            <label>Accent Secondary Color</label>
+                            <div class="color-options-row" id="accent-color-pickers">
+                                <button class="color-swatch-btn" style="background-color: hsl(245, 75%, 52%);" onclick="selectColor('accent', 'hsl(245, 75%, 52%)', this)"></button>
+                                <button class="color-swatch-btn active" style="background-color: hsl(14, 100%, 53%);" onclick="selectColor('accent', 'hsl(14, 100%, 53%)', this)"></button>
+                                <button class="color-swatch-btn" style="background-color: hsl(134, 61%, 41%);" onclick="selectColor('accent', 'hsl(134, 61%, 41%)', this)"></button>
+                                <button class="color-swatch-btn" style="background-color: hsl(51, 100%, 50%);" onclick="selectColor('accent', 'hsl(51, 100%, 50%)', this)"></button>
+                                <button class="color-swatch-btn" style="background-color: hsl(0, 0%, 90%);" onclick="selectColor('accent', 'hsl(0, 0%, 90%)', this)"></button>
+                            </div>
+                        </div>
+
+                        <div class="selector-row">
+                            <label>Sleeve Pattern Styles</label>
+                            <div class="pattern-options-row">
+                                <button class="pattern-btn active" onclick="selectPattern('solid', this)">Solid</button>
+                                <button class="pattern-btn" onclick="selectPattern('striped', this)">Striped</button>
+                                <button class="pattern-btn" onclick="selectPattern('gradient', this)">Gradient</button>
+                            </div>
+                        </div>
+
+                        <a href="#form-section" class="login-btn" style="width: 100%; justify-content: center; height: 44px; margin-top: 1rem;">Lock In Selection</a>
+                    </div>
+
+                    <!-- Right: Vector SVG Mockup Preview -->
+                    <div class="studio-preview">
+                        <!-- Simulated Sublimation Grid overlay -->
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.05; background-image: radial-gradient(var(--text-muted) 1px, transparent 1px); background-size: 16px 16px;"></div>
+                        
+                        <div class="jersey-vector-box" id="jersey-preview-container">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Collar -->
+                                <path id="collar-path" d="M35 15 C35 22 65 22 65 15 L60 12 L40 12 Z" fill="var(--text-primary)" stroke="var(--border)" stroke-width="0.5"></path>
+                                <!-- Left Sleeve -->
+                                <path id="left-sleeve" d="M30 16 L12 28 L18 36 L30 26 Z" fill="hsl(14, 100%, 53%)" stroke="var(--border)" stroke-width="0.5"></path>
+                                <!-- Right Sleeve -->
+                                <path id="right-sleeve" d="M70 16 L88 28 L82 36 L70 26 Z" fill="hsl(14, 100%, 53%)" stroke="var(--border)" stroke-width="0.5"></path>
+                                <!-- Main Body -->
+                                <path id="main-body-path" d="M30 26 L30 80 L70 80 L70 26 Z" fill="hsl(245, 75%, 52%)" stroke="var(--border)" stroke-width="0.5"></path>
+                                <!-- Inner Chest Design Overlay -->
+                                <path id="chest-stripe" d="M30 35 L70 45 L70 50 L30 40 Z" fill="rgba(255, 255, 255, 0.2)"></path>
+                                <!-- Logo Badge Placeholder -->
+                                <circle cx="50" cy="38" r="4" fill="#ffffff" stroke="var(--border)" stroke-width="0.5"></circle>
+                                <polygon points="50,35 52,39 48,39" fill="var(--accent)"></polygon>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Football Kit Personalization Center -->
+            <section class="locator-container" id="football-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Soccer Custom Kits</span></div>
+                    <h3 class="blog-section-title">Football Kit Personalization Center</h3>
+                    <p class="blog-section-desc">Personalize football jerseys, matching compression shorts, and custom woven technical soccer socks.</p>
+                </div>
+
+                <div class="football-kit-card">
+                    <div class="football-kit-left">
+                        <img src="images/football-team-kits.jpg" alt="Woven custom soccer team jerseys and kit set on dressing locker bench">
+                    </div>
+                    <div class="football-kit-right">
+                        <h4>Soccer Performance Kits</h4>
+                        <p class="orders-hero-desc" style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+                            Our soccer jerseys are woven from 100% moisture-wicking interlock polyester, with breathable mesh side panels for temperature regulation on match-day.
+                        </p>
+                        <div class="kit-specs-list">
+                            <div class="kit-spec-node">
+                                <span class="kit-spec-bullet"></span>
+                                <span>Laser-cut ventilation seams</span>
+                            </div>
+                            <div class="kit-spec-node">
+                                <span class="kit-spec-bullet"></span>
+                                <span>Flatlock stitches preventing skin friction</span>
+                            </div>
+                            <div class="kit-spec-node">
+                                <span class="kit-spec-bullet"></span>
+                                <span>Available in ribbed V-neck or stand-up collar profiles</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Custom Logo & Branding Workshop -->
+            <section class="locator-container" id="logo-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Badge workshop</span></div>
+                    <h3 class="blog-section-title">Custom Logo & Branding Workshop</h3>
+                    <p class="blog-section-desc">We offer heavy-gauge embroidery stitching, vinyl heat transfers, and high-density screen printing for club crests.</p>
+                </div>
+
+                <div class="logo-tech-grid">
+                    <!-- Tech card 1 -->
+                    <div class="logo-tech-card">
+                        <div class="logo-tech-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="logo-tech-title">Satin Embroidery</h4>
+                        <p class="logo-tech-body">Heavy embroidery stitch threads detailing club badges with structural depth. Ideal for cricket polo chests and varsity blazer pockets.</p>
+                    </div>
+
+                    <!-- Tech card 2 -->
+                    <div class="logo-tech-card">
+                        <div class="logo-tech-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="logo-tech-title">Vinyl Heat Transfer</h4>
+                        <p class="logo-tech-body">Thin, flexible vinyl films pressed under high heat. Perfect for crisp corporate sponsorship logos and sleeve advertisements.</p>
+                    </div>
+
+                    <!-- Tech card 3 -->
+                    <div class="logo-tech-card">
+                        <div class="logo-tech-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <h4 class="logo-tech-title">High-Density Screen Print</h4>
+                        <p class="logo-tech-body">Thicker plastisol inks passing through mesh grids to form 3D raised ink textures. Premium tactile feel for modern lifestyle kits.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Name & Number Printing Showcase (Interactive Typography) -->
+            <section class="locator-container" id="typo-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Varsity Typography</span></div>
+                    <h3 class="blog-section-title">Name & Number Printing Showcase</h3>
+                    <p class="blog-section-desc">Select from our premier athletic font packs. Watch the typography swap fonts inside the back jersey preview panel.</p>
+                </div>
+
+                <div class="typo-panel-card">
+                    <!-- Left: Description and tab actions -->
+                    <div class="typo-left">
+                        <h4 class="orders-section-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Custom Jersey Font Packs</h4>
+                        <p class="orders-hero-desc" style="font-size: 0.95rem; margin-bottom: 1.5rem;">
+                            Numbers and names are hot-pressed using dynamic polyurethane films that expand alongside the sportswear fabrics, ensuring zero cracking or peeling during play.
+                        </p>
+                        
+                        <div class="selector-row">
+                            <label>Select Font Style</label>
+                            <div class="font-options-row">
+                                <button class="font-tab-btn active" onclick="selectFont('Outfit, sans-serif', this)">Varsity Block</button>
+                                <button class="font-tab-btn" onclick="selectFont('Poppins, sans-serif', this)">Aero Bold</button>
+                                <button class="font-tab-btn" onclick="selectFont('Courier New, monospace', this)">Retro Courier</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Jersey Back Visual Preview -->
+                    <div class="typo-right">
+                        <!-- Simulated Back of Jersey with integrated SVG text coordinates to ensure bulletproof alignment -->
+                        <svg id="jersey-back-svg" style="width: 75%; height: 75%; max-height: 280px; z-index: 1;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Jersey Silhouette path -->
+                            <path d="M30 15 C35 12 65 12 70 15 L88 28 L82 36 L70 26 L70 85 L30 85 L30 26 L18 36 L12 28 Z" fill="var(--bg-hover)" stroke="var(--border)" stroke-width="0.75"></path>
+                            <!-- Name text -->
+                            <text id="name-display" x="50" y="38" text-anchor="middle" fill="var(--text-primary)" font-size="6.5" font-weight="700" letter-spacing="0.5" style="font-family: 'Outfit', sans-serif; text-transform: uppercase;">AEROVOLT</text>
+                            <!-- Number text -->
+                            <text id="number-display" x="50" y="70" text-anchor="middle" fill="var(--text-primary)" font-size="28" font-weight="800" style="font-family: 'Outfit', sans-serif;">10</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: Club Uniform Package Solutions -->
+            <section class="locator-container" id="packages-section">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Bundle Solutions</span></div>
+                    <h3 class="blog-section-title">Club Uniform Package Solutions</h3>
+                    <p class="blog-section-desc">Complete pre-bundled kit uniforms for amateur, semi-professional, and varsity level clubs.</p>
+                </div>
+
+                <div class="packages-grid">
+                    <!-- Pack card 1 -->
+                    <div class="package-pkg-card">
+                        <span class="package-card-price">Club Pack A</span>
+                        <h4 class="school-card-title">League Starter Pack</h4>
+                        <p class="school-card-body">Includes custom sublimated jersey match shirts, performance trousers, and premium woven training caps with logo embroidery.</p>
+                        <div class="school-card-specs">
+                            <div class="spec-item"><span>Bundle Details:</span><strong>1 Shirt, 1 Pant, 1 Cap</strong></div>
+                            <div class="spec-item"><span>Lead Time:</span><strong>7 – 10 Days</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Pack card 2 -->
+                    <div class="package-pkg-card">
+                        <span class="package-card-price">Club Pack B</span>
+                        <h4 class="school-card-title">Championship Pack</h4>
+                        <p class="school-card-body">Includes match jerseys, game pants, matching compression skins, training bibs, caps, and custom screen-printed kitbags.</p>
+                        <div class="school-card-specs">
+                            <div class="spec-item"><span>Bundle Details:</span><strong>Full kit + Compression</strong></div>
+                            <div class="spec-item"><span>Lead Time:</span><strong>10 – 14 Days</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Pack card 3 -->
+                    <div class="package-pkg-card">
+                        <span class="package-card-price">Varsity Elite</span>
+                        <h4 class="school-card-title">Varsity League Pack</h4>
+                        <p class="school-card-body">Match day kits, training kits, varsity hoodies, custom tracksuits, kitbags, and branded water bottles for tournament programs.</p>
+                        <div class="school-card-specs">
+                            <div class="spec-item"><span>Bundle Details:</span><strong>Elite Multi-Apparel</strong></div>
+                            <div class="spec-item"><span>Lead Time:</span><strong>14 – 21 Days</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: Design Request & Customization Form -->
+            <section class="locator-container" id="form-section" style="margin-bottom: 3rem;">
+                <div class="section-header">
+                    <div class="blog-badge"><span>Custom Consultation</span></div>
+                    <h3 class="blog-section-title">Design Request & Customization Form</h3>
+                    <p class="blog-section-desc">Submit your team design requirements. A dedicated AeroVolt custom apparel designer will draft uniform mockups.</p>
+                </div>
+
+                <div class="custom-form-card">
+                    <div class="custom-form-info">
+                        <h4>Consultation & Proofing</h4>
+                        <p>
+                            Describe color choices, sublimation layouts, or upload crest files. Our styling studio returns a digital design proof layout sheet within 24 hours of submission.
+                        </p>
+                        <div class="custom-form-visual">
+                            <img src="images/customization-form.jpg" alt="Design templates and swatch cards arranged on studio workshop table">
+                        </div>
+                    </div>
+
+                    <form class="enquiry-form" id="custom-design-enquiry-form" onsubmit="handleCustomSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="team-name">Team / Club Name</label>
+                                <input type="text" id="team-name" required placeholder="e.g. Aerovolts CC">
+                            </div>
+                            <div class="form-group">
+                                <label for="kit-type">Apparel Focus</label>
+                                <select id="kit-type" required>
+                                    <option value="cricket">Cricket Sublimation Jerseys</option>
+                                    <option value="football">Football Match Kits</option>
+                                    <option value="embroidery">Embroidery Polo Shirts</option>
+                                    <option value="hoodie">Custom Club Hoodies</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="custom-lead">Contact Coordinator</label>
+                                <input type="text" id="custom-lead" required placeholder="Jane Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="custom-email">Contact Email</label>
+                                <input type="email" id="custom-email" required placeholder="jane@team.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="custom-detail">Design Details & Special Instructions</label>
+                            <textarea id="custom-detail" rows="4" required placeholder="Specify primary team colors, naming lists, numbering placements, or sleeve sponsor print details..."></textarea>
+                        </div>
+
+                        <button type="submit" class="login-btn" style="width: 100%; justify-content: center; height: 46px;">Submit Design Request</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ----------------------------------------------------
+       FOOTER CONTAINER (Matches navbar.html)
+    ----------------------------------------------------- -->
+    <footer class="footer">
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <style>
+            @media (max-width: 1024px) {
+                .footer-container {
+                    grid-template-columns: 1fr !important;
+                    gap: 2.5rem !important;
+                }
+                .brand-col {
+                    grid-column: span 1 !important;
+                    text-align: start !important;
+                    align-items: flex-start !important;
+                    margin-bottom: 0 !important;
+                }
+                .brand-col .footer-desc,
+                .brand-col .brand-desc {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: auto !important;
+                    text-align: start !important;
+                }
+                .brand-col .social-links {
+                    justify-content: flex-start !important;
+                }
+                .footer-col {
+                    text-align: start !important;
+                }
+                .footer-col ul {
+                    padding: 0 !important;
+                }
+                .footer-col ul li {
+                    justify-content: flex-start !important;
+                }
+                .footer-bottom-container {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    text-align: start !important;
+                    gap: 1rem !important;
+                }
+                .footer-bottom-links {
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
+
+        <div class="footer-container">
+            <!-- Column 1: Brand Info -->
+            <div class="footer-col brand-col">
+                <a href="index.html" class="logo-section" style="text-decoration: none;">
+                    <div class="logo-badge" aria-hidden="true">
+                        <svg class="logo-icon-svg" viewBox="0 0 32 32" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; overflow: visible;">
+                            <defs>
+                                <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--primary)"></stop>
+                                    <stop offset="100%" stop-color="var(--accent)"></stop>
+                                </linearGradient>
+                            </defs>
+                            <path d="M16 3 L26 7 V14 C26 20 21.5 26 16 29 C10.5 26 6 20 6 14 V7 L16 3 Z" stroke="url(#logoGradFooter)" stroke-width="2" stroke-linejoin="round" fill="rgba(10, 88, 245, 0.04)"></path>
+                            <path d="M12 10 L8 12 H12 L8 15 H13 L9 18 L13 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M20 10 L24 12 H20 L24 15 H19 L23 18 L19 16" stroke="url(#logoGradFooter)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <rect x="15" y="7" width="2" height="6" rx="0.5" fill="var(--text-primary)"></rect>
+                            <path d="M14.5 13.5 C14.5 13 17.5 13 17.5 13.5 V23 C17.5 24 14.5 24 14.5 23 Z" fill="url(#logoGradFooter)"></path>
+                            <circle cx="16" cy="25" r="1.5" fill="var(--accent)"></circle>
+                        </svg>
+                    </div>
+                    <div class="logo-text-wrapper">
+                        <h2 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h2>
+                    </div>
+                </a>
+                <p class="brand-desc">
+                    Engineered with premium craftsmanship and elite sports science, AeroVolt designs game-changing cricket gear, performance apparel, and athletic essentials.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Column 2: Shop Collection -->
+            <div class="footer-col">
+                <h3 class="footer-title">Shop Collection</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Equipment</a></li>
+                    <li><a href="#" class="footer-link">Football Equipment</a></li>
+                    <li><a href="#" class="footer-link">Badminton Equipment</a></li>
+                    <li><a href="#" class="footer-link">Gym & Fitness</a></li>
+                    <li><a href="#" class="footer-link">Sports Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Custom Services -->
+            <div class="footer-col">
+                <h3 class="footer-title">Custom Services</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Team Jerseys</a></li>
+                    <li><a href="#" class="footer-link">Custom Logo Printing</a></li>
+                    <li><a href="#" class="footer-link">Club Uniform Packages</a></li>
+                    <li><a href="#" class="footer-link">Bulk Orders Tier</a></li>
+                    <li><a href="#" class="footer-link">School & College Quote</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Quick Links -->
+            <div class="footer-col">
+                <h3 class="footer-title">Sports Blog</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="footer-link">Cricket Training Tips</a></li>
+                    <li><a href="#" class="footer-link">Football Playbooks</a></li>
+                    <li><a href="#" class="footer-link">Fitness & Nutrition</a></li>
+                    <li><a href="#" class="footer-link">Equipment Reviews</a></li>
+                    <li><a href="#" class="footer-link">Store Locations</a></li>
+                </ul>
+            </div>
+
+            
+        </div>
+        
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p class="copyright-text">
+                    &copy; 2026 AeroVolt Sports Lab. All rights reserved.
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ----------------------------------------------------
+       9. INTERACTIVITY CONTROLLER (JAVASCRIPT)
+    ----------------------------------------------------- -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- Contextual Active Navbar Highlight ---
+            const currentPath = window.location.pathname.split("/").pop() || "index.html";
+            const navLinks = document.querySelectorAll(".nav-menu .nav-link");
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href");
+                link.parentElement.classList.remove("active");
+                
+                if (href === currentPath) {
+                    link.parentElement.classList.add("active");
+                } else if ((currentPath === "index.html" || currentPath === "home 2.html" || currentPath === "") && link.textContent.trim().includes("Home")) {
+                    link.parentElement.classList.add("active");
+                }
+            });
+
+            
+            // --- DOM Selectors ---
+            const htmlElement = document.documentElement;
+            const mobileHamburger = document.getElementById("mobile-hamburger");
+            const navMenu = document.getElementById("nav-menu-list");
+            const drawerOverlay = document.getElementById("drawer-overlay");
+
+            // --- Theme Controller (Light/Dark Mode) ---
+            const savedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+            
+            htmlElement.setAttribute("data-theme", initialTheme);
+
+            const themeToggleBtns = document.querySelectorAll(".theme-toggle");
+            themeToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentTheme = htmlElement.getAttribute("data-theme");
+                    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+                    htmlElement.setAttribute("data-theme", nextTheme);
+                    localStorage.setItem("theme", nextTheme);
+                });
+            });
+
+            // --- Layout Controller (RTL / LTR layout) ---
+            const rtlToggleBtns = document.querySelectorAll(".rtl-toggle");
+            
+            rtlToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const currentDir = htmlElement.getAttribute("dir") || "ltr";
+                    if (currentDir === "ltr") {
+                        htmlElement.setAttribute("dir", "rtl");
+                        htmlElement.setAttribute("lang", "ar");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction RTL to LTR"));
+                    } else {
+                        htmlElement.setAttribute("dir", "ltr");
+                        htmlElement.setAttribute("lang", "en");
+                        rtlToggleBtns.forEach(b => b.setAttribute("aria-label", "Toggle Layout Direction LTR to RTL"));
+                    }
+                });
+            });
+
+            // --- Mobile Navigation Hamburger Controller ---
+            const drawerCloseBtn = document.getElementById("drawer-close-btn");
+            
+            const toggleDrawer = () => {
+                mobileHamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+                drawerOverlay.classList.toggle("active");
+                
+                const isExpanded = mobileHamburger.classList.contains("active");
+                mobileHamburger.setAttribute("aria-expanded", isExpanded);
+            };
+
+            mobileHamburger.addEventListener("click", toggleDrawer);
+            drawerOverlay.addEventListener("click", toggleDrawer);
+            if (drawerCloseBtn) {
+                drawerCloseBtn.addEventListener("click", toggleDrawer);
+            }
+
+            // --- Mobile Dropdown Accordion Controller (Generic) ---
+            const dropdownLinks = document.querySelectorAll(".nav-item > .nav-link");
+            dropdownLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    if (window.innerWidth <= 1320) {
+                        const navItem = link.closest(".nav-item");
+                        const hasDropdown = navItem ? navItem.querySelector(".dropdown-menu") : null;
+                        if (!hasDropdown) return;
+                        
+                        e.preventDefault();
+                        
+                        document.querySelectorAll(".nav-item").forEach(item => {
+                            if (item !== navItem) {
+                                item.classList.remove("mobile-open");
+                                const itemLink = item.querySelector(".nav-link");
+                                if (itemLink) itemLink.setAttribute("aria-expanded", "false");
+                            }
+                        });
+
+                        navItem.classList.toggle("mobile-open");
+                        const isExpanded = navItem.classList.contains("mobile-open");
+                        link.setAttribute("aria-expanded", isExpanded);
+                    }
+                });
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 1320) {
+                    document.querySelectorAll(".nav-item").forEach(item => {
+                        item.classList.remove("mobile-open");
+                    });
+                    dropdownLinks.forEach(link => {
+                        link.setAttribute("aria-expanded", "false");
+                    });
+                    mobileHamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
+                    drawerOverlay.classList.remove("active");
+                    mobileHamburger.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            // --- Login Button Action ---
+            const loginBtns = document.querySelectorAll(".login-btn");
+            loginBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    alert("Login modal simulation: In production, this would route to your identity provider or launch a sign-in dialog.");
+                });
+            });
+        });
+
+        // ----------------------------------------------------
+        // --- INTERACTIVE JERSEY STUDIO COLOR/PATTERN LOGIC ---
+        // ----------------------------------------------------
+        function selectColor(type, colorVal, element) {
+            const pickers = element.parentNode.querySelectorAll(".color-swatch-btn");
+            pickers.forEach(p => p.classList.remove("active"));
+            element.classList.add("active");
+
+            if (type === "primary") {
+                const mainBody = document.getElementById("main-body-path");
+                if (mainBody) mainBody.setAttribute("fill", colorVal);
+            } else if (type === "accent") {
+                const leftSleeve = document.getElementById("left-sleeve");
+                const rightSleeve = document.getElementById("right-sleeve");
+                if (leftSleeve) leftSleeve.setAttribute("fill", colorVal);
+                if (rightSleeve) rightSleeve.setAttribute("fill", colorVal);
+            }
+        }
+
+        function selectPattern(patternType, element) {
+            const btns = element.parentNode.querySelectorAll(".pattern-btn");
+            btns.forEach(b => b.classList.remove("active"));
+            element.classList.add("active");
+
+            const leftSleeve = document.getElementById("left-sleeve");
+            const rightSleeve = document.getElementById("right-sleeve");
+            const mainBody = document.getElementById("main-body-path");
+            
+            if (patternType === "striped") {
+                leftSleeve.setAttribute("stroke-dasharray", "2");
+                rightSleeve.setAttribute("stroke-dasharray", "2");
+                mainBody.setAttribute("stroke-dasharray", "2");
+            } else if (patternType === "gradient") {
+                leftSleeve.setAttribute("opacity", "0.75");
+                rightSleeve.setAttribute("opacity", "0.75");
+                mainBody.setAttribute("opacity", "0.85");
+            } else {
+                leftSleeve.removeAttribute("stroke-dasharray");
+                rightSleeve.removeAttribute("stroke-dasharray");
+                mainBody.removeAttribute("stroke-dasharray");
+                leftSleeve.setAttribute("opacity", "1");
+                rightSleeve.setAttribute("opacity", "1");
+                mainBody.setAttribute("opacity", "1");
+            }
+        }
+
+        // ----------------------------------------------------
+        // --- INTERACTIVE JERSEY TYPOGRAPHY FONT SWITCH ---
+        // ----------------------------------------------------
+        function selectFont(fontFamily, element) {
+            const btns = element.parentNode.querySelectorAll(".font-tab-btn");
+            btns.forEach(b => b.classList.remove("active"));
+            element.classList.add("active");
+
+            const nameDisplay = document.getElementById("name-display");
+            const numDisplay = document.getElementById("number-display");
+            
+            nameDisplay.style.fontFamily = fontFamily;
+            numDisplay.style.fontFamily = fontFamily;
+        }
+
+        // --- Handle enquiry submission ---
+        function handleCustomSubmit(e) {
+            e.preventDefault();
+            const team = document.getElementById("team-name").value;
+            
+            alert(`Thank you for submitting your custom design request!\n\nOur custom apparel styling designer has logged your request for ${team} and will return digital mockup design proof sheets to you within 24 hours.`);
+            document.getElementById("custom-design-enquiry-form").reset();
+        }
+    </script>
+</body>
+</html>
+          
