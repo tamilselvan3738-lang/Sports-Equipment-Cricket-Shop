@@ -1176,6 +1176,9 @@
             gap: 4rem;
             align-items: flex-start;
         }
+        .reminder-card > * {
+            min-width: 0;
+        }
         .reminder-info {
             display: flex;
             flex-direction: column;
@@ -1213,7 +1216,7 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        .reminder-group input {
+        .reminder-group > input {
             background-color: var(--bg-page);
             border: 1px solid var(--border);
             padding: 0.75rem 1rem;
@@ -1224,7 +1227,7 @@
             outline: none;
             transition: border-color 0.25s ease;
         }
-        .reminder-group input:focus {
+        .reminder-group > input:focus {
             border-color: var(--primary);
         }
         .reminder-checkbox-row {
@@ -1235,7 +1238,7 @@
         }
         .checkbox-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.5rem;
             font-size: 0.85rem;
             color: var(--text-secondary);
@@ -1244,6 +1247,7 @@
         .checkbox-item input {
             accent-color: var(--primary);
             cursor: pointer;
+            margin-top: 0.2rem;
         }
 
         /* Section 8: Responsive */
@@ -1332,7 +1336,7 @@
             .checkbox-item {
                 width: 100% !important;
             }
-            .reminder-group input {
+            .reminder-group > input {
                 width: 100% !important;
                 box-sizing: border-box !important;
             }
@@ -1655,7 +1659,7 @@
                 gap: 2.5rem !important;
             }
             
-            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body, .arrivals-body {
                 padding: 4rem 1.5rem !important;
             }
 
@@ -1703,7 +1707,7 @@
 
         /* 768px Breakpoint (Tablets) */
         @media (max-width: 768px) {
-            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body, .arrivals-body {
                 padding: 3rem 1.25rem !important;
             }
             
@@ -1778,7 +1782,7 @@
 
         /* 480px Breakpoint (Mobile Portrait) */
         @media (max-width: 480px) {
-            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body, .arrivals-body {
                 padding: 2.5rem 1rem !important;
             }
             
@@ -1832,7 +1836,7 @@
 
         /* 320px Breakpoint (Small Mobile Screen) */
         @media (max-width: 320px) {
-            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body {
+            section, .home-section, .about-body, .custom-body, .orders-body, .blog-body, .contact-body, .brands-body, .arrivals-body {
                 padding: 2rem 0.75rem !important;
             }
             
