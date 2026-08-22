@@ -3813,6 +3813,555 @@
             color: var(--primary) !important;
             transform: scale(1.05) !important;
         }
+
+        /* ----------------------------------------------------
+           9. E-COMMERCE SHOPPING SECTIONS STYLING
+        ---------------------------------------------------- */
+        .sport-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .sport-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .sport-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .sport-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            text-align: start;
+        }
+        .sport-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+        .sport-card:hover img {
+            transform: scale(1.08);
+        }
+        .sport-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+        .sport-action {
+            font-size: 0.8rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Product Best Sellers */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .product-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: start;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--accent);
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 10;
+        }
+        .product-img-box {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            position: relative;
+            background-color: var(--bg-hover);
+        }
+        .product-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            flex-grow: 1;
+        }
+        .product-sport {
+            font-size: 0.7rem;
+            font-weight: 750;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .product-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .product-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #fbbf24;
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+        .product-rating span {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-inline-start: 0.25rem;
+        }
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed var(--border);
+            padding-top: 0.75rem;
+            margin-top: auto;
+            gap: 0.5rem;
+        }
+        .product-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 850;
+            color: var(--text-primary);
+        }
+        .product-btn {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 750;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--primary-glow);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .product-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Categories Section */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .category-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .category-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: var(--bg-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        .category-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        .category-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-align: start;
+        }
+
+        /* Special Offers */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .offer-promo-card {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-hover));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .offer-promo-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--accent-glow);
+            filter: blur(20px);
+            z-index: 1;
+        }
+        .offer-promo-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        .offer-badge {
+            background-color: var(--accent);
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            width: fit-content;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .offer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            z-index: 2;
+        }
+        .offer-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            z-index: 2;
+        }
+        .offer-link {
+            font-size: 0.85rem;
+            font-weight: 750;
+            color: var(--primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: auto;
+            width: fit-content;
+        }
+        .offer-link:hover {
+            color: var(--primary-hover);
+        }
+
+        /* Quick Order Modal */
+        .quick-order-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .quick-order-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+        }
+        .modal-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.25rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 2010;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            text-align: start;
+        }
+        .quick-order-modal.active .modal-card {
+            transform: translateY(0);
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .modal-close-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .modal-close-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        .modal-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            text-align: start;
+        }
+        .modal-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            text-align: start;
+        }
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: start;
+        }
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 750;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.25s ease;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--primary);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .modal-submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .modal-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--primary-glow);
+            filter: brightness(1.1);
+        }
+
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .toast-notification.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .toast-icon {
+            color: #10b981;
+            display: flex;
+            align-items: center;
+        }
+        .toast-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+        .toast-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Responsive Shopping Overrides */
+        @media (max-width: 1024px) {
+            .sport-grid, .product-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1.5rem !important;
+            }
+            .category-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1.25rem !important;
+            }
+            .offers-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1.5rem !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sport-grid, .product-grid, .offers-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1rem !important;
+            }
+            .form-row {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            .toast-notification {
+                bottom: 1rem !important;
+                right: 1rem !important;
+                left: 1rem !important;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .category-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* ----------------------------------------------------
+           10. TYPOGRAPHY CONSISTENCY OVERRIDES
+        ---------------------------------------------------- */
+        h1, h2, h3, h4, h5, h6,
+        .hero-title-main, .section-title, .pro-card-title, .logo-title, .athlete-card-name, .sport-title, .product-name, .category-name, .offer-title, .modal-title, .blog-section-title, .snap-card-title, .blog-post-title, .lab-panel-title, .calendar-phase-title, .config-title, .custom-step-title, .benefit-card-title, .contact-card-title {
+            font-weight: 600 !important;
+        }
+        p, .section-desc, .hero-desc, .offer-desc, .modal-desc, .product-desc, .athlete-card-formula, .card-formula, .about-story-text, .kit-spec-node span, .spec-item span, .contact-card-desc {
+            font-weight: 450 !important;
+        }
 </style>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -3916,9 +4465,21 @@
                         <a class="nav-link" href="about.html">About</a>
                     </li>
 
-                    <!-- 3. Collection Link -->
+                    <!-- 3. Shop Link -->
                     <li class="nav-item">
-                        <a class="nav-link" href="collection.html">Collection</a>
+                        <a class="nav-link" href="collection.html" aria-expanded="false" aria-haspopup="true">
+                            Shop
+                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="collection.html" class="dropdown-item">Full Equipment Vault</a>
+                            <a href="#shop-by-sport" class="dropdown-item">Shop by Sport</a>
+                            <a href="#best-sellers" class="dropdown-item">Best Sellers</a>
+                            <a href="#shop-categories" class="dropdown-item">Categories</a>
+                            <a href="#special-offers" class="dropdown-item">Special Offers</a>
+                        </div>
                     </li>
 
                     <!-- 4. Arrivals Link -->
@@ -4056,7 +4617,7 @@
                     <span class="section-tag">AeroVolt Molecular Biomechanics Lab</span>
                     <h2 class="hero-title-main">ENGINEERED FOR SHOCKWAVE POWER.</h2>
                     <p class="section-desc">
-                        AeroVolt constructs elite athletic equipment calibrated for shockwave energy transmission. By combining sub-millisecond laser tracking systems, multiaxial carbon composite sheets, and low-frequency vibration absorption compounds, our development team designs implements that exceed standard coefficient of restitution (CoR) performance limits. We do not just construct sports gear—we calibrate vectors of acceleration, deflection damping, and impact conservation to turn mechanical force into raw field speed.
+                        AeroVolt constructs elite sports equipment and custom bats engineered for maximum shockwave energy return, impact dampening, and raw field speed. Calibrated for tournament power and built to exceed standard performance limits.
                     </p>
                     <div class="hero-actions-row">
                         <a href="collection.html" class="btn-primary">
@@ -4093,6 +4654,342 @@
                             <line x1="35" y1="60" x2="65" y2="60" stroke="var(--accent)" stroke-width="0.5"></line>
                         </svg>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1.1 SHOP BY SPORT SECTION -->
+        <section class="home-section" id="shop-by-sport">
+            <div style="max-width:1440px;margin:0 auto;margin-bottom:3rem;">
+                <span class="section-tag">Shop By Sport</span>
+                <h3 class="section-title">Explore Featured Gear by Your Game</h3>
+                <p class="section-desc" style="margin-bottom: 0;">
+                    Select your game focus to explore professional-grade, field-tested equipment custom-engineered for shockwave power and recovery.
+                </p>
+            </div>
+            <div class="sport-grid" style="max-width:1440px;margin:0 auto;">
+                <!-- Cricket -->
+                <div class="sport-card" onclick="location.href='collection.html'">
+                    <img src="images/cricket-equipment.jpg" alt="Professional Cricket Equipment">
+                    <div class="sport-overlay">
+                        <h4 class="sport-title">Cricket Gear</h4>
+                        <div class="sport-action">
+                            <span>Browse Bats & Pads</span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <!-- Football -->
+                <div class="sport-card" onclick="location.href='customization.html#soccer-section'">
+                    <img src="images/football-team-kits.jpg" alt="Elite Football Custom Kits">
+                    <div class="sport-overlay">
+                        <h4 class="sport-title">Football / Soccer</h4>
+                        <div class="sport-action">
+                            <span>Explore Team Kits</span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <!-- Badminton -->
+                <div class="sport-card" onclick="location.href='collection.html'">
+                    <img src="images/badminton-equipment.jpg" alt="Performance Badminton Racquets">
+                    <div class="sport-overlay">
+                        <h4 class="sport-title">Badminton</h4>
+                        <div class="sport-action">
+                            <span>Browse Racquets</span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tennis -->
+                <div class="sport-card" onclick="location.href='brands.html'">
+                    <img src="images/about-hero.jpg" alt="High-End Tennis Rackets">
+                    <div class="sport-overlay">
+                        <h4 class="sport-title">Tennis</h4>
+                        <div class="sport-action">
+                            <span>Explore Rackets</span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1.2 BEST SELLERS SECTION -->
+        <section class="home-section" id="best-sellers" style="background-color: rgba(10, 88, 245, 0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+            <div style="max-width:1440px;margin:0 auto;margin-bottom:3rem;">
+                <span class="section-tag">Best Sellers</span>
+                <h3 class="section-title">Most Popular Professional Implements</h3>
+                <p class="section-desc" style="margin-bottom: 0;">
+                    Explore our top-selling gear, preferred by tournament athletes for their outstanding rebound and durability parameters.
+                </p>
+            </div>
+            <div class="product-grid" style="max-width:1440px;margin:0 auto;">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <span class="product-badge">Best Seller</span>
+                    <div class="product-img-box">
+                        <img src="images/ss-sports.jpg" alt="AeroVolt Genesis Pro Willow Bat">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-sport">Cricket</span>
+                        <h4 class="product-name">Genesis Pro Willow Bat</h4>
+                        <p class="product-desc">Grade-1 English Willow reinforced with multi-axial carbon fibers along the spine.</p>
+                        <div class="product-rating">
+                            ★★★★★ <span>(48 reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$420</span>
+                        <button class="product-btn" onclick="openQuickOrder('Genesis Pro Willow Bat')">Order Now</button>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <span class="product-badge">Top Protection</span>
+                    <div class="product-img-box">
+                        <img src="images/cricket-equipment.jpg" alt="AeroVolt Deflector Shock Cricket Helmet">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-sport">Cricket</span>
+                        <h4 class="product-name">Deflector Shock Helmet</h4>
+                        <p class="product-desc">High-density EPS core shell with premium titanium grille for lightweight impact safety.</p>
+                        <div class="product-rating">
+                            ★★★★★ <span>(32 reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$140</span>
+                        <button class="product-btn" onclick="openQuickOrder('Deflector Shock Cricket Helmet')">Order Now</button>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <span class="product-badge">Best Seller</span>
+                    <div class="product-img-box">
+                        <img src="images/football-team-kits.jpg" alt="AeroVolt Vector Cleats (Phase 2)">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-sport">Football</span>
+                        <h4 class="product-name">Vector Cleats (Phase 2)</h4>
+                        <p class="product-desc">Carbon plate outsoles with a custom stud distribution to reduce strain during quick cuts.</p>
+                        <div class="product-rating">
+                            ★★★★☆ <span>(29 reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$160</span>
+                        <button class="product-btn" onclick="openQuickOrder('Vector Cleats (Phase 2)')">Order Now</button>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <span class="product-badge">New</span>
+                    <div class="product-img-box">
+                        <img src="images/yonex-performance.jpg" alt="AeroVolt VoltStrike Badminton Racquet">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-sport">Badminton</span>
+                        <h4 class="product-name">VoltStrike Racket</h4>
+                        <p class="product-desc">Head-heavy nanocarbon frame configuration designed for maximum smash velocity return.</p>
+                        <div class="product-rating">
+                            ★★★★★ <span>(18 reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$190</span>
+                        <button class="product-btn" onclick="openQuickOrder('VoltStrike Badminton Racquet')">Order Now</button>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <img src="images/sports-accessories.jpg" alt="AeroVolt Carbon-Guard Elite Batting Pads">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-sport">Cricket</span>
+                        <h4 class="product-name">Carbon-Guard Batting Pads</h4>
+                        <p class="product-desc">Premium density foam wraps with ultra-light carbon knee roll deflection inserts.</p>
+                        <div class="product-rating">
+                            ★★★★★ <span>(22 reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$110</span>
+                        <button class="product-btn" onclick="openQuickOrder('Carbon-Guard Elite Batting Pads')">Order Now</button>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <span class="product-badge">Precision</span>
+                    <div class="product-img-box">
+                        <img src="images/brands-hero.jpg" alt="AeroVolt Pro Rotational Stability Tennis Racket">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-sport">Tennis</span>
+                        <h4 class="product-name">Rotational Tennis Racket</h4>
+                        <p class="product-desc">Optimized throat geometry engineered to reduce frame torque deflection during off-center hits.</p>
+                        <div class="product-rating">
+                            ★★★★☆ <span>(15 reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$220</span>
+                        <button class="product-btn" onclick="openQuickOrder('Pro Rotational Tennis Racket')">Order Now</button>
+                    </div>
+                </div>
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <img src="images/cricket-equipment.jpg" alt="AeroVolt Shockwave Leather Match Balls">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-sport">Cricket</span>
+                        <h4 class="product-name">Shockwave Match Balls (6-pack)</h4>
+                        <p class="product-desc">Alum-tanned grade-A leather pressed under high-density loads for shape retention.</p>
+                        <div class="product-rating">
+                            ★★★★★ <span>(31 reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$75</span>
+                        <button class="product-btn" onclick="openQuickOrder('Shockwave Leather Match Balls (Pack of 6)')">Order Now</button>
+                    </div>
+                </div>
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <span class="product-badge">Custom</span>
+                    <div class="product-img-box">
+                        <img src="images/football-team-kits.jpg" alt="AeroVolt Custom Sublimation Jersey">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-sport">Apparel</span>
+                        <h4 class="product-name">Custom Sublimated Jersey</h4>
+                        <p class="product-desc">100% moisture-wicking interlock polyester with laser-cut ventilation stitching.</p>
+                        <div class="product-rating">
+                            ★★★★★ <span>(41 reviews)</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$55</span>
+                        <button class="product-btn" onclick="openQuickOrder('Custom Sublimation Jersey')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1.3 SHOP CATEGORIES SECTION -->
+        <section class="home-section" id="shop-categories">
+            <div style="max-width:1440px;margin:0 auto;margin-bottom:3rem;">
+                <span class="section-tag">Inventory Categories</span>
+                <h3 class="section-title">Shop Equipment Classifications</h3>
+                <p class="section-desc" style="margin-bottom: 0;">
+                    Filter your professional search parameters by exploring core equipment and apparel groupings designed for competitive leagues.
+                </p>
+            </div>
+            <div class="category-grid" style="max-width:1440px;margin:0 auto;">
+                <!-- Category 1: Bats & Rackets -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM6 15a3 3 0 0 0-3 3v1h6v-1a3 3 0 0 0-3-3zM15 18H9"/></svg>
+                    </div>
+                    <span class="category-name">Bats & Rackets</span>
+                    <ul class="category-list">
+                        <li>• English Willow Bats</li>
+                        <li>• Carbon-Weave Racquets</li>
+                        <li>• Tennis Rackets</li>
+                    </ul>
+                </div>
+                <!-- Category 2: Match Balls -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M6 12A6 6 0 0 1 12 6M12 18a6 6 0 0 1 6-6"/></svg>
+                    </div>
+                    <span class="category-name">Match Balls</span>
+                    <ul class="category-list">
+                        <li>• Alum-Tanned Cricket Balls</li>
+                        <li>• Felt-Pressed Tennis Balls</li>
+                        <li>• Seamless Soccer Balls</li>
+                    </ul>
+                </div>
+                <!-- Category 3: Protective Gear -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <span class="category-name">Protective Gear</span>
+                    <ul class="category-list">
+                        <li>• Deflector Headguards</li>
+                        <li>• Carbon Knee-Roll Pads</li>
+                        <li>• High-Impact Gloves</li>
+                    </ul>
+                </div>
+                <!-- Category 4: Team Apparel -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46L16 2.04l-4.38 1.42-4.38-1.42L2.86 3.46c-.52.17-.86.65-.86 1.19v4.2c0 2.22 1.21 4.25 3.16 5.27l6.46 3.39c.24.12.52.12.76 0l6.46-3.39c1.95-1.02 3.16-3.05 3.16-5.27V4.65c0-.54-.34-1.02-.86-1.19z"/></svg>
+                    </div>
+                    <span class="category-name">Custom Teamwear</span>
+                    <ul class="category-list">
+                        <li>• Sublimated Jerseys</li>
+                        <li>• Compression Underwear</li>
+                        <li>• Ribbed Technical Socks</li>
+                    </ul>
+                </div>
+                <!-- Category 5: Accessories -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2zM12 7V3M9 3h6"/></svg>
+                    </div>
+                    <span class="category-name">Accessories</span>
+                    <ul class="category-list">
+                        <li>• Waterproof Bat Duffles</li>
+                        <li>• Vacuum Thermal Flasks</li>
+                        <li>• Speed-Wick Mesh Caps</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1.4 EXCLUSIVE SHOP OFFERS SECTION -->
+        <section class="home-section" id="special-offers" style="background-color: rgba(249, 115, 22, 0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+            <div style="max-width:1440px;margin:0 auto;margin-bottom:3rem;">
+                <span class="section-tag">Exclusive Store Promotions</span>
+                <h3 class="section-title">Active Pre-Season Equipment Bundles</h3>
+                <p class="section-desc" style="margin-bottom: 0;">
+                    Equip your competitive squad or upgrade your personal training profile using our limited-time package discounts.
+                </p>
+            </div>
+            <div class="offers-grid" style="max-width:1440px;margin:0 auto;">
+                <!-- Offer 1 -->
+                <div class="offer-promo-card">
+                    <span class="offer-badge">Squad Deal</span>
+                    <h4 class="offer-title">Varsity Athletics Pack</h4>
+                    <p class="offer-desc">Order matched customized batting kits and uniforms for school clubs. Enjoy up to 25% discount, complimentary nationwide freight, and custom engraving.</p>
+                    <a href="orders.html" class="offer-link">
+                        <span>Configure Varsity Order</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <!-- Offer 2 -->
+                <div class="offer-promo-card">
+                    <span class="offer-badge">Pro Benefit</span>
+                    <h4 class="offer-title">Pre-Season Bat Preparation</h4>
+                    <p class="offer-desc">Every purchase of our Genesis Pro or Shockwave bat series receives a complimentary 500-stroke bat knocking-in, oiling, and laser emblem engraving package.</p>
+                    <a href="customization.html" class="offer-link">
+                        <span>Customize Your Bat Spec</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <!-- Offer 3 -->
+                <div class="offer-promo-card">
+                    <span class="offer-badge">Welcome Promo</span>
+                    <h4 class="offer-title">10% Off First Custom Order</h4>
+                    <p class="offer-desc">New to AeroVolt? Configure your customized specifications using our design wizard and apply the discount code <strong>VOLT10</strong> at order confirmation checkout.</p>
+                    <a href="customization.html" class="offer-link">
+                        <span>Launch Design Wizard</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
                 </div>
             </div>
         </section>
@@ -5022,8 +5919,116 @@
                     summarySession.textContent = pill.getAttribute("data-type");
                 });
             });
+
+            // 6. Quick Order Modal Handlers
+            window.openQuickOrder = function(productName) {
+                const modal = document.getElementById("quick-order-modal");
+                const productInput = document.getElementById("order-product");
+                if (modal && productInput) {
+                    productInput.value = productName;
+                    modal.classList.add("active");
+                    document.body.style.overflow = "hidden"; // Prevent background scroll
+                }
+            };
+
+            window.closeQuickOrder = function() {
+                const modal = document.getElementById("quick-order-modal");
+                if (modal) {
+                    modal.classList.remove("active");
+                    document.body.style.overflow = ""; // Re-enable background scroll
+                }
+            };
+
+            window.submitQuickOrder = function(event) {
+                event.preventDefault();
+                const form = document.getElementById("quick-order-form");
+                const toast = document.getElementById("toast-success");
+                
+                if (form && toast) {
+                    // Collect form data (dummy send)
+                    const name = document.getElementById("order-name").value;
+                    const email = document.getElementById("order-email").value;
+                    const product = document.getElementById("order-product").value;
+                    const qty = document.getElementById("order-qty").value;
+                    
+                    console.log(`Order Enquiry Submitted: Product: ${product}, Qty: ${qty}, Name: ${name}, Email: ${email}`);
+                    
+                    // Reset form and close modal
+                    form.reset();
+                    closeQuickOrder();
+                    
+                    // Show success toast
+                    toast.classList.add("active");
+                    
+                    // Hide toast after 3 seconds
+                    setTimeout(() => {
+                        toast.classList.remove("active");
+                    }, 3000);
+                }
+            };
         });
     </script>
+
+    <!-- QUICK ORDER ENQUIRY MODAL -->
+    <div class="quick-order-modal" id="quick-order-modal" aria-modal="true" role="dialog">
+        <div class="modal-backdrop" onclick="closeQuickOrder()"></div>
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeQuickOrder()" aria-label="Close Order Modal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h3 class="modal-title">Place Quick Order Enquiry</h3>
+            <p class="modal-desc">Configure your request parameters. Our team will contact you within 24 hours to confirm your custom specifications.</p>
+            
+            <form class="modal-form" id="quick-order-form" onsubmit="submitQuickOrder(event)">
+                <div class="form-group">
+                    <label for="order-product">Selected Implement</label>
+                    <input type="text" id="order-product" readonly style="font-weight: 700; color: var(--primary);">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="order-name">Your Full Name</label>
+                        <input type="text" id="order-name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="order-email">Email Address</label>
+                        <input type="email" id="order-email" required placeholder="john@example.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="order-qty">Quantity Needed</label>
+                        <input type="number" id="order-qty" min="1" max="100" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="order-player-type">Play Style / Level</label>
+                        <select id="order-player-type">
+                            <option value="professional">Professional / League Player</option>
+                            <option value="club">Club / Varsity Level</option>
+                            <option value="recreational">Recreational / Practice</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="order-notes">Custom Notes / Specs</label>
+                    <textarea id="order-notes" rows="3" placeholder="Enter preferred weight, handle grip type, custom engravings, etc."></textarea>
+                </div>
+                <button type="submit" class="modal-submit-btn">Submit Order Enquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SUCCESS TOAST NOTIFICATION -->
+    <div class="toast-notification" id="toast-success">
+        <div class="toast-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        <div class="toast-text">Order enquiry submitted successfully!</div>
+    </div>
 </body>
 </html>
                

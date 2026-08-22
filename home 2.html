@@ -2329,7 +2329,7 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 11px;
+            left: 43px;
             width: 2px;
             height: 100%;
             background-color: var(--border);
@@ -2499,6 +2499,82 @@
         .hamburger:hover svg {
             color: var(--primary) !important;
             transform: scale(1.05) !important;
+        }
+
+        /* HUD Visual Hero Grid */
+        .bento-header-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+        .bento-header-col {
+            margin-bottom: 0 !important;
+        }
+        .bento-header-visual {
+            width: 100%;
+        }
+        .hud-visual-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            aspect-ratio: 16/9;
+            box-shadow: var(--shadow-md);
+            background-color: var(--bg-card);
+        }
+        .hud-visual-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .hud-overlay-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .hud-circle-scanner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border: 2px dashed var(--accent);
+            border-radius: 50%;
+            animation: rotate-hud 20s linear infinite;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        @keyframes rotate-hud {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @media (max-width: 1024px) {
+            .bento-header-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+
+        /* ----------------------------------------------------
+           10. TYPOGRAPHY CONSISTENCY OVERRIDES
+        ---------------------------------------------------- */
+        h1, h2, h3, h4, h5, h6,
+        .hero-title-main, .section-title, .pro-card-title, .logo-title, .athlete-card-name, .sport-title, .product-name, .category-name, .offer-title, .modal-title, .blog-section-title, .snap-card-title, .blog-post-title, .lab-panel-title, .calendar-phase-title, .config-title, .custom-step-title, .benefit-card-title, .contact-card-title {
+            font-weight: 600 !important;
+        }
+        p, .section-desc, .hero-desc, .offer-desc, .modal-desc, .product-desc, .athlete-card-formula, .card-formula, .about-story-text, .kit-spec-node span, .spec-item span, .contact-card-desc {
+            font-weight: 450 !important;
         }
 </style>
 
@@ -2737,12 +2813,21 @@
     </header>
 
     <main class="home-main">
-        <div class="bento-header-col">
-            <span class="section-tag">Laboratory Workspace</span>
-            <h2 class="section-title">AEROVOLT KINETIC WORKSPACE</h2>
-            <p class="section-desc">
-                Welcome to the AeroVolt Dynamics Hub. Monitor real-time air velocity sweeps, customize carbon fiber layups, map skeletal torsion tolerances, and book chamber diagnostics directly from a single HUD layout.
-            </p>
+        <div class="bento-header-grid">
+            <div class="bento-header-col">
+                <span class="section-tag">Laboratory Workspace</span>
+                <h2 class="section-title">AEROVOLT KINETIC WORKSPACE</h2>
+                <p class="section-desc">
+                    Welcome to the AeroVolt Dynamics Hub. Monitor real-time air velocity sweeps, customize carbon fiber layups, map skeletal torsion tolerances, and book chamber diagnostics directly from a single HUD layout.
+                </p>
+            </div>
+            <div class="bento-header-visual">
+                <div class="hud-visual-card">
+                    <img src="images/brand-discovery.jpg" alt="AeroVolt Workspace Diagnostics">
+                    <div class="hud-overlay-grid"></div>
+                    <div class="hud-circle-scanner"></div>
+                </div>
+            </div>
         </div>
 
         <div class="bento-grid">
