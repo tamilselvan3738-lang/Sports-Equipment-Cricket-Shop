@@ -1527,13 +1527,15 @@
         }
 
         .spec-item {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 0.5rem;
             align-items: center;
             font-size: 0.8rem;
             color: var(--text-secondary);
             border-bottom: 1px dashed var(--border);
             padding-bottom: 0.25rem;
+            text-align: start;
         }
 
         .spec-item:last-child {
@@ -2105,6 +2107,7 @@
                 </div>
                 <div class="logo-text-wrapper">
                     <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                    <span class="logo-tagline">Charge Your Game. Defy Your Limits.</span>
                 </div>
             </a>
 
@@ -2138,6 +2141,7 @@
                                 </div>
                                 <div class="logo-text-wrapper">
                                     <h1 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h1>
+                                    <span class="logo-tagline">Charge Your Game. Defy Your Limits.</span>
                                 </div>
                             </a>
                             <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Menu">
@@ -2753,6 +2757,7 @@
                     </div>
                     <div class="logo-text-wrapper">
                         <h2 class="logo-title"><span class="highlight">AeroVolt</span> Sports</h2>
+                        <span class="logo-tagline">Charge Your Game. Defy Your Limits.</span>
                     </div>
                 </a>
                 <p class="brand-desc">
