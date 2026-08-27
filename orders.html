@@ -1907,7 +1907,8 @@
             font-size: 1rem;
             color: var(--text-muted);
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 0 2.5rem 0;
+            text-align: start;
         }
         
         /* Hamburger custom SVG toggle button styling */
@@ -2837,7 +2838,7 @@
             });
 
             // --- Login Button Action ---
-            const loginBtns = document.querySelectorAll(".login-btn");
+            const loginBtns = document.querySelectorAll("#login-btn, .drawer-login-btn");
             loginBtns.forEach(btn => {
                 btn.addEventListener("click", () => {
                     alert("Login modal simulation: In production, this would route to your identity provider or launch a sign-in dialog.");

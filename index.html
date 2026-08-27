@@ -4478,19 +4478,8 @@
 
                     <!-- 3. Shop Link -->
                     <li class="nav-item">
-                        <a class="nav-link" href="collection.html" aria-expanded="false" aria-haspopup="true">
-                            Shop
-                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="collection.html" class="dropdown-item">Full Equipment Vault</a>
-                            <a href="#shop-by-sport" class="dropdown-item">Shop by Sport</a>
-                            <a href="#best-sellers" class="dropdown-item">Best Sellers</a>
-                            <a href="#shop-categories" class="dropdown-item">Categories</a>
-                            <a href="#special-offers" class="dropdown-item">Special Offers</a>
-                        </div>
+                        <a class="nav-link" href="collection.html">Collection</a>
+
                     </li>
 
                     <!-- 4. Arrivals Link -->
@@ -5746,7 +5735,7 @@
             });
 
             // --- Login Button Redirection ---
-            const loginBtns = document.querySelectorAll(".login-btn");
+            const loginBtns = document.querySelectorAll("#login-btn, .drawer-login-btn");
             loginBtns.forEach(btn => {
                 btn.addEventListener("click", () => {
                     window.location.href = "login.html";

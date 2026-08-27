@@ -2750,7 +2750,7 @@
             });
 
             // --- Login Button Action ---
-            const loginBtns = document.querySelectorAll(".login-btn");
+            const loginBtns = document.querySelectorAll("#login-btn, .drawer-login-btn");
             loginBtns.forEach(btn => {
                 btn.addEventListener("click", () => {
                     alert("Login modal simulation: In production, this would route to your identity provider or launch a sign-in dialog.");
